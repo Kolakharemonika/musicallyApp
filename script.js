@@ -67,7 +67,7 @@ nextSongPlayBtn.addEventListener('click', () => {
 
     slides.forEach(slide => {
         move == 'prev'
-        slide.style.transform = `translate3d(-34%, 0, 0)`;
+        slide.style.transform = `translate3d(-11%, 0, 0)`; //-34%
         slide.style.transition = 'width 2s, height 2s, transform 2s';
     });
 });
@@ -99,9 +99,9 @@ document.querySelector(".dropbtn").addEventListener('click', () => {
     document.querySelector("#profileDropdown").classList.toggle("show");
 });
 
-// document.getElementById('musicPlay').addEventListener('click', () => {
-//     document.querySelector(".song_play_container").classList.toggle("hidden");
-// });
+document.getElementById('musicPlay').addEventListener('click', () => {
+    document.querySelector(".song_play_container").classList.toggle("hidden");
+});
 
 musicPlayBtn.addEventListener('click', (e) => {
     // console.log(e.target.closest('.music_play_btn_svg'));

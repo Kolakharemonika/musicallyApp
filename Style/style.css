@@ -87,10 +87,27 @@ button {
 } */
 
 .music_card .music_card_prev,
-.music_card .music_card_current,
 .music_card .music_card_next {
     position: relative;
-    height: 85%;
+    height: 80%;
+
+}
+
+.music_card .music_card_next {
+    /* margin-right: 18px; */
+}
+
+.music_card .music_card_current {
+    position: relative;
+    height: 89%;
+    transform: translateY(-12px);
+    /* margin: 2px 55px; */
+}
+
+.music_card .music_card_current,
+.music_card .music_card_prev,
+.music_card .music_card_next {
+    width: 25vw;
 }
 
 .music_card .music_card_current:hover {
@@ -129,7 +146,7 @@ button {
 
 .music_card .music_card_next {
     transform-style: preserve-3d;
-    transform: perspective(10px) rotateY(0.5deg);
+    transform: perspective(10px) rotateY(0.4deg);
 }
 
 .nav li:first-child {
@@ -556,7 +573,7 @@ img {
 
 /* nmbhajbnx */
 .card-size {
-    width: 80%;
+    width: 83%;
     margin: auto;
 }
 
@@ -572,8 +589,10 @@ img {
 }
 
 .slidebox {
+    padding-top: 20px;
     display: flex;
     width: 68vw;
+    width: 241vw;
     /* width: 100vw; */
 }
 
@@ -582,6 +601,8 @@ img {
     padding-top: 10px;
     padding-right: 30px;
     height: 276px;
+    padding-bottom: 30px;
+    overflow: hidden;
 }
 
 .playing_song_card img {
