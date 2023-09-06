@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musically App</title>
+    <link rel="stylesheet" href="./Style/style.css">
+    <script defer src="./script.js" type="module"></script>
+</head>
+
+<body>
+    <div class="main_container">
+        <header class="header">
+            <nav class="nav">
+                <ul class="nav_list">
+                    <li class="nav_item musically">
+                        <a href="#"><img src="./assests/images/Musicly.png" alt="musically name logo"></a>
+                    </li>
+                    <li class="nav_item nav_item_click active">
+                        <button class="nav_btn">
+                            <svg class="nav_icon ">
+                                <use href="./assests/icons.svg#home-icon"></use>
+                            </svg>
+                            <span>Home</span>
+                        </button>
+                    </li>
+                    <li class="nav_item nav_item_click">
+                        <button class="nav_btn">
+                            <svg class="nav__icon">
+                                <use href="./assests/icons.svg#headphone-icon"></use>
+                            </svg>
+                            <span>Library</span>
+                        </button>
+                    </li>
+                    <li class="nav_item nav_item_click">
+                        <button class="nav_btn">
+                            <svg class="nav_icon">
+                                <use href="./assests/icons.svg#podcasts-icon"></use>
+                            </svg>
+                            <span>Podcasts</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+            <div>
+                <ul class="nav_list nav-right">
+                    <li class="nav_item">
+                        <form class="search">
+                            <input type="text" class="search_field" placeholder="Search Song, Singer or Album " />
+                            <button class="nav_btn search_btn">
+                                <svg class="search_icon">
+                                    <use href="./assests/icons.svg#search-icon"></use>
+                                </svg>
+                            </button>
+                        </form>
+                    </li>
+                    <li class="nav_item">
+                        <button class="nav_btn">
+                            <svg class="nav_icon bell-icon">
+                                <use href="./assests/icons.svg#bell-icon"></use>
+                            </svg>
+                        </button>
+                    </li>
+                    <li class="nav_item">
+                        <button class="nav_btn profile-img">
+                            <img src="./assests/images/profile.png" alt="profile pic">
+                        </button>
+                    </li>
+                    <li class="nav_item nav_dropdown_item">
+                        <!-- <div class="nav_dropdown_item"> -->
+                        <button class="nav_btn dropbtn">
+                            <svg class="nav_icon">
+                                <use href="./assests/icons.svg#expand-icon"></use>
+                            </svg>
+                        </button>
+                        <div id="profileDropdown" class="nav_dropdown-content">
+                            <ul class="dropdown_ul">
+                                <li class="dropdown_li_item">
+                                    <svg class="nav_icon">
+                                        <use href="./assests/icons.svg#user-icon"></use>
+                                    </svg>
+                                    <span>My Account</span>
+                                </li>
+                                <li class="dropdown_li_item">
+                                    <svg class="nav_icon">
+                                        <use href="./assests/icons.svg#star-icon"></use>
+                                    </svg>
+                                    <span>Premium</span>
+                                </li>
+                                <li class="dropdown_li_item">
+                                    <svg class="nav_icon">
+                                        <use href="./assests/icons.svg#logout-icon"></use>
+                                    </svg>
+                                    <span>Log Out</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="trial">
+                    <button class="nav_btn search_btn">
+                        <svg class="search_icon">
+                            <use href="./assests/icons.svg#search-icon"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- <hr> -->
+        <div class="container">
+            <div class="section_1">
+                <div class="music_cards_container">
+                    <button onclick="changeImage('prev')" class="active slide_btn">
+                        <svg class="icon">
+                            <use href="./assests/icons.svg#back-arrow-icon"></use>
+                        </svg>
+                    </button>
+                    <div class="music_card d-flex">
+                        <div class="img_card music_card_prev">
+                            <img src="./assests/images/uddjaa.jpg" alt="music poster image">
+                        </div>
+                        <div class="img_card music_card_current">
+                            <img src="./assests/images/heeriye.jpg" alt="music poster image">
+                            <!-- <img class="flip_img" src="./assests/images/heeriye.jpg" alt=""> -->
+                        </div>
+                        <div class="img_card music_card_next">
+                            <img src="./assests/images/hukum.jpg" alt="music poster image">
+                            <!-- <img class="flip_img" src="./assests/images/hukum.jpg" alt=""> -->
+                        </div>
+                    </div>
+                    <button onclick="changeImage('next')" class="slide_btn">
+                        <svg class="icon">
+                            <use href="./assests/icons.svg#forward-arrow-icon"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="section_2 trending_songs_container">
+                <div class="trending_songs_head">
+                    <span class="heading">Trending Songs </span>
+                    <div class="d-flex trending_song_btn">
+                        <button class="" disabled>
+                            <svg class="icon">
+                                <use href="./assests/icons.svg#back-arrow-icon"></use>
+                            </svg>
+                        </button>
+                        <button class="">
+                            <svg class="icon">
+                                <use href="./assests/icons.svg#forward-arrow-icon"></use>
+                            </svg>
+                        </button>
+                        <button class="btn">
+                            <span>SEE ALL</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="trending_songs_cards">
+                    <div class="card">
+                        <img class="song-img" src="./assests/images/hukum-170px.jpg" alt="hukum">
+                        <h5 class="song-title">hukum</h5>
+                        <span class="song-writer">Anirudh Ravichander</span>
+                    </div>
+                    <div class="card">
+                        <img src="./assests/images/heeriye-170px.jpg" alt="hukum">
+                        <h5 class="song-title">Heeriye(feet. Arijit singh)</h5>
+                        <span class="song-writer">Jasleen Royal, Arijit singh</span>
+                    </div>
+                    <div class="card">
+                        <img src="./assests/images/uddjaa-170px.jpg" alt="hukum">
+                        <h5 class="song-title">hghghgj</h5>
+                        <span class="song-writer">Udit Narayan</span>
+                    </div>
+                    <div class="card">
+                        <img class="song-img" src="./assests/images/hukum-170px.jpg" alt="hukum">
+                        <h5 class="song-title">hukum</h5>
+                        <span class="song-writer">Anirudh Ravichander</span>
+                    </div>
+                    <div class="card">
+                        <img src="./assests/images/heeriye-170px.jpg" alt="hukum">
+                        <h5 class="song-title">Heeriye(feet. Arijit singh)</h5>
+                        <span class="song-writer">Jasleen Royal, Arijit singh</span>
+                    </div>
+                    <div class="card">
+                        <img src="./assests/images/uddjaa-170px.jpg" alt="hukum">
+                        <h5 class="song-title">hghghgj</h5>
+                        <span class="song-writer">Udit Narayan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="song_play_container">
+            <div class="music-playing_sec">
+                <div class="music_info_sec">
+                    <div>
+                        <img width="50" height="50" src="./assests/images/heeriye-170px.jpg" alt="image">
+                    </div>
+                    <div class="music_info">
+                        <span>Heeriye (feat. Arijit Singh)</span>
+                        <span>Jasleen Royal, Arijit Singh</span>
+                    </div>
+                </div>
+                <div class="d-flex music_btns">
+                    <button class="music_btn">
+                        <svg>
+                            <use href="./assests/icons.svg#play-previous-icon"></use>
+                        </svg>
+                    </button>
+                    <button class="music_btn">
+                        <svg>
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                    </button>
+                    <button class="music_btn">
+                        <svg>
+                            <use href="./assests/icons.svg#play-next-icon"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <button class="show_Lyrics_btn">Show Lyrics</button>
+                </div>
+            </div>
+        </div>
+        <div class="lyrics_container">
+
+            <div class="lyrics_sec hidden">
+                <button class="expand_btn">
+                    <svg>
+                        <use href="./assests/icons.svg#expand-more-icon"></use>
+                    </svg>
+                </button>
+                <img class="lyrics_sec_bg_img" src="./assests/images/heeriye.jpg" alt="">
+                <div class="lyrics_sec_img">
+                    <img src="./assests/images/heeriye-170px.jpg" alt="img 1">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

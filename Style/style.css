@@ -1,0 +1,511 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pathway+Gothic+One&family=Poppins&family=Roboto:wght@400;500&display=swap');
+
+:root {
+    --color-primary: #C01A20;
+    --color-grad-1: #fbdb89;
+    --color-grad-2: #f48982;
+
+    --color-white: #FFFFFF;
+    --color-white-off: #888888;
+    --color-white-off-20: #FFFFFF33;
+
+    --color-dark: #000;
+    --color-dark-50: #00000080;
+
+    --color-grey: #555555;
+    --color-dark-grey: #333333;
+
+}
+
+/* 
+    transform-style: preserve-3d;
+        transform: perspective(10px) rotateY(0.5deg); */
+body {
+    padding: 0;
+    margin: 0;
+    background: var(--color-dark);
+    font-family: 'Roboto', sans-serif;
+    /* position: relative; */
+
+}
+
+h1,
+h4,
+h6,
+h5,
+span {
+    color: var(--color-white);
+    padding: 0;
+    margin: 0;
+}
+
+h5 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+ul {
+    padding-left: 10px;
+    margin: 10px;
+}
+
+li {
+    list-style: none;
+    padding-left: 20px;
+}
+
+button {
+    border: none;
+    padding: 0;
+    /* padding: 0;
+    margin: 0;
+    width: fit-content; */
+    background: var(--color-dark);
+    color: var(--color-white);
+}
+
+/*  */
+.float-rt {
+    float: right;
+}
+
+.float-lf {
+    float: left;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.music_card .music_card_prev img,
+.music_card .music_card_next img {
+    width: 88%;
+}
+
+.music_card .music_card_prev {
+    /* transform-style: preserve-3d;
+    transform: perspective(10px) rotateY(-0.5deg); */
+}
+
+.music_card .music_card_next {
+    /* transform-style: preserve-3d;
+    transform: perspective(10px) rotateY(0.5deg); */
+}
+
+.nav li:first-child {
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+.show {
+    display: block !important;
+}
+
+.nav_dropdown_item {
+    position: relative;
+}
+
+.nav_dropdown-content {
+    position: absolute;
+    display: none;
+    right: 0px;
+    background: var(--color-white);
+    border-radius: 5px;
+    margin-top: 10px;
+    min-width: 145px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.nav_dropdown-content .nav_icon {
+    fill: var(--color-dark);
+}
+
+.nav_dropdown-content span {
+    color: var(--color-dark);
+}
+
+.nav_dropdown-content .dropdown_ul {
+    padding: 15px;
+    margin: 0;
+
+}
+
+.nav_dropdown-content .dropdown_ul .dropdown_li_item {
+    display: flex;
+    padding-left: 0;
+    padding-bottom: 5px;
+    line-height: 2px;
+}
+
+.dropdown_li_item:hover svg {
+    fill: var(--color-primary);
+}
+
+.dropdown_li_item:hover span {
+    color: var(--color-primary);
+}
+
+.music_card .music_card_prev {}
+
+.music_card .music_card_prev {}
+
+.music_card.music_card_prev {}
+
+.nav-right .nav_item:last-child {
+    padding-left: 0;
+    /* padding-right: 20px; */
+}
+
+/*  header css start  */
+.nav_list,
+.nav_btn,
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* only for header  */
+}
+
+.header {
+    border-bottom: 1px solid var(--color-grey);
+}
+
+hr {
+    position: absolute;
+    width: 100%;
+    top: 52px;
+}
+
+svg {
+    height: 1.8rem;
+    width: 1.8rem;
+    fill: var(--color-white);
+}
+
+.nav_btn svg .bell-icon {
+    height: 2rem;
+    width: 2.6rem;
+}
+
+span {
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0rem;
+    text-align: left;
+}
+
+.nav_btn .bell-icon {
+    height: 2rem;
+    width: 2.6rem;
+}
+
+.profile-img {
+    width: 40px;
+}
+
+.profile-img img {
+    border-radius: 50%;
+}
+
+.search_field {
+    line-height: 2.5;
+    border-radius: 25px;
+    padding: 0 10px;
+    border: none;
+    width: 200px;
+}
+
+input:focus-visible {
+    outline: none;
+}
+
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.trial {
+    display: none;
+}
+
+.search_btn {
+    position: absolute;
+    background: transparent;
+    right: 0;
+}
+
+.search_btn svg {
+    fill: var(--color-white-off);
+    transform: translateY(3px);
+}
+
+.container {
+    /* padding: 10px;
+    margin: 10px; */
+}
+
+.music_cards_container {
+    display: flex;
+}
+
+.musically {
+    width: 90px;
+}
+
+.mk {
+    /* object-position: 7% 35%; */
+    /* object-position: 100% 100%; */
+    /* background-position: center bottom; */
+    /* background-repeat: round; */
+    background-size: cover;
+    width: 272px;
+    /* transform: rotateX(180deg); */
+    /* -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); */
+    height: 31px;
+    border: 1px solid red;
+    background: url(../assests/images/uddjaa.jpg);
+    background-position: center bottom;
+}
+
+.img_card img {
+    border-radius: 5px;
+    padding: 3px;
+    /* -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); */
+    /* height: 38%; */
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 2;
+}
+
+.trending_songs_container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    /* top: 68%; */
+    background: var(--color-dark);
+    padding: 0 10px;
+}
+
+.trending_songs_head {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 10px 0px;
+    align-items: center;
+}
+
+.img_card {
+    /* height: 250px;
+    width: 260px; */
+    padding: 10px;
+    /* width: 32%;
+    height: 85%; */
+    width: 33%;
+    height: 75%;
+}
+
+.flip_img {
+    /* transform: scaleY(-1); */
+}
+
+.trending_songs_cards {
+    display: flex;
+    /* padding: 0 10px; */
+}
+
+.trending_songs_cards .card {
+    padding: 10px;
+    /* height: 20%;
+    width: 20%; */
+}
+
+.music_cards_container .music_card {
+    align-items: center;
+    /* height: 280px; */
+}
+
+.trending_songs_cards .card img {
+    /* width: 120px;
+    height: 120px; */
+    /* height: 60%; */
+    border-radius: 5px;
+}
+
+.slide_btn {
+    padding: 10px;
+}
+
+.icon {
+    width: 18px;
+    height: 18px;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+    /* height: 100% !important;
+    width: 100% !important; */
+}
+
+.song-writer {
+    color: var(--color-white-off);
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.btn {
+    background: var(--color-white);
+    color: var(--color-primary);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/*  media css start  */
+@media only screen and (max-width: 700px) {
+
+    /* width: 70%; */
+    .nav_btn span {
+        display: none;
+    }
+
+    .trial {
+        display: block;
+    }
+
+    .nav-right {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+
+    .img_card img {
+        /* height: 58%; */
+    }
+}
+
+.main_container {
+    /* position: relative; */
+}
+
+.song_play_container {
+    visibility: hidden;
+    border-top: 1px solid white;
+    position: absolute;
+    bottom: 0;
+    height: 70px;
+    background: black;
+    width: 100%;
+    z-index: 63;
+    opacity: 1;
+}
+
+.music_info_sec,
+.music_info {
+    display: flex;
+}
+
+.music_info {
+    padding-left: 12px;
+
+}
+
+.music_info {
+    flex-direction: column;
+}
+
+.music_info_sec img {
+    height: 50px;
+    width: 50px;
+}
+
+.music-playing_sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 20px;
+}
+
+.music_btn svg {
+    width: 40px;
+    height: 40px;
+}
+
+.show_Lyrics_btn {
+    width: 100px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.lyrics_container {
+    /* visibility: hidden; */
+}
+
+.trending_song_btn button {
+    margin-left: 20px;
+}
+
+.trending_song_btn button span {
+    color: var(--color-primary);
+}
+
+.lyrics_sec {
+    top: 10px;
+    position: absolute;
+    z-index: 1;
+    /* background: url(../assests/images/heeriye.jpg);
+    background-size: cover;
+    background-repeat: no-repeat; */
+}
+
+.lyrics_sec_bg_img {
+    height: 100vh;
+    width: 100vw;
+}
+
+.lyrics_sec_img {
+    width: 250px;
+    height: 200px;
+    position: absolute;
+    top: 29%;
+    left: 3%;
+}
+
+.expand_btn {
+    background: transparent;
+    /* width: 23px; */
+    position: absolute;
+    /* height: 20px; */
+}
+
+.expand_btn svg {
+    width: 40px;
+    height: 40px;
+}
+
+.nav_item_click.active span,
+.nav_item_click:hover span {
+    color: var(--color-primary);
+}
+
+.nav_item_click.active svg,
+.nav_item_click:hover svg {
+    fill: var(--color-primary);
+}
