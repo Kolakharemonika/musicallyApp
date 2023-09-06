@@ -119,35 +119,58 @@
         </header>
         <!-- <hr> -->
         <div class="container">
-            <div class="section_1">
-                <div class="music_cards_container">
-                    <button onclick="changeImage('prev')" class="active slide_btn">
-                        <svg class="icon">
-                            <use href="./assests/icons.svg#back-arrow-icon"></use>
-                        </svg>
-                    </button>
-                    <div class="music_card d-flex">
-                        <div class="img_card music_card_prev">
-                            <img src="./assests/images/uddjaa.jpg" alt="music poster image">
+            <div class="music_cards_container">
+
+                <button class="active slide_btn previous_song_btn">
+                    <svg class="icon">
+                        <use href="./assests/icons.svg#back-arrow-icon"></use>
+                    </svg>
+                </button>
+                <div class="card-size d-grid slides music_card">
+                    <div class="slidebox">
+                        <div class="playing_song_card music_card_prev">
+                            <img src="./assests/images/uddjaa.jpg" alt="mountain image 1">
                         </div>
-                        <div class="img_card music_card_current">
-                            <img src="./assests/images/heeriye.jpg" alt="music poster image">
+                        <div class="playing_song_card music_card_current">
+                            <img src="./assests/images/heeriye.jpg" alt="mountain image 2">
                             <button class="btn_play_icon" id=musicPlay>
                                 <svg class="play_icon">
                                     <use href="./assests/icons.svg#play-icon"></use>
                                 </svg>
                             </button>
                         </div>
-                        <div class="img_card music_card_next">
-                            <img src="./assests/images/hukum.jpg" alt="music poster image">
+                        <div class="playing_song_card music_card_next ">
+                            <img src="./assests/images/hukum.jpg" alt="mountain image 2">
                         </div>
                     </div>
-                    <button onclick="changeImage('next')" class="slide_btn">
-                        <svg class="icon">
-                            <use href="./assests/icons.svg#forward-arrow-icon"></use>
-                        </svg>
-                    </button>
+                    <div class="slidebox">
+                        <div class="playing_song_card ">
+                            <img src="./assests/images/uddjaa.jpg" alt="mountain image 1">
+                        </div>
+                        <div class="playing_song_card ">
+                            <img src="./assests/images/heeriye.jpg" alt="mountain image 2">
+                        </div>
+                        <div class="playing_song_card ">
+                            <img src="./assests/images/hukum.jpg" alt="mountain image 2">
+                        </div>
+                    </div>
+                    <div class="slidebox">
+                        <div class="playing_song_card ">
+                            <img src="./assests/images/uddjaa.jpg" alt="mountain image 2">
+                        </div>
+                        <div class="playing_song_card ">
+                            <img src="./assests/images/heeriye.jpg" alt="mountain image 2">
+                        </div>
+                        <div class="playing_song_card ">
+                            <img src="./assests/images/hukum.jpg" alt="mountain image 2">
+                        </div>
+                    </div>
                 </div>
+                <button class="slide_btn next_song_btn">
+                    <svg class="icon">
+                        <use href="./assests/icons.svg#forward-arrow-icon"></use>
+                    </svg>
+                </button>
             </div>
             <div class="section_2 trending_songs_container">
                 <div class="trending_songs_head">

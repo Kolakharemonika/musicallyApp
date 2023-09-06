@@ -40,21 +40,40 @@ function trending() {
 trending();
 const imgCards = document.querySelectorAll('.img_card');
 
-function changeImage(move) {
-    var moveTo = 50;
+const sliderBtn = document.querySelector('.slide-dots');
 
-    // moveTo = move == 'prev' ? '0' : (move == 'current' ? '100' : '200');
-    imgCards.forEach((slide, i) => {
-        // move == 'prev'
-        console.log(i);
-        // slide.style.transform = `translate3d(-${moveTo}%, 0, 0)`;
-        // slide.style.transition = 'width 2s, height 2s, transform 2s';
-        // if (i == 0) {
-        //     slide.style.visibility = 'hidden'
-        // }
+const slides = document.querySelectorAll('.slidebox');
+const previousSongPlayBtn = document.querySelector('.previous_song_btn');
+const nextSongPlayBtn = document.querySelector('.next_song_btn');
 
+
+previousSongPlayBtn.addEventListener('click', () => {
+    const move = 'prev';
+
+    var moveTo;
+    moveTo = move == 'prev' ? '0' : (move == 'current' ? '100' : '200');
+
+    slides.forEach(slide => {
+        move == 'prev'
+        slide.style.transform = `translate3d(-0%, 0, 0)`;
+        slide.style.transition = 'width 2s, height 2s, transform 2s';
     });
-}
+});
+nextSongPlayBtn.addEventListener('click', () => {
+    const move = 'prev';
+
+    var moveTo;
+    moveTo = move == 'prev' ? '0' : (move == 'current' ? '100' : '200');
+
+    slides.forEach(slide => {
+        move == 'prev'
+        slide.style.transform = `translate3d(-34%, 0, 0)`;
+        slide.style.transition = 'width 2s, height 2s, transform 2s';
+    });
+});
+
+// translate3d(-100%, 0, 0)
+// transition: width 2s, height 2s, transform 2s;
 
 function showHidwLyrics() {
     console.log('showLyricsBtn');
@@ -80,9 +99,9 @@ document.querySelector(".dropbtn").addEventListener('click', () => {
     document.querySelector("#profileDropdown").classList.toggle("show");
 });
 
-document.getElementById('musicPlay').addEventListener('click', () => {
-    document.querySelector(".song_play_container").classList.toggle("hidden");
-});
+// document.getElementById('musicPlay').addEventListener('click', () => {
+//     document.querySelector(".song_play_container").classList.toggle("hidden");
+// });
 
 musicPlayBtn.addEventListener('click', (e) => {
     // console.log(e.target.closest('.music_play_btn_svg'));

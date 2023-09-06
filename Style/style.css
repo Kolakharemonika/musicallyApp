@@ -81,12 +81,14 @@ button {
     display: flex;
 }
 
-.music_card {
+/* .music_card {
     height: 50vh;
     width: 100vw;
-}
+} */
 
-.music_card .music_card_current {
+.music_card .music_card_prev,
+.music_card .music_card_current,
+.music_card .music_card_next {
     position: relative;
     height: 85%;
 }
@@ -302,10 +304,6 @@ input:focus-visible {
     transform: translateY(3px);
 }
 
-.music_cards_container {
-    display: flex;
-}
-
 .musically {
     width: 90px;
 }
@@ -323,13 +321,6 @@ input:focus-visible {
     border: 1px solid red;
     background: url(../assests/images/uddjaa.jpg);
     background-position: center bottom;
-}
-
-.img_card img {
-    border-radius: 5%;
-    padding: 3px;
-    -webkit-box-reflect: below 0px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-    /* height: 38%; */
 }
 
 .disabled {
@@ -353,15 +344,6 @@ input:focus-visible {
     align-items: center;
 }
 
-.img_card {
-    /* height: 250px;
-    width: 260px; */
-    /* padding: 10px; */
-    /* width: 32%;
-    height: 85%; */
-    width: 33%;
-    height: 75%;
-}
 
 .trending_songs_cards {
     display: flex;
@@ -375,7 +357,7 @@ input:focus-visible {
 }
 
 .music_cards_container .music_card {
-    align-items: center;
+    /* align-items: center; */
     /* height: 280px; */
 }
 
@@ -559,7 +541,8 @@ img {
     /* height: 20px; */
 }
 
-
+/* transform: translate3d(-100%, 0, 0);
+ transition: width 2s, height 2s, transform 2s; */
 
 .nav_item_click.active span,
 .nav_item_click:hover span {
@@ -569,4 +552,39 @@ img {
 .nav_item_click.active .nav_icon_svg,
 .nav_item_click:hover .nav_icon_svg {
     fill: var(--color-primary);
+}
+
+/* nmbhajbnx */
+.card-size {
+    width: 80%;
+    margin: auto;
+}
+
+.music_cards_container {
+    display: flex;
+}
+
+
+.d-grid {
+    display: grid;
+    grid-auto-flow: column;
+    overflow: hidden;
+}
+
+.slidebox {
+    display: flex;
+    width: 68vw;
+    /* width: 100vw; */
+}
+
+.playing_song_card {
+    width: 230px;
+    padding-top: 10px;
+    padding-right: 30px;
+    height: 276px;
+}
+
+.playing_song_card img {
+    border-radius: 5%;
+    -webkit-box-reflect: below 3px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 }
