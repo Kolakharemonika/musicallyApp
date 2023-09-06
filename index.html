@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musically App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pathway+Gothic+One&family=Poppins&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./Style/style.css">
-    <script defer src="./script.js" type="module"></script>
+    <script src="./script.js" type="module"></script>
 </head>
 
 <body>
@@ -19,7 +24,7 @@
                     </li>
                     <li class="nav_item nav_item_click active">
                         <button class="nav_btn">
-                            <svg class="nav_icon ">
+                            <svg class="nav_icon nav_icon_svg">
                                 <use href="./assests/icons.svg#home-icon"></use>
                             </svg>
                             <span>Home</span>
@@ -27,7 +32,7 @@
                     </li>
                     <li class="nav_item nav_item_click">
                         <button class="nav_btn">
-                            <svg class="nav__icon">
+                            <svg class="nav__icon nav_icon_svg">
                                 <use href="./assests/icons.svg#headphone-icon"></use>
                             </svg>
                             <span>Library</span>
@@ -35,7 +40,7 @@
                     </li>
                     <li class="nav_item nav_item_click">
                         <button class="nav_btn">
-                            <svg class="nav_icon">
+                            <svg class="nav_icon nav_icon_svg">
                                 <use href="./assests/icons.svg#podcasts-icon"></use>
                             </svg>
                             <span>Podcasts</span>
@@ -47,7 +52,12 @@
                 <ul class="nav_list nav-right">
                     <li class="nav_item">
                         <form class="search">
-                            <input type="text" class="search_field" placeholder="Search Song, Singer or Album " />
+                            <input type="text" class="search_field" placeholder="Search Song, Singer or Album">
+                            <button class="nav_btn clear_search_btn">
+                                <svg class="close_icon">
+                                    <use href="./assests/icons.svg#close-icon"></use>
+                                </svg>
+                            </button>
                             <button class="nav_btn search_btn">
                                 <svg class="search_icon">
                                     <use href="./assests/icons.svg#search-icon"></use>
@@ -77,19 +87,19 @@
                         <div id="profileDropdown" class="nav_dropdown-content">
                             <ul class="dropdown_ul">
                                 <li class="dropdown_li_item">
-                                    <svg class="nav_icon">
+                                    <svg class="nav_icon dropdown_item_svg">
                                         <use href="./assests/icons.svg#user-icon"></use>
                                     </svg>
                                     <span>My Account</span>
                                 </li>
                                 <li class="dropdown_li_item">
-                                    <svg class="nav_icon">
+                                    <svg class="nav_icon dropdown_item_svg">
                                         <use href="./assests/icons.svg#star-icon"></use>
                                     </svg>
                                     <span>Premium</span>
                                 </li>
                                 <li class="dropdown_li_item">
-                                    <svg class="nav_icon">
+                                    <svg class="nav_icon dropdown_item_svg">
                                         <use href="./assests/icons.svg#logout-icon"></use>
                                     </svg>
                                     <span>Log Out</span>
@@ -122,11 +132,14 @@
                         </div>
                         <div class="img_card music_card_current">
                             <img src="./assests/images/heeriye.jpg" alt="music poster image">
-                            <!-- <img class="flip_img" src="./assests/images/heeriye.jpg" alt=""> -->
+                            <button class="btn_play_icon" id=musicPlay>
+                                <svg class="play_icon">
+                                    <use href="./assests/icons.svg#play-icon"></use>
+                                </svg>
+                            </button>
                         </div>
                         <div class="img_card music_card_next">
                             <img src="./assests/images/hukum.jpg" alt="music poster image">
-                            <!-- <img class="flip_img" src="./assests/images/hukum.jpg" alt=""> -->
                         </div>
                     </div>
                     <button onclick="changeImage('next')" class="slide_btn">
@@ -139,8 +152,8 @@
             <div class="section_2 trending_songs_container">
                 <div class="trending_songs_head">
                     <span class="heading">Trending Songs </span>
-                    <div class="d-flex trending_song_btn">
-                        <button class="" disabled>
+                    <div class="d-flex trending_song_btns">
+                        <button class="disabled">
                             <svg class="icon">
                                 <use href="./assests/icons.svg#back-arrow-icon"></use>
                             </svg>
@@ -150,47 +163,48 @@
                                 <use href="./assests/icons.svg#forward-arrow-icon"></use>
                             </svg>
                         </button>
-                        <button class="btn">
+                        <button class="btn btn_expand_library">
                             <span>SEE ALL</span>
                         </button>
                     </div>
                 </div>
                 <div class="trending_songs_cards">
-                    <div class="card">
+                    <div class="song_card">
                         <img class="song-img" src="./assests/images/hukum-170px.jpg" alt="hukum">
                         <h5 class="song-title">hukum</h5>
                         <span class="song-writer">Anirudh Ravichander</span>
                     </div>
-                    <div class="card">
-                        <img src="./assests/images/heeriye-170px.jpg" alt="hukum">
+                    <div class="song_card">
+                        <img class="song-img" src="./assests/images/heeriye-170px.jpg" alt="hukum">
                         <h5 class="song-title">Heeriye(feet. Arijit singh)</h5>
                         <span class="song-writer">Jasleen Royal, Arijit singh</span>
                     </div>
-                    <div class="card">
-                        <img src="./assests/images/uddjaa-170px.jpg" alt="hukum">
+                    <div class="song_card">
+                        <img class="song-img" src="./assests/images/uddjaa-170px.jpg" alt="hukum">
                         <h5 class="song-title">hghghgj</h5>
                         <span class="song-writer">Udit Narayan</span>
                     </div>
-                    <div class="card">
+                    <div class="song_card">
                         <img class="song-img" src="./assests/images/hukum-170px.jpg" alt="hukum">
                         <h5 class="song-title">hukum</h5>
                         <span class="song-writer">Anirudh Ravichander</span>
                     </div>
-                    <div class="card">
-                        <img src="./assests/images/heeriye-170px.jpg" alt="hukum">
+                    <div class="song_card">
+                        <img class="song-img" src="./assests/images/heeriye-170px.jpg" alt="hukum">
                         <h5 class="song-title">Heeriye(feet. Arijit singh)</h5>
                         <span class="song-writer">Jasleen Royal, Arijit singh</span>
                     </div>
-                    <div class="card">
-                        <img src="./assests/images/uddjaa-170px.jpg" alt="hukum">
+                    <div class="song_card">
+                        <img class="song-img" src="./assests/images/uddjaa-170px.jpg" alt="hukum">
                         <h5 class="song-title">hghghgj</h5>
                         <span class="song-writer">Udit Narayan</span>
                     </div>
+
                 </div>
             </div>
         </div>
 
-        <div class="song_play_container">
+        <div class="song_play_container hidden">
             <div class="music-playing_sec">
                 <div class="music_info_sec">
                     <div>
@@ -203,17 +217,18 @@
                 </div>
                 <div class="d-flex music_btns">
                     <button class="music_btn">
-                        <svg>
+                        <svg class="music_btn_svg">
                             <use href="./assests/icons.svg#play-previous-icon"></use>
                         </svg>
                     </button>
-                    <button class="music_btn">
-                        <svg>
-                            <use href="./assests/icons.svg#play-icon"></use>
+                    <button class="music_btn music_play_btn">
+                        <svg class="music_btn_svg music_play_btn_svg">
+                            <use id="play" href="./assests/icons.svg#play-icon"></use>
+                            <!-- <use id="pause" href="./assests/icons.svg#pause-icon"></use> -->
                         </svg>
                     </button>
                     <button class="music_btn">
-                        <svg>
+                        <svg class="music_btn_svg">
                             <use href="./assests/icons.svg#play-next-icon"></use>
                         </svg>
                     </button>
@@ -227,7 +242,7 @@
 
             <div class="lyrics_sec hidden">
                 <button class="expand_btn">
-                    <svg>
+                    <svg class="expand_btn_svg">
                         <use href="./assests/icons.svg#expand-more-icon"></use>
                     </svg>
                 </button>
