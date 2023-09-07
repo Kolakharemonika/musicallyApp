@@ -68,40 +68,91 @@ export const getMusicList = async function () {
     return musicList.slice();
 }
 
-export const loadGallary = async function () {
-
-    console.log('jhwfgjwyhgfbmesevfejhsfbjs,nc ');
-
-}
 
 export const trendingSongMarkup = async function () {
     const list = musicList.slice();
-    let html = `${musicList.map(music => {
-
-        return `<div class="song_card">
+    if (list.length !== 0 && list.length >= 6) {
+        let html = `${list.map((music, id) => {
+            if (id >= 6) return;
+            return `<div class="song_card" id="${music.songId}">
             <img class="song-img" src="./assests/images/${music.songImg}" alt="${music.songTitle}">
-                <h5 class="song-title">${music.songTitle.padEnd(15, '.')}</h5>
-                <span class="song-writer">${music.songWriter}</span>
-        </div>`
-    }).join('')} `;
+            <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
+            <button class="btn_play_icon_small">
+              <svg class="play_icon">
+                    <use href="./assests/icons.svg#play-icon"></use>
+              </svg>
+            </button> 
+            <h5 class="song-title">${music.songTitle.padEnd(15, '.')}</h5>
+            <span class="song-writer">${music.songWriter}</span>
+            </div>`
+        }).join('')} `;
 
-    return html;
+        return html;
+    } else {
+        return 'No songs available...'
+    }
+
 }
 
-// export const loadGallary = async function () {
-//     console.log(music);
-//     let html = `${music.map(recipe => {
-//         return ` <button class="btn--recipes " id="${recipe.id}"><div class="recipee flex" >
-//                     <div class="recipe-img flex">
+export const loadGallary = async function () {
+    const list = musicList.slice();
+    if (list.length && list.length > 0) {
+        let html = `${list.map(music => {
+            return `<div class="song_card w-14" id="${music.songId}">
+            <img class="song-img" src="./assests/images/${music.songImg}" alt="${music.songTitle}">
+             <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
+                            <button class="btn_play_icon_small">
+                                <svg class="play_icon">
+                                    <use href="./assests/icons.svg#play-icon"></use>
+                                </svg>
+                            </button>   <h5 class="song-title">${music.songTitle.padEnd(15, '.')}</h5>
+                <span class="song-writer">${music.songWriter}</span>
+        </div>`
+        }).join('')} `;
 
-//                         <img src="${recipe.imageUrl}" alt="${recipe.title}">
-//                     </div>
-//                     <span class="flex-row pt-10 recipe-dec">
-//                         <span class="heading--3">${recipe.title?.length >= 30 ? (recipe.title.slice(0, 30)).toUpperCase() + '...' : (recipe.title).toUpperCase()}</span>
-//                         <span>${recipe.publisher}</span>
-//                     </span>
-//                 </div>  </button>`
-//     }).join('')} `;
+        return html;
+    } else {
+        return 'No songs available...'
+    }
+}
 
-//     return html;
-// }
+export const generateMarkup = async function () {
+    if (musicList.length !== 0 && musicList.length >= 3) {
+        let html = `${musicList.map((trendingSong, id) => {
+            let classtemp;
+            if (id == 0) {
+                classtemp = 'music_card_prev';
+            }
+            if (id == 1) {
+                classtemp = 'music_card_current';
+            }
+            if (id == 2) {
+                classtemp = 'music_card_next';
+            }
+            if (id >= 3) return;
+            return `<div class="playing_song_card ${classtemp}" id="${trendingSong.songId}">
+                            <img src="./assests/images/${trendingSong.songImg}" alt="${trendingSong.songTitle}">
+                     <div class="playing_song_info">
+                                <span class="song_title">${trendingSong.songTitle}</span>
+                                <span class="song_writer">${trendingSong.songWriter}</span>
+                     </div>
+                     <div class="overlay">
+                       <button class="music_btn music_play_btn btn_play_icon">
+                                    <svg class="music_btn_svg btn_play_pause" id="play">
+                                        <use href="./assests/icons.svg#play-icon"></use>
+                                    </svg>
+                                    <svg class="music_btn_svg btn_play_pause d-none" id="pause">
+                                        <use href="./assests/icons.svg#pause-icon"></use>
+                                    </svg>
+                       </button>
+                       </div>
+                    </div>`
+        }).join('')} `;
+        return html;
+    } else {
+        return 'No Songs Available';
+    }
+
+
+
+}

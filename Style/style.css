@@ -124,6 +124,10 @@ button {
     width: 3rem;
     border-radius: 50%;
     background: var(--color-white-off-20);
+    opacity: 0;
+}
+
+.trending_songs_cards .song_card:hover .btn_play_icon_small {
     opacity: 1;
 }
 
@@ -133,8 +137,8 @@ button {
 
 .music_card .btn_play_icon {
     position: absolute;
-    top: 34%;
-    left: 47%;
+    top: 43%;
+    left: 35%;
     opacity: 1;
     z-index: 1;
     height: 3rem;
@@ -155,22 +159,26 @@ button {
     padding-left: 20px;
 }
 
-
-
-.music_card .music_card_current:hover .playing_song_info,
+.music_card .playing_song_card:hover .playing_song_info,
 .music_card .btn_play_icon:hover .playing_song_info {
     opacity: 1;
     z-index: 2;
 }
 
-.music_card .music_card_current:hover .music_card .btn_play_icon {
+.music_card .playing_song_card:hover .music_card .btn_play_icon {
     z-index: 1;
 }
 
-.music_card .music_card_current:hover .overlay {
-    /* opacity: 1; */
+/* .music_card .music_card_current:hover .overlay {
+    opacity: 1;
+} */
+.music_card .playing_song_card:hover .overlay {
+    opacity: 1;
 }
 
+.btn_play_icon:hover+.music_card .music_card_current .overlay {
+    opacity: 1;
+}
 
 .music_card .music_card_current:hover .playing_song_card.img {
     border: 1px solid var(--color-white-off-20);
@@ -415,26 +423,33 @@ input:focus-visible {
     position: absolute;
     /* top: 68%; */
     background: var(--color-dark);
-    padding: 0 10px;
+    width: 100%;
 }
 
 .trending_songs_head {
     display: flex;
     justify-content: space-between;
-    margin: 10px 10px 0px;
+    padding: 10px 20px;
     align-items: center;
 }
 
 
 .trending_songs_cards {
     display: flex;
-    /* padding: 0 10px; */
+    /* margin-bottom: 80px; */
+    /* transform: translate3d(-16%, 0, 0); */
+    /* transition: width 2s, height 2s, transform 2s; */
 }
 
 .trending_songs_cards .song_card {
     padding: 10px;
-    /* height: 20%;
-    width: 20%; */
+    width: 24%;
+}
+
+.sub_container {
+    width: 95%;
+    margin: auto;
+    overflow: hidden;
 }
 
 .music_cards_container .music_card {
@@ -443,19 +458,10 @@ input:focus-visible {
 }
 
 .trending_songs_cards .song_card .song-img {
-    /* width: 120px;
-    height: 120px; */
     height: 60%;
     border-radius: 5px;
 }
 
-.position {
-    /* position: absolute; */
-}
-
-.trending_songs_cards .song-img:hover+.position {
-    /* position: relative; */
-}
 
 .slide_btn {
     padding: 10px;
@@ -469,8 +475,6 @@ input:focus-visible {
 img {
     height: 100%;
     width: 100%;
-    /* height: 100% !important;
-    width: 100% !important; */
 }
 
 .song-writer {
@@ -526,6 +530,7 @@ img {
     z-index: 63;
     opacity: 1;
 }
+
 
 .music_info_sec,
 .music_info {
@@ -605,6 +610,10 @@ img {
     border-radius: 50%;
 }
 
+.w-14 {
+    width: 14% !important;
+}
+
 .lyrics_sec {
     top: 10px;
     position: absolute;
@@ -640,6 +649,7 @@ img {
     width: 100%;
     left: 0;
     height: 50%;
+    opacity: 0;
 }
 
 /* transform: translate3d(-100%, 0, 0);
