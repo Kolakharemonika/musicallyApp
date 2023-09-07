@@ -9,49 +9,58 @@ export const musicList = [{
     songId: 1,
     songImg: 'hukum-170px.jpg',
     songTitle: 'hukum',
-    songWriter: 'Anirudh Ravichander'
+    songWriter: 'Anirudh Ravichander',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 2,
     songImg: 'heeriye-170px.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
-    songWriter: 'Jasleen Royal, Arijit singh'
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 3,
     songImg: 'uddjaa-170px.jpg',
     songTitle: 'Udd jaa kaale kaava',
-    songWriter: 'Udit Narayan'
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
     songId: 4,
     songImg: 'hukum-170px.jpg',
     songTitle: 'hukum',
-    songWriter: 'Anirudh Ravichander'
+    songWriter: 'Anirudh Ravichander',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 5,
     songImg: 'heeriye-170px.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
-    songWriter: 'Jasleen Royal, Arijit singh'
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 6,
     songImg: 'uddjaa-170px.jpg',
     songTitle: 'Udd jaa kaale kaava',
-    songWriter: 'Udit Narayan'
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
     songId: 7,
     songImg: 'hukum-170px.jpg',
     songTitle: 'hukum',
-    songWriter: 'Anirudh Ravichander'
+    songWriter: 'Anirudh Ravichander',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 8,
     songImg: 'heeriye-170px.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
-    songWriter: 'Jasleen Royal, Arijit singh'
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 9,
     songImg: 'uddjaa-170px.jpg',
     songTitle: 'Udd jaa kaale kaava',
-    songWriter: 'Udit Narayan'
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }]
 
 

@@ -70,27 +70,27 @@ function load() {
         //                     <div class="overlay"> </div>    </div>`
         // })
 
-        slideContainer.innerHTML = `<div class="playing_song_card music_card_prev">
+        slideContainer.innerHTML = `<div class="playing_song_card music_card_prev" id="${trendingSongsList[0].songId}">
                             <img src="./assests/images/${trendingSongsList[0].songImg}" alt="${trendingSongsList[0].songTitle}">
                      <div class="playing_song_info">
                                 <span class="song_title">${trendingSongsList[0].songTitle}</span>
                                 <span class="song_writer">${trendingSongsList[0].songWriter}</span>
                             </div>
-                            <div class="overlay"> </div>    </div>
-                        <div class="playing_song_card music_card_current">
+                               </div>
+                        <div class="playing_song_card music_card_current" id="${trendingSongsList[1].songId}">
                             <img src="./assests/images/${trendingSongsList[1].songImg}" alt="${trendingSongsList[1].songTitle}">
                       <div class="playing_song_info">
                                 <span class="song_title">${trendingSongsList[1].songTitle}</span>
                                 <span class="song_writer">${trendingSongsList[1].songWriter}</span>
                             </div>
-                            <div class="overlay"> </div>    </div>
-                        <div class="playing_song_card music_card_next ">
+                               </div>
+                        <div class="playing_song_card music_card_next " id="${trendingSongsList[2].songId}">
                             <img src="./assests/images/${trendingSongsList[2].songImg}" alt="${trendingSongsList[2].songTitle}">
                     <div class="playing_song_info">
                                 <span class="song_title">${trendingSongsList[2].songTitle}</span>
                                 <span class="song_writer">${trendingSongsList[2].songWriter}</span>
                             </div>
-                            <div class="overlay"> </div>     </div>
+                                </div>
                          `
     } else {
         slideContainer.textContent = 'No Songs Available';
@@ -102,71 +102,92 @@ load();
 
 const musicCardNext = document.querySelector('.music_card_next');
 const musicCardPrev = document.querySelector('.music_card_prev');
-const musicPlayBtn = document.querySelector('.music_play_btn');
+const musicPlayBtn = document.querySelectorAll('.music_play_btn');
 const playingSongCardList = document.querySelectorAll('.playing_song_card');
 var currentSlide = 0;
 
 // trendingSongPlay
 function playPrevSong() {
     currentSlide--;
+    slides.forEach(slide => {
+        slide.style.transform = `translate3d(-${currentSlide * 11}%, 0, 0)`;
+        slide.style.transition = 'width 2s, height 2s, transform 2s';
+    });
     console.log(currentSlide);
     if (currentSlide == 0) {
         previousSongPlayBtn.classList.add('disabled');
     } else {
         nextSongPlayBtn.classList.remove('disabled');
     }
+    const playingSongCardList1 = document.querySelectorAll('.playing_song_card');
+    console.log(playingSongCardList1);
 
-    slides.forEach(slide => {
-        slide.style.transform = `translate3d(-${currentSlide * 11}%, 0, 0)`;
-        slide.style.transition = 'width 2s, height 2s, transform 2s';
-    });
+    playingSongCardList1[currentSlide].classList.replace('none', 'music_card_prev')
+    playingSongCardList1[currentSlide + 1].classList.replace('music_card_prev', 'music_card_current')
+    playingSongCardList1[currentSlide + 2].classList.replace('music_card_current', 'music_card_next')
+
+    // slides.forEach(slide => {
+    //     slide.style.transform = `translate3d(-${currentSlide * 11}%, 0, 0)`;
+    //     slide.style.transition = 'width 2s, height 2s, transform 2s';
+    // });
     setTimeout(() => {
-        console.log(slideContainer.hasChildNodes(), slideContainer.removeChild(slideContainer.lastChild));
+        playingSongCardList1.length >= 3 && slideContainer.removeChild(slideContainer.lastChild)
+        // console.log(slideContainer.hasChildNodes(), slideContainer.removeChild(slideContainer.lastChild));
     }, 1500);
 }
 
 musicCardPrev.addEventListener('click', playPrevSong)
 previousSongPlayBtn.addEventListener('click', playPrevSong);
 
-
-
 function playNextSong() {
     currentSlide++;
+
     console.log(currentSlide);
     if (currentSlide == trendingSongsList.length - 3) {
         nextSongPlayBtn.classList.add('disabled');
     } else {
         previousSongPlayBtn.classList.remove('disabled');
+        slides.forEach(slide => {
+            slide.style.transform = `translate3d(-${currentSlide * 11}%, 0, 0)`; //-34%
+            slide.style.transition = 'width 2s, height 2s, transform 2s';
+        });
 
+        const playingSongCardList1 = document.querySelectorAll('.playing_song_card');
 
-        console.log(playingSongCardList, 'playingSongCardList');
-        playingSongCardList.forEach(card => {
-            // card.classList.remove('music_card_prev')
-            // card.classList.remove('music_card_current')
-            // card.classList.remove('music_card_next')
-        })
-        const html = `<div class="playing_song_card music_card_next">
+        for (let i = 0; i <= playingSongCardList1.length; i++) {
+            if (i == playingSongCardList1.length - 3) {
+                playingSongCardList1[i].classList.replace('music_card_prev', 'none')
+            }
+            if (i == playingSongCardList1.length - 2) {
+                playingSongCardList1[i].classList.replace('music_card_current', 'music_card_prev')
+            }
+            if (i == playingSongCardList1.length - 1) {
+                playingSongCardList1[i].classList.replace('music_card_next', 'music_card_current')
+            }
+        }
+
+        const html = `<div class="playing_song_card music_card_next" id="${trendingSongsList[2 + currentSlide].songId}">
                             <img src="./assests/images/${trendingSongsList[2 + currentSlide].songImg}" alt="${trendingSongsList[2 + currentSlide].songTitle}">
-                        </div>`;
+                     <div class="playing_song_info">
+                                <span class="song_title">${trendingSongsList[2 + currentSlide].songTitle}</span>
+                                <span class="song_writer">${trendingSongsList[2 + currentSlide].songWriter}</span>
+                            </div>
+                               </div>`;
 
         slideContainer.insertAdjacentHTML('beforeend', html);
 
-        slides.forEach(slide => {
-            slide.style.transform = `translate3d(-${(currentSlide) * 11}%, 0, 0)`; //-34%
-            slide.style.transition = 'width 2s, height 2s, transform 2s';
-        });
+        // slides.forEach(slide => {
+        //     slide.style.transform = `translate3d(-${currentSlide * 11}%, 0, 0)`; //-34%
+        //     slide.style.transition = 'width 2s, height 2s, transform 2s';
+        // });
         // slideContainer.removeChild(list.firstElementChild);
         // console.log(slideContainer.hasChildNodes(), slideContainer.removeChild(slideContainer.firstChild));
-        if (playingSongCardList.length == 5) {
+        setTimeout(() => {
+            // slideContainer.removeChild(slideContainer.lastElementChild);
+        }, 2500)
 
-            setTimeout(() => {
-                // slideContainer.removeChild(slideContainer.firstElementChild);
-            }, 2500)
-        }
     }
 }
-
-
 musicCardNext.addEventListener('click', playNextSong);
 nextSongPlayBtn.addEventListener('click', playNextSong);
 
@@ -194,9 +215,11 @@ document.querySelector(".dropbtn").addEventListener('click', () => {
     document.querySelector("#profileDropdown").classList.toggle("show");
 });
 
+
 //working
-document.getElementById('musicPlay').addEventListener('click', () => {
-    document.querySelector(".song_play_container").classList.toggle("hidden");
+const playMusic = document.getElementById('musicPlay');
+playMusic.addEventListener('click', () => {
+    document.querySelector(".song_play_container").classList.remove("hidden");
 });
 
 //trending song btns prevList nextList
@@ -222,23 +245,80 @@ expandLibraryBtn.addEventListener('click', getLibraryList)
 
 
 //Audio play pause
-const audio = document.querySelector('audio');
+
 const btnPlayPause = document.querySelectorAll('.btn_play_pause');
 
-musicPlayBtn.addEventListener('click', (e) => {
-    // audio.duration
-    console.log(audio.duration, 'audio.duration');
-    const closestBtn = e.target.closest('.btn_play_pause');
-    if (closestBtn) {
-        if (closestBtn.getAttribute('id') == 'play') {
-            audio.play();
-            console.log(audio.seekable.end(audio.seekable.length - 1), 'dfsfs');
-        } else {
-            audio.pause();
-        }
+function selectedSongDisplay(displaySongId) {
+    console.log(displaySongId, 'SongId');
+    const selectedSong = trendingSongsList.find(trendingSong => {
+        return trendingSong.songId == displaySongId;
+    })
+    // console.log(selectedSong, 'selectedSong');
+    if (selectedSong) {
+        const audioHtml = ` <audio class="audio_song" src="./assests/music/${selectedSong.audioFile}" type="audio/mpeg">
+                    </audio>`
+        document.querySelector('.audio_song-container').innerHTML = audioHtml;
+
+        const musicInfoHtml = ` <div>
+                        <img width="50" height="50" src="./assests/images/${selectedSong.songImg}" alt="${selectedSong.songTitle}" >
+                    </div>
+                    <div class="music_info">
+                        <span>${selectedSong.songTitle}</span>
+                        <span>${selectedSong.songWriter}</span>
+                    </div>`;
+        document.querySelector('.music_info_sec').innerHTML = musicInfoHtml;
     }
 
-    btnPlayPause.forEach(btn => {
-        btn.classList.toggle('d-none');
+
+}
+
+slideContainer.addEventListener('click', (e) => {
+    // console.log(e.target, 'slideContainer');
+
+    if (e.target.closest('.playing_song_card')) {
+
+        const displaySongId = e.target.closest('.playing_song_card').getAttribute('id');
+        // console.log(displaySongId, 'displaySongId');
+
+        if (displaySongId) {
+            selectedSongDisplay(displaySongId);
+        }
+
+    }
+})
+
+// musicCardCurrent.addEventListener('click', (e) => {
+//     console.log(e.target, 'wdws');
+// })
+
+
+
+musicPlayBtn.forEach(playingBtn => {
+
+    // margin-bottom: 80px;
+    playingBtn.addEventListener('click', (e) => {
+        trendingSongCard.style.marginBottom = '80px';
+        const audio = document.querySelector('audio');
+        const musicCardCurrent = document.querySelector('.music_card_current');
+        const displaySongId = musicCardCurrent.getAttribute('id');
+
+        if (displaySongId) {
+            selectedSongDisplay(displaySongId);
+        }
+
+        // audio.duration
+        // console.log(audio.duration, 'audio.duration');
+        const closestBtn = e.target.closest('.btn_play_pause');
+        if (closestBtn && audio) {
+            if (closestBtn.getAttribute('id') == 'play') {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+            btnPlayPause.forEach(btn => {
+                btn.classList.toggle('d-none');
+            })
+        }
+
     })
 })
