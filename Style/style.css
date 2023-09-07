@@ -111,22 +111,85 @@ button {
 }
 
 .music_card .music_card_current:hover {
-    opacity: 0.5;
+    /* opacity: 0.5; */
 }
 
-.btn_play_icon {
-    position: absolute;
-    top: 46%;
-    left: 46%;
+.btn_play_icon_small {
+    /* position: absolute;
+    top: 34%;
+    left: 47%;
+    z-index: 1;
     height: 3rem;
     width: 3rem;
     border-radius: 50%;
     background: var(--color-white-off-20);
-    opacity: 0;
+    opacity: 1; */
+
+    position: absolute;
+    /* top: 34%; */
+    bottom: 138px;
+    left: 51px;
+    /* z-index: 0; */
+    z-index: 1;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background: var(--color-white-off-20);
+    opacity: 1;
 }
 
-.music_card .music_card_current:hover .btn_play_icon {
+.d-none {
+    display: none;
+}
+
+.music_card .btn_play_icon {
+    position: absolute;
+    top: 34%;
+    left: 47%;
     opacity: 1;
+    z-index: 1;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    background: var(--color-white-off-20);
+
+}
+
+.playing_song_info {
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    z-index: 0;
+    position: absolute;
+    bottom: 42px;
+    padding-left: 20px;
+}
+
+
+
+.music_card .music_card_current:hover .playing_song_info {
+    opacity: 1;
+    z-index: 2;
+}
+
+.music_card .music_card_current:hover .music_card .btn_play_icon {
+    z-index: 1;
+}
+
+.music_card .music_card_current:hover .overlay {
+    opacity: 1;
+}
+
+
+.music_card .music_card_current:hover .playing_song_card.img {
+    border: 1px solid var(--color-white-off-20);
+    opacity: 1;
+}
+
+.playing_song_info .song_writer {
+    margin-top: -4px;
+    font-size: 12px;
+    color: var(--color-white-off);
 }
 
 .play_icon {
@@ -345,6 +408,16 @@ input:focus-visible {
     opacity: 0.2;
 }
 
+.overlay {
+    background-image: linear-gradient(0deg, #000000 0%, transparent 74%);
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    height: 91%;
+    width: 100%;
+    overflow: hidden;
+}
+
 .trending_songs_container {
     display: flex;
     flex-direction: column;
@@ -375,7 +448,7 @@ input:focus-visible {
 
 .music_cards_container .music_card {
     /* align-items: center; */
-    /* height: 280px; */
+    height: 327px;
 }
 
 .trending_songs_cards .song_card .song-img {
@@ -383,6 +456,14 @@ input:focus-visible {
     height: 120px; */
     height: 60%;
     border-radius: 5px;
+}
+
+.position {
+    /* position: absolute; */
+}
+
+.trending_songs_cards .song-img:hover+.position {
+    /* position: relative; */
 }
 
 .slide_btn {
@@ -447,7 +528,8 @@ img {
     border-top: 1px solid white;
     position: fixed;
     bottom: 0;
-    height: 70px;
+    /* height: 70px; */
+    height: 100px;
     background: black;
     width: 100%;
     z-index: 63;
@@ -607,5 +689,9 @@ img {
 
 .playing_song_card img {
     border-radius: 5%;
-    -webkit-box-reflect: below 3px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+    -webkit-box-reflect: below 3px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.4));
+}
+
+audio {
+    width: 100%;
 }

@@ -6,27 +6,49 @@ export const music = {
 }
 
 export const musicList = [{
+    songId: 1,
     songImg: 'hukum-170px.jpg',
     songTitle: 'hukum',
     songWriter: 'Anirudh Ravichander'
 }, {
+    songId: 2,
     songImg: 'heeriye-170px.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
     songWriter: 'Jasleen Royal, Arijit singh'
 }, {
+    songId: 3,
     songImg: 'uddjaa-170px.jpg',
     songTitle: 'Udd jaa kaale kaava',
     songWriter: 'Udit Narayan'
 },
 {
+    songId: 4,
     songImg: 'hukum-170px.jpg',
     songTitle: 'hukum',
     songWriter: 'Anirudh Ravichander'
 }, {
+    songId: 5,
     songImg: 'heeriye-170px.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
     songWriter: 'Jasleen Royal, Arijit singh'
 }, {
+    songId: 6,
+    songImg: 'uddjaa-170px.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songWriter: 'Udit Narayan'
+},
+{
+    songId: 7,
+    songImg: 'hukum-170px.jpg',
+    songTitle: 'hukum',
+    songWriter: 'Anirudh Ravichander'
+}, {
+    songId: 8,
+    songImg: 'heeriye-170px.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songWriter: 'Jasleen Royal, Arijit singh'
+}, {
+    songId: 9,
     songImg: 'uddjaa-170px.jpg',
     songTitle: 'Udd jaa kaale kaava',
     songWriter: 'Udit Narayan'

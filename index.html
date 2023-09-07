@@ -31,7 +31,7 @@
                         </button>
                     </li>
                     <li class="nav_item nav_item_click">
-                        <button class="nav_btn">
+                        <button class="nav_btn library">
                             <svg class="nav__icon nav_icon_svg">
                                 <use href="./assests/icons.svg#headphone-icon"></use>
                             </svg>
@@ -117,51 +117,47 @@
                 </div>
             </div>
         </header>
-        <!-- <hr> -->
         <div class="container">
             <div class="music_cards_container">
 
-                <button class="active slide_btn previous_song_btn">
+                <button class="active slide_btn previous_song_btn disabled">
                     <svg class="icon">
                         <use href="./assests/icons.svg#back-arrow-icon"></use>
                     </svg>
                 </button>
                 <div class="card-size d-grid slides music_card">
-                    <div class="slidebox">
-                        <div class="playing_song_card music_card_prev">
-                            <img src="./assests/images/uddjaa.jpg" alt="mountain image 1">
+                    <button class="btn_play_icon" id=musicPlay>
+                        <svg class="play_icon">
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                    </button>
+                    <div class="slidebox slide_container">
+                        <!-- <div class="playing_song_card music_card_prev">
+                            <img src="./assests/images/hukum.jpg" alt="mountain image 2">
+                            <div class="playing_song_info">
+                                <span class="song_title">Heeriye</span>
+                                <span class="song_writer">Jasleen Royal, Arijit Singh</span>
+                            </div>
+                            <div class="overlay"> </div>
                         </div>
                         <div class="playing_song_card music_card_current">
                             <img src="./assests/images/heeriye.jpg" alt="mountain image 2">
-                            <button class="btn_play_icon" id=musicPlay>
-                                <svg class="play_icon">
-                                    <use href="./assests/icons.svg#play-icon"></use>
-                                </svg>
-                            </button>
+
+                            <div class="playing_song_info">
+                                <span class="song_title">Heeriye</span>
+                                <span class="song_writer">Jasleen Royal, Arijit Singh</span>
+                            </div>
+                            <div class="overlay"> </div>
                         </div>
                         <div class="playing_song_card music_card_next ">
-                            <img src="./assests/images/hukum.jpg" alt="mountain image 2">
-                        </div>
-
-                        <div class="playing_song_card ">
                             <img src="./assests/images/uddjaa.jpg" alt="mountain image 1">
-                        </div>
-                        <div class="playing_song_card ">
-                            <img src="./assests/images/heeriye.jpg" alt="mountain image 2">
-                        </div>
-                        <div class="playing_song_card ">
-                            <img src="./assests/images/hukum.jpg" alt="mountain image 2">
-                        </div>
 
-                        <div class="playing_song_card ">
-                            <img src="./assests/images/uddjaa.jpg" alt="mountain image 2">
-                        </div>
-                        <div class="playing_song_card ">
-                            <img src="./assests/images/heeriye.jpg" alt="mountain image 2">
-                        </div>
-                        <div class="playing_song_card ">
-                            <img src="./assests/images/hukum.jpg" alt="mountain image 2">
-                        </div>
+                            <div class="playing_song_info">
+                                <span class="song_title">Heeriye</span>
+                                <span class="song_writer">Jasleen Royal, Arijit Singh</span>
+                            </div>
+                            <div class="overlay"> </div>
+                        </div> -->
                     </div>
                 </div>
                 <button class="slide_btn next_song_btn">
@@ -174,12 +170,12 @@
                 <div class="trending_songs_head">
                     <span class="heading">Trending Songs </span>
                     <div class="d-flex trending_song_btns">
-                        <button class="disabled">
+                        <button class="disabled trending_song_btn_prev">
                             <svg class="icon">
                                 <use href="./assests/icons.svg#back-arrow-icon"></use>
                             </svg>
                         </button>
-                        <button class="">
+                        <button class="trending_song_btn_next">
                             <svg class="icon">
                                 <use href="./assests/icons.svg#forward-arrow-icon"></use>
                             </svg>
@@ -189,43 +185,65 @@
                         </button>
                     </div>
                 </div>
-                <div class="trending_songs_cards">
-                    <div class="song_card">
-                        <img class="song-img" src="./assests/images/hukum-170px.jpg" alt="hukum">
-                        <h5 class="song-title">hukum</h5>
-                        <span class="song-writer">Anirudh Ravichander</span>
+                <div>
+                    <div class="trending_songs_cards">
+                        <div class="song_card">
+                            <img class="song-img" src="./assests/images/hukum-170px.jpg" alt="hukum">
+                            <h5 class="song-title">hukum</h5>
+                            <span class="song-writer">Anirudh Ravichander</span>
+                        </div>
+                        <div class="song_card">
+                            <img class="song-img" src="./assests/images/heeriye-170px.jpg" alt="hukum">
+                            <h5 class="song-title">Heeriye(feet. Arijit singh)</h5>
+                            <span class="song-writer">Jasleen Royal, Arijit singh</span>
+                        </div>
+                        <div class="song_card">
+                            <img class="song-img" src="./assests/images/uddjaa-170px.jpg" alt="hukum">
+                            <h5 class="song-title">hghghgj</h5>
+                            <span class="song-writer">Udit Narayan</span>
+                        </div>
+                        <div class="song_card">
+                            <img class="song-img" src="./assests/images/hukum-170px.jpg" alt="hukum">
+                            <h5 class="song-title">hukum</h5>
+                            <span class="song-writer">Anirudh Ravichander</span>
+                        </div>
+                        <div class="song_card">
+                            <img class="song-img" src="./assests/images/heeriye-170px.jpg" alt="hukum">
+                            <h5 class="song-title">Heeriye(feet. Arijit singh)</h5>
+                            <span class="song-writer">Jasleen Royal, Arijit singh</span>
+                        </div>
+                        <div class="song_card">
+                            <img class="song-img" src="./assests/images/uddjaa-170px.jpg" alt="hukum">
+                            <h5 class="song-title">hghghgj</h5>
+                            <span class="song-writer">Udit Narayan</span>
+                        </div>
+                        <!-- <button class="btn_play_icon_small" id=trendingSongPlay>
+                            <svg class="play_icon">
+                                <use href="./assests/icons.svg#play-icon"></use>
+                            </svg>
+                        </button> -->
                     </div>
-                    <div class="song_card">
-                        <img class="song-img" src="./assests/images/heeriye-170px.jpg" alt="hukum">
-                        <h5 class="song-title">Heeriye(feet. Arijit singh)</h5>
-                        <span class="song-writer">Jasleen Royal, Arijit singh</span>
-                    </div>
-                    <div class="song_card">
-                        <img class="song-img" src="./assests/images/uddjaa-170px.jpg" alt="hukum">
-                        <h5 class="song-title">hghghgj</h5>
-                        <span class="song-writer">Udit Narayan</span>
-                    </div>
-                    <div class="song_card">
-                        <img class="song-img" src="./assests/images/hukum-170px.jpg" alt="hukum">
-                        <h5 class="song-title">hukum</h5>
-                        <span class="song-writer">Anirudh Ravichander</span>
-                    </div>
-                    <div class="song_card">
-                        <img class="song-img" src="./assests/images/heeriye-170px.jpg" alt="hukum">
-                        <h5 class="song-title">Heeriye(feet. Arijit singh)</h5>
-                        <span class="song-writer">Jasleen Royal, Arijit singh</span>
-                    </div>
-                    <div class="song_card">
-                        <img class="song-img" src="./assests/images/uddjaa-170px.jpg" alt="hukum">
-                        <h5 class="song-title">hghghgj</h5>
-                        <span class="song-writer">Udit Narayan</span>
-                    </div>
-
+                    <button class="btn_play_icon_small" id=trendingSongPlay>
+                        <svg class="play_icon">
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
 
         <div class="song_play_container hidden">
+            <div class="audio-player">
+                <input type="range" id="seek-slider" max="100" value="0">
+                <div class="audio_song-container">
+                    <audio src="./assests/music/Heeriye-song-mp3.mp3" type="audio/mpeg">
+                    </audio>
+                    <!-- <audio controls>
+                        <source src="./assests/music/Heeriye-song-mp3.mp3" type="audio/mpeg">
+                    </audio> -->
+                </div>
+            </div>
+
             <div class="music-playing_sec">
                 <div class="music_info_sec">
                     <div>
@@ -243,9 +261,11 @@
                         </svg>
                     </button>
                     <button class="music_btn music_play_btn">
-                        <svg class="music_btn_svg music_play_btn_svg">
-                            <use id="play" href="./assests/icons.svg#play-icon"></use>
-                            <!-- <use id="pause" href="./assests/icons.svg#pause-icon"></use> -->
+                        <svg class="music_btn_svg btn_play_pause" id="play">
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                        <svg class="music_btn_svg btn_play_pause d-none" id="pause">
+                            <use href="./assests/icons.svg#pause-icon"></use>
                         </svg>
                     </button>
                     <button class="music_btn">
@@ -260,7 +280,6 @@
             </div>
         </div>
         <div class="lyrics_container">
-
             <div class="lyrics_sec hidden">
                 <button class="expand_btn">
                     <svg class="expand_btn_svg">
