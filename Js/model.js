@@ -1,63 +1,72 @@
 
 export const music = {
-    songImg: '',
+    songImgUrl: '',
     songTitle: '',
     songWriter: ''
 }
 
 export const musicList = [{
     songId: 1,
-    songImg: 'hukum-170px.jpg',
+    songImgUrl: 'hukum-170px.jpg',
+    songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 2,
-    songImg: 'heeriye-170px.jpg',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
     songWriter: 'Jasleen Royal, Arijit singh',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 3,
-    songImg: 'uddjaa-170px.jpg',
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
     songWriter: 'Udit Narayan',
     audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
     songId: 4,
-    songImg: 'hukum-170px.jpg',
+    songImgUrl: 'hukum-170px.jpg',
+    songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 5,
-    songImg: 'heeriye-170px.jpg',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
     songWriter: 'Jasleen Royal, Arijit singh',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 6,
-    songImg: 'uddjaa-170px.jpg',
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
     songWriter: 'Udit Narayan',
     audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
     songId: 7,
-    songImg: 'hukum-170px.jpg',
+    songImgUrl: 'hukum-170px.jpg',
+    songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 8,
-    songImg: 'heeriye-170px.jpg',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
     songWriter: 'Jasleen Royal, Arijit singh',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
     songId: 9,
-    songImg: 'uddjaa-170px.jpg',
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
     songWriter: 'Udit Narayan',
     audioFile: 'Heeriye-song-mp3.mp3'
@@ -75,7 +84,7 @@ export const trendingSongMarkup = async function () {
         let html = `${list.map((music, id) => {
             if (id >= 6) return;
             return `<div class="song_card" id="${music.songId}">
-            <img class="song-img" src="./assests/images/${music.songImg}" alt="${music.songTitle}">
+            <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
             <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
             <button class="btn_play_icon_small">
               <svg class="play_icon">
@@ -99,7 +108,7 @@ export const loadGallary = async function () {
     if (list.length && list.length > 0) {
         let html = `${list.map(music => {
             return `<div class="song_card w-14" id="${music.songId}">
-            <img class="song-img" src="./assests/images/${music.songImg}" alt="${music.songTitle}">
+            <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
              <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
                             <button class="btn_play_icon_small">
                                 <svg class="play_icon">
@@ -131,7 +140,7 @@ export const generateMarkup = async function () {
             }
             if (id >= 3) return;
             return `<div class="playing_song_card ${classtemp}" id="${trendingSong.songId}">
-                            <img src="./assests/images/${trendingSong.songImg}" alt="${trendingSong.songTitle}">
+                            <img src="./assests/images/${trendingSong.songImgUrlHd}" alt="${trendingSong.songTitle}">
                      <div class="playing_song_info">
                                 <span class="song_title">${trendingSong.songTitle}</span>
                                 <span class="song_writer">${trendingSong.songWriter}</span>

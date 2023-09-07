@@ -18,6 +18,7 @@ const slideContainer = document.querySelector('.slide_container');
 const previousSongPlayBtn = document.querySelector('.previous_song_btn');
 const nextSongPlayBtn = document.querySelector('.next_song_btn');
 
+var selectedCard;
 (async function load() {
     slideContainer.innerHTML = await model.generateMarkup()
 })();
@@ -36,10 +37,19 @@ const trendingSongsList = await model.getMusicList();
 
 
 trendingSongCard.addEventListener('click', (e) => {
-    console.log(e.target.closest('.song_card'));
+    // console.log(e.target.closest('.song_card'));
     if (e.target.closest('.song_card')) {
-        const mk = e.target.closest('.song_card')
-        console.log(mk.getAttribute('id'), 'id');
+        const displaySongId = e.target.closest('.song_card').getAttribute('id')
+
+        const selectedSong = trendingSongsList.find(trendingSong => {
+            return trendingSong.songId == displaySongId;
+        })
+        selectedCard = selectedSong;
+        console.log(selectedCard, 'selectedCard', selectedSong);
+        if (displaySongId) {
+            selectedSongDisplay(displaySongId);
+        }
+        // console.log(selectedCard, ' this.selectedCard');
     }
     // console.log(e.target.closest('.song-img'));
     // if (e.target.closest('.song-img')) {
@@ -70,8 +80,8 @@ trending();
 
 
 
-const musicCardNext = document.querySelector('.music_card_next');
-const musicCardPrev = document.querySelector('.music_card_prev');
+// const musicCardNext = document.querySelector('.music_card_next');
+// const musicCardPrev = document.querySelector('.music_card_prev');
 const musicPlayBtn = document.querySelectorAll('.music_play_btn');
 const playingSongCardList = document.querySelectorAll('.playing_song_card');
 var currentSlide = 0;
@@ -92,16 +102,16 @@ function playPrevSong() {
     const playingSongCardList1 = document.querySelectorAll('.playing_song_card');
     console.log(playingSongCardList1);
 
-    playingSongCardList1[currentSlide].classList.replace('none', 'music_card_prev')
-    playingSongCardList1[currentSlide + 1].classList.replace('music_card_prev', 'music_card_current')
-    playingSongCardList1[currentSlide + 2].classList.replace('music_card_current', 'music_card_next')
+    playingSongCardList1[currentSlide].classList?.replace('none', 'music_card_prev')
+    playingSongCardList1[currentSlide + 1].classList?.replace('music_card_prev', 'music_card_current')
+    playingSongCardList1[currentSlide + 2].classList?.replace('music_card_current', 'music_card_next')
 
     setTimeout(() => {
         playingSongCardList1.length >= 3 && slideContainer.removeChild(slideContainer.lastChild)
     }, 1500);
 }
 
-musicCardPrev.addEventListener('click', playPrevSong)
+// musicCardPrev.addEventListener('click', playPrevSong)
 previousSongPlayBtn.addEventListener('click', playPrevSong);
 
 function playNextSong() {
@@ -132,7 +142,7 @@ function playNextSong() {
         }
 
         const html = `<div class="playing_song_card music_card_next" id="${trendingSongsList[2 + currentSlide].songId}">
-                            <img src="./assests/images/${trendingSongsList[2 + currentSlide].songImg}" alt="${trendingSongsList[2 + currentSlide].songTitle}">
+                            <img src="./assests/images/${trendingSongsList[2 + currentSlide].songImgUrlHd}" alt="${trendingSongsList[2 + currentSlide].songTitle}">
                      <div class="playing_song_info">
                                 <span class="song_title">${trendingSongsList[2 + currentSlide].songTitle}</span>
                                 <span class="song_writer">${trendingSongsList[2 + currentSlide].songWriter}</span>
@@ -160,13 +170,36 @@ function playNextSong() {
 
     }
 }
-musicCardNext.addEventListener('click', playNextSong);
+// slideContainer
+// musicCardNext.addEventListener('click', playNextSong);
 nextSongPlayBtn.addEventListener('click', playNextSong);
 
 function showHidwLyrics() {
+    // container
+    const lyricsSec = document.querySelector('.lyrics_sec');
+    const trendingSong = document.querySelector('.trending_songs_container');
+    const header = document.querySelector('.header');
+    const container = document.querySelector('.container');
     console.log('showLyricsBtn');
+
+    trendingSong.classList.toggle('d-none');
+    header.classList.toggle('d-none');
+    container.classList.toggle('d-none');
+
+    songPlayContainer.style.background = showLyricsBtn.textContent == 'Hide Lyrics' ? 'black' : 'transparent';
+
+    trendingSongCard.style.marginBottom = showLyricsBtn.textContent == 'Hide Lyrics' ? '80px' : '-14px';
     showLyricsBtn.textContent = showLyricsBtn.textContent == 'Hide Lyrics' ? 'Show Lyrics' : 'Hide Lyrics';
-    document.querySelector('.lyrics_sec').classList.toggle('hidden');
+
+    console.log('selectedCard lyrics', selectedCard);
+    const html = `<img class="lyrics_sec_bg_img" src="./assests/images/${selectedCard?.songImgUrlHd}" alt="${selectedCard?.songTitle}">
+                <div class="lyrics_sec_img">
+                    <img src="./assests/images/${selectedCard?.songImgUrl}" alt="${selectedCard?.songTitle}">
+                </div>`
+
+    document.querySelector('.lyrics_bg').innerHTML = html;
+
+    lyricsSec.classList.toggle('hidden');
     document.querySelector('.show_Lyrics_btn').classList.toggle('hide_Lyrics_btn');
 }
 
@@ -210,7 +243,7 @@ function trendingSongMoveNext() {
             card.style.transition = 'width 2s, height 2s, transform 2s';
         })
         const html = `  <div class="song_card" id="${trendingSongsList[trendingSongIndex].songId}">
-        <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex].songImg}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
+        <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
     <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
                             <button class="btn_play_icon_small">
                                 <svg class="play_icon">
@@ -249,7 +282,7 @@ function trendingSongMovePrev() {
             card.style.transitionDelay = '1s';
         })
         const html = `  <div class="song_card" id="${trendingSongsList[trendingSongIndex - 5].songId}">
-        <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex - 5].songImg}" alt="${trendingSongsList[trendingSongIndex - 5].songTitle}">
+        <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex - 5].songImgUrl}" alt="${trendingSongsList[trendingSongIndex - 5].songTitle}">
           <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
                             <button class="btn_play_icon_small">
                                 <svg class="play_icon">
@@ -278,7 +311,6 @@ trendingSongBtnPrev.addEventListener('click', trendingSongMovePrev);
 async function fetchMusicLibrary() {
     document.querySelector('.trending_songs_container').style.top = '11%';
     trendingSongCard.style.flexFlow = 'wrap';
-    document.querySelectorAll('.song_card').width = '14%';
     trendingSongCard.innerHTML = await model.loadGallary();
 }
 expandLibraryBtn.addEventListener('click', fetchMusicLibrary);
@@ -303,6 +335,8 @@ function selectedSongDisplay(displaySongId) {
     const selectedSong = trendingSongsList.find(trendingSong => {
         return trendingSong.songId == displaySongId;
     })
+    selectedCard = selectedSong;
+    console.log(selectedCard, ' this.selectedCard');
 
     if (selectedSong) {
         const audioHtml = ` <audio class="audio_song" src="./assests/music/${selectedSong.audioFile}" type="audio/mpeg">
@@ -310,7 +344,7 @@ function selectedSongDisplay(displaySongId) {
         document.querySelector('.audio_song-container').innerHTML = audioHtml;
 
         const musicInfoHtml = ` <div>
-                        <img width="50" height="50" src="./assests/images/${selectedSong.songImg}" alt="${selectedSong.songTitle}" >
+                        <img width="50" height="50" src="./assests/images/${selectedSong.songImgUrl}" alt="${selectedSong.songTitle}" >
                     </div>
                     <div class="music_info">
                         <span>${selectedSong.songTitle}</span>
@@ -324,7 +358,19 @@ slideContainer.addEventListener('click', (e) => {
     // songPlayContainer.classList.remove("hidden");
     if (e.target.closest('.playing_song_card')) {
 
-        const displaySongId = e.target.closest('.playing_song_card').getAttribute('id');
+        const musicCardNext = document.querySelector('.music_card_next');
+        const musicCardPrev = document.querySelector('.music_card_prev');
+
+        musicCardNext.addEventListener('click', playNextSong);
+        musicCardPrev.addEventListener('click', playPrevSong)
+        const displaySongId = e.target.closest('.playing_song_card')?.getAttribute('id');
+
+        const selectedSong = trendingSongsList.find(trendingSong => {
+            return trendingSong.songId == displaySongId;
+        })
+        selectedCard = selectedSong;
+        console.log(selectedCard, ' this.selectedCard');
+        console.log(selectedCard.songId, 'selectedCard.songId', displaySongId, 'displaySongId');
 
         if (displaySongId) {
             selectedSongDisplay(displaySongId);
@@ -333,40 +379,45 @@ slideContainer.addEventListener('click', (e) => {
     }
 })
 
-// musicCardCurrent.addEventListener('click', (e) => {
-//     console.log(e.target, 'wdws');
-// })
-
-
-
 musicPlayBtn.forEach(playingBtn => {
 
-    // margin-bottom: 80px;
+
     playingBtn.addEventListener('click', (e) => {
         trendingSongCard.style.marginBottom = '80px';
         const audio = document.querySelector('audio');
+
+        const allSongCard = document.querySelectorAll('.song_card');
+
         const musicCardCurrent = document.querySelector('.music_card_current');
-
-
-        console.log(musicCardCurrent, 'musicCardCurrent');
-        const displaySongId = musicCardCurrent.getAttribute('id');
-
+        let displaySongId = musicCardCurrent.getAttribute('id');
+        // console.log(displaySongId, 'displaySongId', selectedCard.songId, 'selected');
+        displaySongId = selectedCard?.songId ? selectedCard?.songId : displaySongId;
         if (displaySongId) {
             selectedSongDisplay(displaySongId);
         }
-
+        // const selectedTrendingCrad = allSongCard.find(trendingSong => {
+        //     return trendingSong.songId == displaySongId;
+        // })
+        // console.log(selectedTrendingCrad, 'selectedTrendingCrad');
         // audio.duration
         // console.log(audio.duration, 'audio.duration');
         const closestBtn = e.target.closest('.btn_play_pause');
         if (closestBtn && audio) {
             if (closestBtn.getAttribute('id') == 'play') {
                 audio.play();
+                closestBtn.nextElementSibling.classList.toggle('d-none');
+
+
             } else {
                 audio.pause();
+                closestBtn.previousElementSibling.classList.toggle('d-none');
             }
-            btnPlayPause.forEach(btn => {
-                btn.classList.toggle('d-none');
-            })
+            closestBtn.classList.toggle('d-none');
+            // console.log(closestBtn.nextSibling);
+            // console.log(closestBtn.previousSibling);
+            // console.log(closestBtn.previousElementSibling);
+            // console.log(closestBtn.nextElementSibling, 'nextElementSibling');
+
         }
 
     })

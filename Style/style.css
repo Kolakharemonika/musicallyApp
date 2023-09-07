@@ -118,7 +118,7 @@ button {
     position: absolute;
     top: 26%;
     bottom: 138px;
-    left: 51px;
+    left: 35%;
     z-index: 1;
     height: 3rem;
     width: 3rem;
@@ -132,7 +132,7 @@ button {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .music_card .btn_play_icon {
@@ -520,11 +520,9 @@ img {
 
 
 .song_play_container {
-    border-top: 1px solid white;
     position: fixed;
     bottom: 0;
-    /* height: 70px; */
-    height: 100px;
+    height: 90px;
     background: black;
     width: 100%;
     z-index: 63;
@@ -555,7 +553,11 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 20px;
+    margin: 10px 30px;
+}
+
+.music_btns button {
+    background: transparent;
 }
 
 .music_btn .music_btn_svg,
@@ -620,9 +622,21 @@ img {
     z-index: 1;
 }
 
+.lyrics_bg {
+    margin: 10px;
+    overflow: hidden;
+}
+
 .lyrics_sec_bg_img {
-    height: 100vh;
-    width: 100vw;
+
+    height: 94vh;
+    /* margin: auto; */
+    overflow: hidden;
+    width: 97vw;
+    /* height: 100vh; */
+    /* width: 100vw; */
+    opacity: 0.7;
+    filter: blur(4px);
 }
 
 .lyrics_sec_img {
@@ -635,6 +649,9 @@ img {
 
 .expand_btn {
     background: transparent;
+    z-index: 1;
+    left: 3%;
+    top: 2%;
     /* width: 23px; */
     position: absolute;
     /* height: 20px; */
@@ -642,6 +659,17 @@ img {
 
 .song_card {
     position: relative;
+}
+
+.audio-player input {
+    width: 93%;
+    margin: auto 29px;
+    height: 2px;
+}
+
+.audio-player {
+    padding-bottom: 16px;
+    margin: -12px;
 }
 
 .song_card .music_gif {
@@ -702,8 +730,4 @@ img {
 .playing_song_card img {
     border-radius: 5%;
     -webkit-box-reflect: below 3px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.4));
-}
-
-audio {
-    width: 100%;
 }
