@@ -1,3 +1,5 @@
+
+'use strict';
 import * as model from './Js/model.js';
 const cardEl = document.querySelectorAll('.card');
 const showLyricsBtn = document.querySelector('.show_Lyrics_btn');
@@ -18,11 +20,76 @@ const slideContainer = document.querySelector('.slide_container');
 const previousSongPlayBtn = document.querySelector('.previous_song_btn');
 const nextSongPlayBtn = document.querySelector('.next_song_btn');
 
+const newmusicplaybtn = document.querySelector('.newmusicplaybtn');
 var selectedCard;
+var songState = { state: 'ready' };
+// songState.state = 'play'
+console.log(songState.state, 'songState.state');
+
 (async function load() {
     slideContainer.innerHTML = await model.generateMarkup()
 })();
 
+
+
+function playPauseMusic(closestBtn, idd) {
+    // console.log(idd, 'iddddd');
+    const audio = document.querySelector('audio');
+    trendingSongCard.style.marginBottom = '80px';
+
+    if (idd == 'newmusicplaybtn') {
+        if (closestBtn.getAttribute('id') && audio) {
+            if (closestBtn.getAttribute('id') == 'play') {
+                audio.play();
+                console.log('song playing');
+                closestBtn.nextElementSibling.classList.toggle('d-none');
+
+            } else {
+                audio.pause();
+                console.log('song pause');
+                closestBtn.previousElementSibling.classList.toggle('d-none');
+            }
+            closestBtn.classList.toggle('d-none');
+
+            const impp = document.querySelector('.music_card_current').querySelectorAll('.btn_play_pause');
+            console.log(impp, '111111111111111');
+
+            impp.forEach(btn => {
+                btn.classList.toggle('d-none');
+            });
+        }
+    }
+    if (idd == 'mk') {
+        if (closestBtn && audio) {
+            if (closestBtn == 'play') {
+                audio.play();
+                console.log('song playing');
+                // closestBtn.classList.toggle('d-none');
+
+            } else {
+                audio.pause();
+                console.log('song pause');
+                // closestBtn.classList.toggle('d-none');
+            }
+            // closestBtn.classList.toggle('d-none');
+        }
+        const impp1 = newmusicplaybtn.querySelectorAll('.btn_play_pause')
+        impp1.forEach(btn => {
+            btn.classList.toggle('d-none');
+        });
+    }
+
+
+}
+newmusicplaybtn.addEventListener('click', (e) => {
+    console.log(e.target.closest('.btn_play_pause').getAttribute('id'), 'newmusicplaybtn target imppp');
+    if (e.target.closest('.btn_play_pause')) {
+
+        const closestBtn = e.target.closest('.btn_play_pause');
+        playPauseMusic(closestBtn, 'newmusicplaybtn');
+    }
+
+})
 //working
 // (async function getTrendingSongsList() {
 //     trendingSongCard.innerHTML = await model.trendingSongMarkup();
@@ -38,69 +105,46 @@ const trendingSongsList = await model.getMusicList();
 
 trendingSongCard.addEventListener('click', (e) => {
     // console.log(e.target.closest('.song_card'));
+    // console.log(e.target.closest('.btn_play_pause'), 'trendingSongCard e.target.closest playpause');
     if (e.target.closest('.song_card')) {
         const displaySongId = e.target.closest('.song_card').getAttribute('id')
+
+
+        console.log('imppppp new start', e.target.closest('.song_card'));
+        // const md = e.target.closest('.song_card').querySelector('.btn_play_icon_small')
+        // console.log(e.target.closest('.song_card').querySelector('.btn_play_icon_small').closest(''), 'mddddd imp');
 
         const selectedSong = trendingSongsList.find(trendingSong => {
             return trendingSong.songId == displaySongId;
         })
         selectedCard = selectedSong;
-        console.log(selectedCard, 'selectedCard', selectedSong);
+        console.log(selectedCard, 'trendingSongCard selectedCard', selectedSong);
         if (displaySongId) {
             selectedSongDisplay(displaySongId);
         }
-        // console.log(selectedCard, ' this.selectedCard');
     }
-    // console.log(e.target.closest('.song-img'));
-    // if (e.target.closest('.song-img')) {
 
-    //     let button = document.createElement("button");
-    //     button.classList.add('btn_play_icon_small');
-    //     button.setAttribute('id', 'trendingSongPlay');
-    //     // let p = document.createElement("svg");
-    //     // p.innerHTML=
-    //     button.innerHTML = `<svg class="play_icon">
-    //             <use href="./assests/icons.svg#play-icon"></use>
-    //         </svg>`;
-
-    //     // trendingSongCard.append(button);
-
-    //     // console.log(div.childNodes); // NodeList [ <p> ]
-    //     // console.log(e.target.closest('.song-img').classList);
-
-    // }
 })
 
-function trending() {
-    // const html = ;
-    // trendingSongCard.innerHTML = html;
-}
-trending();
 
-
-
-
-// const musicCardNext = document.querySelector('.music_card_next');
-// const musicCardPrev = document.querySelector('.music_card_prev');
 const musicPlayBtn = document.querySelectorAll('.music_play_btn');
 const playingSongCardList = document.querySelectorAll('.playing_song_card');
 var currentSlide = 0;
 
 // trendingSongPlay
-function playPrevSong() {
+async function playPrevSong() {
     currentSlide--;
     slides.forEach(slide => {
         slide.style.transform = `translate3d(-${currentSlide * 11}%, 0, 0)`;
         slide.style.transition = 'width 2s, height 2s, transform 2s';
     });
-    console.log(currentSlide);
+    console.log(currentSlide, 'currentSlide');
     if (currentSlide == 0) {
         previousSongPlayBtn.classList.add('disabled');
     } else {
         nextSongPlayBtn.classList.remove('disabled');
     }
     const playingSongCardList1 = document.querySelectorAll('.playing_song_card');
-    console.log(playingSongCardList1);
 
     playingSongCardList1[currentSlide].classList?.replace('none', 'music_card_prev')
     playingSongCardList1[currentSlide + 1].classList?.replace('music_card_prev', 'music_card_current')
@@ -111,13 +155,12 @@ function playPrevSong() {
     }, 1500);
 }
 
-// musicCardPrev.addEventListener('click', playPrevSong)
 previousSongPlayBtn.addEventListener('click', playPrevSong);
 
-function playNextSong() {
+async function playNextSong() {
     currentSlide++;
 
-    console.log(currentSlide);
+    console.log(currentSlide, 'currentSlide playNextSong');
     if (currentSlide == trendingSongsList.length - 3) {
         nextSongPlayBtn.classList.add('disabled');
     } else {
@@ -141,22 +184,8 @@ function playNextSong() {
             }
         }
 
-        const html = `<div class="playing_song_card music_card_next" id="${trendingSongsList[2 + currentSlide].songId}">
-                            <img src="./assests/images/${trendingSongsList[2 + currentSlide].songImgUrlHd}" alt="${trendingSongsList[2 + currentSlide].songTitle}">
-                     <div class="playing_song_info">
-                                <span class="song_title">${trendingSongsList[2 + currentSlide].songTitle}</span>
-                                <span class="song_writer">${trendingSongsList[2 + currentSlide].songWriter}</span>
-                            </div>
-                         <div class="overlay"> <button class="music_btn music_play_btn btn_play_icon" id=musicPlay>
-                                    <svg class="music_btn_svg btn_play_pause" id="play">
-                                        <use href="./assests/icons.svg#play-icon"></use>
-                                    </svg>
-                                    <svg class="music_btn_svg btn_play_pause d-none" id="pause">
-                                        <use href="./assests/icons.svg#pause-icon"></use>
-                                    </svg>
-                                </button> </div>        </div>`;
-
-        slideContainer.insertAdjacentHTML('beforeend', html);
+        const markup = await model.dispalyNextSingleCardMarkup(2 + currentSlide)
+        slideContainer.insertAdjacentHTML('beforeend', markup);
 
         // slides.forEach(slide => {
         //     slide.style.transform = `translate3d(-${currentSlide * 11}%, 0, 0)`; //-34%
@@ -170,37 +199,58 @@ function playNextSong() {
 
     }
 }
+
 // slideContainer
-// musicCardNext.addEventListener('click', playNextSong);
 nextSongPlayBtn.addEventListener('click', playNextSong);
 
+
+//hide Show library
 function showHidwLyrics() {
-    // container
     const lyricsSec = document.querySelector('.lyrics_sec');
     const trendingSong = document.querySelector('.trending_songs_container');
     const header = document.querySelector('.header');
     const container = document.querySelector('.container');
-    console.log('showLyricsBtn');
+    var hide = showLyricsBtn.textContent == 'Hide Lyrics';
+    if (!hide) {
+        lyricsSec.style.transform = 'translateY(-7px)';
+        lyricsSec.style.transition = 'width 2s ease 0s, height 2s ease 0s, transform 2s ease 0s';
 
-    trendingSong.classList.toggle('d-none');
-    header.classList.toggle('d-none');
-    container.classList.toggle('d-none');
-
-    songPlayContainer.style.background = showLyricsBtn.textContent == 'Hide Lyrics' ? 'black' : 'transparent';
-
-    trendingSongCard.style.marginBottom = showLyricsBtn.textContent == 'Hide Lyrics' ? '80px' : '-14px';
-    showLyricsBtn.textContent = showLyricsBtn.textContent == 'Hide Lyrics' ? 'Show Lyrics' : 'Hide Lyrics';
-
-    console.log('selectedCard lyrics', selectedCard);
-    const html = `<img class="lyrics_sec_bg_img" src="./assests/images/${selectedCard?.songImgUrlHd}" alt="${selectedCard?.songTitle}">
+        songPlayContainer.style.background = 'transparent';
+        trendingSongCard.style.marginBottom = '-14px';
+        showLyricsBtn.textContent = 'Hide Lyrics';
+        lyricsSec.classList.toggle('hidden');
+        setTimeout(() => {
+            trendingSong.classList.toggle('d-none');
+            container.classList.toggle('d-none');
+            header.classList.toggle('d-none');
+        }, 500);
+        console.log('selectedCard lyrics selectedCard', selectedCard);
+        const html = `<img class="lyrics_sec_bg_img" src="./assests/images/${selectedCard?.songImgUrlHd}" alt="${selectedCard?.songTitle}">
                 <div class="lyrics_sec_img">
                     <img src="./assests/images/${selectedCard?.songImgUrl}" alt="${selectedCard?.songTitle}">
                 </div>`
 
-    document.querySelector('.lyrics_bg').innerHTML = html;
+        document.querySelector('.lyrics_bg').innerHTML = html;
+        document.querySelector('.show_Lyrics_btn').classList.toggle('hide_Lyrics_btn');
 
-    lyricsSec.classList.toggle('hidden');
-    document.querySelector('.show_Lyrics_btn').classList.toggle('hide_Lyrics_btn');
+    } else {
+        lyricsSec.style.transition = 'width 2s, height 2s, transform 2s';
+        lyricsSec.style.transform = 'translateY(500px)';
+
+        songPlayContainer.style.background = 'black';
+        trendingSongCard.style.marginBottom = '80px';
+        showLyricsBtn.textContent = 'Show Lyrics';
+
+        trendingSong.classList.toggle('d-none');
+        container.classList.toggle('d-none');
+        header.classList.toggle('d-none');
+
+        setTimeout(() => {
+            lyricsSec.classList.toggle('hidden');
+            document.querySelector('.lyrics_bg').innerHTML = '';
+        }, 2000);
+    }
+
 }
 
 showLyricsBtn.addEventListener('click', showHidwLyrics);
@@ -216,6 +266,7 @@ navList.addEventListener('click', (e) => {
     e.target.closest('.nav_item_click').classList.add('active');
 });
 
+//dropdown display
 document.querySelector(".dropbtn").addEventListener('click', () => {
     document.querySelector("#profileDropdown").classList.toggle("show");
 });
@@ -232,7 +283,7 @@ function trendingSongMoveNext() {
     const allSongCard = document.querySelectorAll('.song_card');
 
 
-    console.log(trendingSongsList.length, trendingSongIndex, 'trendingSongIndex');
+    // console.log(trendingSongsList.length, trendingSongIndex, 'trendingSongIndex');
     if (trendingSongsList.length
         > trendingSongIndex) {
 
@@ -265,7 +316,7 @@ function trendingSongMoveNext() {
         trendingSongBtnPrev.classList.remove('disabled')
         trendingSongBtnNext.classList.remove('disabled')
     }
-    console.log('trendingSong');
+    // console.log('trendingSong');
 }
 
 function trendingSongMovePrev() {
@@ -328,20 +379,40 @@ homeScreen.addEventListener('click', () => {
 
 const btnPlayPause = document.querySelectorAll('.btn_play_pause');
 
-function selectedSongDisplay(displaySongId) {
 
+btnPlayPause.forEach(btn => {
+    // console.log(btn);
+    // btn.addEventListener('click', (e) => {
+    //     const audio = document.querySelector('audio');
+    //     const closestBtn = e.target.closest('.btn_play_pause');
+    //     if (closestBtn && audio) {
+    //         if (closestBtn.getAttribute('id') == 'play') {
+    //             audio.play();
+    //             closestBtn.nextElementSibling.classList.toggle('d-none');
+    //         } else {
+    //             audio.pause();
+    //             closestBtn.previousElementSibling.classList.toggle('d-none');
+    //         }
+    //         closestBtn.classList.toggle('d-none');
+
+    //     }
+    // })
+})
+
+function selectedSongDisplay(displaySongId) {
+    trendingSongCard.style.marginBottom = '80px';
     songPlayContainer.classList.remove("hidden");
     console.log(displaySongId, 'SongId');
     const selectedSong = trendingSongsList.find(trendingSong => {
         return trendingSong.songId == displaySongId;
     })
     selectedCard = selectedSong;
-    console.log(selectedCard, ' this.selectedCard');
+    console.log(selectedCard, 'selectedSongDisplay selectedCard');
 
     if (selectedSong) {
-        const audioHtml = ` <audio class="audio_song" src="./assests/music/${selectedSong.audioFile}" type="audio/mpeg">
-                    </audio>`
-        document.querySelector('.audio_song-container').innerHTML = audioHtml;
+        // const audioHtml = ` <audio class="audio_song" src="./assests/music/${selectedSong.audioFile}" type="audio/mpeg">
+        //             </audio>`
+        // document.querySelector('.audio_song-container').innerHTML = audioHtml;
 
         const musicInfoHtml = ` <div>
                         <img width="50" height="50" src="./assests/images/${selectedSong.songImgUrl}" alt="${selectedSong.songTitle}" >
@@ -353,73 +424,101 @@ function selectedSongDisplay(displaySongId) {
         document.querySelector('.music_info_sec').innerHTML = musicInfoHtml;
     }
 }
+const mk = document.querySelectorAll('.btn_play_icon');
+// mk.forEach(btn => {
+//     btn.addEventListener('click', (e) => {
+//         console.log(e.target.closest('.btn_play_pause').getAttribute('id'), ' e.target mkkkkk imppp');
+//         if (e.target.closest('.btn_play_pause')){
+//             const closestBtn = e.target.closest('.btn_play_pause').getAttribute('id')
+//             // closestBtn.getAttribute('id')
+//             playPauseMusic(closestBtn, 'mk');
+//         }
 
+
+//     })
+// })
 slideContainer.addEventListener('click', (e) => {
     // songPlayContainer.classList.remove("hidden");
     if (e.target.closest('.playing_song_card')) {
+        console.log('slideContainer');
+        if (e.target.closest('.music_card_current')) {
+
+            const impp = e.target.closest('.music_card_current').querySelectorAll('.btn_play_pause')
+            console.log(impp, '111111111111111');
+
+            impp.forEach(btn => {
+                // console.log(btn, 'btn');
+                btn.classList.toggle('d-none');
+            });
+            playPauseMusic('play', 'mk');
+            // const impp1 = newmusicplaybtn.querySelectorAll('.btn_play_pause')
+            // impp1.forEach(btn => {
+            //     // console.log(btn, 'btn');
+            //     btn.classList.toggle('d-none');
+            // });
+        }
 
         const musicCardNext = document.querySelector('.music_card_next');
         const musicCardPrev = document.querySelector('.music_card_prev');
-
         musicCardNext.addEventListener('click', playNextSong);
         musicCardPrev.addEventListener('click', playPrevSong)
+
         const displaySongId = e.target.closest('.playing_song_card')?.getAttribute('id');
 
-        const selectedSong = trendingSongsList.find(trendingSong => {
-            return trendingSong.songId == displaySongId;
-        })
-        selectedCard = selectedSong;
-        console.log(selectedCard, ' this.selectedCard');
-        console.log(selectedCard.songId, 'selectedCard.songId', displaySongId, 'displaySongId');
-
         if (displaySongId) {
+            const selectedSong = trendingSongsList.find(trendingSong => {
+                return trendingSong.songId == displaySongId;
+            });
+
+            selectedCard = selectedSong;
             selectedSongDisplay(displaySongId);
         }
 
     }
 })
 
-musicPlayBtn.forEach(playingBtn => {
+
+// musicPlayBtn.forEach(playingBtn => {
 
 
-    playingBtn.addEventListener('click', (e) => {
-        trendingSongCard.style.marginBottom = '80px';
-        const audio = document.querySelector('audio');
+//     playingBtn.addEventListener('click', (e) => {
+//         trendingSongCard.style.marginBottom = '80px';
+//         const audio = document.querySelector('audio');
 
-        const allSongCard = document.querySelectorAll('.song_card');
+//         const allSongCard = document.querySelectorAll('.song_card');
 
-        const musicCardCurrent = document.querySelector('.music_card_current');
-        let displaySongId = musicCardCurrent.getAttribute('id');
-        // console.log(displaySongId, 'displaySongId', selectedCard.songId, 'selected');
-        displaySongId = selectedCard?.songId ? selectedCard?.songId : displaySongId;
-        if (displaySongId) {
-            selectedSongDisplay(displaySongId);
-        }
-        // const selectedTrendingCrad = allSongCard.find(trendingSong => {
-        //     return trendingSong.songId == displaySongId;
-        // })
-        // console.log(selectedTrendingCrad, 'selectedTrendingCrad');
-        // audio.duration
-        // console.log(audio.duration, 'audio.duration');
-        const closestBtn = e.target.closest('.btn_play_pause');
-        if (closestBtn && audio) {
-            if (closestBtn.getAttribute('id') == 'play') {
-                audio.play();
-                closestBtn.nextElementSibling.classList.toggle('d-none');
+//         const musicCardCurrent = document.querySelector('.music_card_current');
+//         let displaySongId = musicCardCurrent.getAttribute('id');
+//         // console.log(displaySongId, 'displaySongId', selectedCard.songId, 'selected');
+//         displaySongId = selectedCard?.songId ? selectedCard?.songId : displaySongId;
+//         if (displaySongId) {
+//             selectedSongDisplay(displaySongId);
+//         }
+//         // const selectedTrendingCrad = allSongCard.find(trendingSong => {
+//         //     return trendingSong.songId == displaySongId;
+//         // })
+//         // console.log(selectedTrendingCrad, 'selectedTrendingCrad');
+//         // audio.duration
+//         // console.log(audio.duration, 'audio.duration');
+//         const closestBtn = e.target.closest('.btn_play_pause');
+//         if (closestBtn && audio) {
+//             if (closestBtn.getAttribute('id') == 'play') {
+//                 audio.play();
+//                 closestBtn.nextElementSibling.classList.toggle('d-none');
 
 
-            } else {
-                audio.pause();
-                closestBtn.previousElementSibling.classList.toggle('d-none');
-            }
-            closestBtn.classList.toggle('d-none');
-            // console.log(closestBtn.nextSibling);
-            // console.log(closestBtn.previousSibling);
-            // console.log(closestBtn.previousElementSibling);
-            // console.log(closestBtn.nextElementSibling, 'nextElementSibling');
+//             } else {
+//                 audio.pause();
+//                 closestBtn.previousElementSibling.classList.toggle('d-none');
+//             }
+//             closestBtn.classList.toggle('d-none');
+//             // console.log(closestBtn.nextSibling);
+//             // console.log(closestBtn.previousSibling);
+//             // console.log(closestBtn.previousElementSibling);
+//             // console.log(closestBtn.nextElementSibling, 'nextElementSibling');
 
-        }
+//         }
 
-    })
-});
+//     })
+// });
 
