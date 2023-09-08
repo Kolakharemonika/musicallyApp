@@ -86,10 +86,13 @@ export const trendingSongMarkup = async function () {
             return `<div class="song_card" id="${music.songId}">
             <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
             <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
-            <button class="btn_play_icon_small" >
-              <svg class="play_icon">
-                    <use href="./assests/icons.svg#play-icon"></use>
-              </svg>
+             <button class="btn_play_icon_small">
+                               <svg class="play_icon" id="play">
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                        <svg class="play_icon d-none" id="pause">
+                            <use href="./assests/icons.svg#pause-icon"></use>
+                        </svg>
             </button> 
             <h5 class="song-title">${music.songTitle.padEnd(15, '.')}</h5>
             <span class="song-writer">${music.songWriter}</span>
@@ -109,11 +112,14 @@ export const loadGallary = async function () {
         let html = `${list.map(music => {
             return `<div class="song_card w-14" id="${music.songId}">
             <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
-             <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
+             <img class="music_gif " src="./assests/gif/music_playing.gif" alt="music playing gif">
                             <button class="btn_play_icon_small">
-                                <svg class="play_icon">
-                                    <use href="./assests/icons.svg#play-icon"></use>
-                                </svg>
+                               <svg class="play_icon" id="play">
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                        <svg class="play_icon d-none" id="pause">
+                            <use href="./assests/icons.svg#pause-icon"></use>
+                        </svg>
                             </button>   <h5 class="song-title">${music.songTitle.padEnd(15, '.')}</h5>
                 <span class="song-writer">${music.songWriter}</span>
         </div>`

@@ -37,48 +37,73 @@ function playPauseMusic(closestBtn, idd) {
     const audio = document.querySelector('audio');
     trendingSongCard.style.marginBottom = '80px';
 
+    console.log('playPauseMusic', selectedCard.songId);
+
     if (idd == 'newmusicplaybtn') {
         if (closestBtn.getAttribute('id') && audio) {
             if (closestBtn.getAttribute('id') == 'play') {
                 audio.play();
                 console.log('song playing');
-                closestBtn.nextElementSibling.classList.toggle('d-none');
 
             } else {
                 audio.pause();
                 console.log('song pause');
-                closestBtn.previousElementSibling.classList.toggle('d-none');
             }
-            closestBtn.classList.toggle('d-none');
-
-            const impp = document.querySelector('.music_card_current').querySelectorAll('.btn_play_pause');
-            console.log(impp, '111111111111111');
-
-            impp.forEach(btn => {
-                btn.classList.toggle('d-none');
-            });
         }
     }
-    if (idd == 'mk') {
+    if (idd == 'trendingSongCard') {
+        if (closestBtn && audio) {
+            if (closestBtn == 'play') {
+                audio.play();
+                // document.getElementById(selectedCard.songId).querySelector('.music_gif').style.opacity = '1';
+                console.log('song playing');
+            } else {
+                audio.pause();
+                console.log('song pause');
+            }
+        }
+
+    }
+    if (idd == 'slideContainer') {
         if (closestBtn && audio) {
             if (closestBtn == 'play') {
                 audio.play();
                 console.log('song playing');
-                // closestBtn.classList.toggle('d-none');
-
             } else {
                 audio.pause();
                 console.log('song pause');
-                // closestBtn.classList.toggle('d-none');
             }
-            // closestBtn.classList.toggle('d-none');
         }
-        const impp1 = newmusicplaybtn.querySelectorAll('.btn_play_pause')
-        impp1.forEach(btn => {
-            btn.classList.toggle('d-none');
-        });
-    }
 
+    }
+    newmusicplaybtn.querySelectorAll('.btn_play_pause').forEach(btn => {
+        btn.classList.toggle('d-none');
+    })
+    document.querySelectorAll('.song_card').forEach(song => {
+        if (song.getAttribute('id') == selectedCard.songId) {
+
+            song.querySelectorAll('.play_icon').forEach(btn => {
+                btn.classList.toggle('d-none');
+            });
+
+            song.querySelector('.music_gif').style.opacity = '1';
+        } else {
+            song.querySelector('.music_gif').style.opacity = '0';
+        }
+    });
+    document.querySelectorAll('.playing_song_card').forEach(song => {
+        if (song.getAttribute('id') == selectedCard.songId) {
+
+            song.querySelectorAll('.btn_play_pause').forEach(btn => {
+                btn.classList.toggle('d-none');
+            });
+
+            // song.querySelector('.music_gif').style.opacity = '1';
+        } else {
+            // song.querySelector('.music_gif').style.opacity = '0';
+        }
+    });
+    // playing_song_card
 
 }
 newmusicplaybtn.addEventListener('click', (e) => {
@@ -110,7 +135,7 @@ trendingSongCard.addEventListener('click', (e) => {
         const displaySongId = e.target.closest('.song_card').getAttribute('id')
 
 
-        console.log('imppppp new start', e.target.closest('.song_card'));
+        // console.log('imppppp new start', e.target.closest('.song_card'));
         // const md = e.target.closest('.song_card').querySelector('.btn_play_icon_small')
         // console.log(e.target.closest('.song_card').querySelector('.btn_play_icon_small').closest(''), 'mddddd imp');
 
@@ -118,10 +143,26 @@ trendingSongCard.addEventListener('click', (e) => {
             return trendingSong.songId == displaySongId;
         })
         selectedCard = selectedSong;
-        console.log(selectedCard, 'trendingSongCard selectedCard', selectedSong);
+        // console.log(selectedCard, 'trendingSongCard selectedCard', selectedSong);
         if (displaySongId) {
             selectedSongDisplay(displaySongId);
         }
+        // btn_play_icon_small
+        // e.target.closest('.song_card').querySelector('.btn_play_icon_small').classList.toggle('opacity-0');
+
+        // music_gif
+
+
+        //clicked on btn then -correct
+        if (e.target?.closest('.play_icon')) {
+            const playbtnId = e.target?.closest('.play_icon').getAttribute('id')
+            playPauseMusic(playbtnId, 'trendingSongCard');
+        } else {
+            e.target.closest('.song_card').querySelector('.btn_play_icon_small')
+            console.log(e.target.closest('.song_card').querySelector('.btn_play_icon_small'), 'lll');
+            playPauseMusic('play', 'trendingSongCard');
+        }
+
     }
 
 })
@@ -296,10 +337,13 @@ function trendingSongMoveNext() {
         const html = `  <div class="song_card" id="${trendingSongsList[trendingSongIndex].songId}">
         <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
     <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
-                            <button class="btn_play_icon_small">
-                                <svg class="play_icon">
-                                    <use href="./assests/icons.svg#play-icon"></use>
-                                </svg>
+                           <button class="btn_play_icon_small">
+                               <svg class="play_icon" id="play">
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                        <svg class="play_icon d-none" id="pause">
+                            <use href="./assests/icons.svg#pause-icon"></use>
+                        </svg>
                             </button>    <h5 class="song-title">${trendingSongsList[trendingSongIndex].songTitle}</h5>
         <span class="song-writer">${trendingSongsList[trendingSongIndex].songWriter}</span>
         </div>`
@@ -336,9 +380,12 @@ function trendingSongMovePrev() {
         <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex - 5].songImgUrl}" alt="${trendingSongsList[trendingSongIndex - 5].songTitle}">
           <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
                             <button class="btn_play_icon_small">
-                                <svg class="play_icon">
-                                    <use href="./assests/icons.svg#play-icon"></use>
-                                </svg>
+                               <svg class="play_icon" id="play">
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                        <svg class="play_icon d-none" id="pause">
+                            <use href="./assests/icons.svg#pause-icon"></use>
+                        </svg>
                             </button>   <h5 class="song-title">${trendingSongsList[trendingSongIndex - 5].songTitle}</h5>
         <span class="song-writer">${trendingSongsList[trendingSongIndex - 5].songWriter}</span>
         </div>`
@@ -425,6 +472,7 @@ function selectedSongDisplay(displaySongId) {
     }
 }
 const mk = document.querySelectorAll('.btn_play_icon');
+//imp
 // mk.forEach(btn => {
 //     btn.addEventListener('click', (e) => {
 //         console.log(e.target.closest('.btn_play_pause').getAttribute('id'), ' e.target mkkkkk imppp');
@@ -440,31 +488,7 @@ const mk = document.querySelectorAll('.btn_play_icon');
 slideContainer.addEventListener('click', (e) => {
     // songPlayContainer.classList.remove("hidden");
     if (e.target.closest('.playing_song_card')) {
-        console.log('slideContainer');
-        if (e.target.closest('.music_card_current')) {
-
-            const impp = e.target.closest('.music_card_current').querySelectorAll('.btn_play_pause')
-            console.log(impp, '111111111111111');
-
-            impp.forEach(btn => {
-                // console.log(btn, 'btn');
-                btn.classList.toggle('d-none');
-            });
-            playPauseMusic('play', 'mk');
-            // const impp1 = newmusicplaybtn.querySelectorAll('.btn_play_pause')
-            // impp1.forEach(btn => {
-            //     // console.log(btn, 'btn');
-            //     btn.classList.toggle('d-none');
-            // });
-        }
-
-        const musicCardNext = document.querySelector('.music_card_next');
-        const musicCardPrev = document.querySelector('.music_card_prev');
-        musicCardNext.addEventListener('click', playNextSong);
-        musicCardPrev.addEventListener('click', playPrevSong)
-
-        const displaySongId = e.target.closest('.playing_song_card')?.getAttribute('id');
-
+        const displaySongId = e.target.closest('.playing_song_card').getAttribute('id');
         if (displaySongId) {
             const selectedSong = trendingSongsList.find(trendingSong => {
                 return trendingSong.songId == displaySongId;
@@ -473,6 +497,19 @@ slideContainer.addEventListener('click', (e) => {
             selectedCard = selectedSong;
             selectedSongDisplay(displaySongId);
         }
+        console.log('selectedCard', selectedCard.songId);
+        console.log('slideContainer');
+        if (e.target.closest('.music_card_current')) {
+
+
+            playPauseMusic('play', 'slideContainer');
+        }
+
+        // const musicCardNext = document.querySelector('.music_card_next');
+        // const musicCardPrev = document.querySelector('.music_card_prev');
+        // musicCardNext.addEventListener('click', playNextSong);
+        // musicCardPrev.addEventListener('click', playPrevSong)
+
 
     }
 })

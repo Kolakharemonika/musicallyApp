@@ -194,8 +194,6 @@ button {
     width: 2.5rem;
 }
 
-
-
 .music_card .music_card_prev {
     transform-style: preserve-3d;
     transform: perspective(10px) rotateY(-0.5deg);
