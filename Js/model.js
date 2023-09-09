@@ -25,7 +25,7 @@ export const musicList = [{
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
     songWriter: 'Udit Narayan',
-    audioFile: 'Heeriye-song-mp3.mp3'
+    audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
 },
 {
     songId: 4,
@@ -47,7 +47,7 @@ export const musicList = [{
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
     songWriter: 'Udit Narayan',
-    audioFile: 'Heeriye-song-mp3.mp3'
+    audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
 },
 {
     songId: 7,
@@ -69,7 +69,7 @@ export const musicList = [{
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
     songWriter: 'Udit Narayan',
-    audioFile: 'Heeriye-song-mp3.mp3'
+    audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
 }]
 
 
@@ -86,7 +86,8 @@ export const trendingSongMarkup = async function () {
             return `<div class="song_card" id="${music.songId}">
             <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
             <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
-             <button class="btn_play_icon_small">
+             <audio class="audio_song" src="./assests/music/${music.audioFile}" type="audio/mpeg">
+                    </audio> <button class="btn_play_icon_small">
                                <svg class="play_icon" id="play">
                             <use href="./assests/icons.svg#play-icon"></use>
                         </svg>
@@ -94,7 +95,7 @@ export const trendingSongMarkup = async function () {
                             <use href="./assests/icons.svg#pause-icon"></use>
                         </svg>
             </button> 
-            <h5 class="song-title">${music.songTitle.padEnd(15, '.')}</h5>
+            <h5 class="song-title">${music.songTitle}</h5>
             <span class="song-writer">${music.songWriter}</span>
             </div>`
         }).join('')} `;
@@ -113,7 +114,8 @@ export const loadGallary = async function () {
             return `<div class="song_card w-14" id="${music.songId}">
             <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
              <img class="music_gif " src="./assests/gif/music_playing.gif" alt="music playing gif">
-                            <button class="btn_play_icon_small">
+                     <audio class="audio_song" src="./assests/music/${music.audioFile}" type="audio/mpeg">
+                    </audio>         <button class="btn_play_icon_small">
                                <svg class="play_icon" id="play">
                             <use href="./assests/icons.svg#play-icon"></use>
                         </svg>
@@ -151,6 +153,8 @@ export const generateMarkup = async function () {
                                 <span class="song_title">${trendingSong.songTitle}</span>
                                 <span class="song_writer">${trendingSong.songWriter}</span>
                      </div>
+                      <audio class="audio_song" src="./assests/music/${trendingSong.audioFile}" type="audio/mpeg">
+                    </audio>
                      <div class="overlay">
                        <button class="music_btn music_play_btn btn_play_icon">
                                     <svg class="music_btn_svg btn_play_pause" id="play">
@@ -180,6 +184,8 @@ export const dispalyNextSingleCardMarkup = async function (currentSlide) {
                                 <span class="song_title">${trendingSongsList[currentSlide].songTitle}</span>
                                 <span class="song_writer">${trendingSongsList[currentSlide].songWriter}</span>
                             </div>
+                            <audio class="audio_song" src="./assests/music/${trendingSongsList[currentSlide].audioFile}" type="audio/mpeg">
+                    </audio>
                          <div class="overlay"> <button class="music_btn music_play_btn btn_play_icon" id=musicPlay>
                                     <svg class="music_btn_svg btn_play_pause" id="play">
                                         <use href="./assests/icons.svg#play-icon"></use>

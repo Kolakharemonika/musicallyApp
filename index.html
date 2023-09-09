@@ -165,9 +165,7 @@
         <div class="song_play_container hidden">
             <div class="audio-player">
                 <input type="range" id="seek-slider" max="100" value="0">
-                <div class="audio_song-container">
-                    <audio class="audio_song" src="./assests/music/Heeriye-song-mp3.mp3" type="audio/mpeg">
-                    </audio>
+                <div class="audio_song_container">
                 </div>
             </div>
 
@@ -201,19 +199,18 @@
         </div>
     </div>
     <div class="lyrics_container">
-        <div class="lyrics_sec hidden ">
+        <div class="lyrics_sec hidden">
             <button class="expand_btn">
                 <svg class="expand_btn_svg">
-                    <use href="./assests/icons.svg#expand-more-icon"></use>
+                    <use href="assests/icons.svg#expand-more-icon"></use>
                 </svg>
             </button>
             <div class="lyrics_bg">
-
             </div>
-            <!-- <img class="lyrics_sec_bg_img" src="./assests/images/heeriye.jpg" alt="">
-            <div class="lyrics_sec_img">
-                <img src="./assests/images/heeriye-170px.jpg" alt="img 1">
-            </div> -->
+            <div class="lyrics_show">
+                <iframe id="lyrics_showing_iframe" class="iframe" style="border: none;" src="assests/heeriye_lyrics.txt"
+                    frameborder="0"></iframe>
+            </div>
         </div>
 
     </div>
