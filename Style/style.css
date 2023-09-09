@@ -33,7 +33,7 @@ span {
 }
 
 h5 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 27px;
     letter-spacing: 0em;
@@ -107,18 +107,19 @@ button {
     position: relative;
     height: 89%;
     transform: translateY(-12px);
-    /* margin: 2px 55px; */
 }
 
 .music_card .music_card_current,
 .music_card .music_card_prev,
 .music_card .music_card_next {
-    /* width: 25vw; */
     width: 20vw;
 }
 
-.music_card .music_card_current:hover {
-    /* opacity: 0.5; */
+.music_card .music_card_current img,
+.music_card .music_card_prev img,
+.music_card .music_card_next img {
+    border-radius: 5%;
+    -webkit-box-reflect: below 3px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.4));
 }
 
 .music_card .music_card_prev img,
@@ -179,9 +180,9 @@ button {
     opacity: 1;
 }
 
-.music_card .music_card_current:hover .playing_song_card.img {
-    border: 1px solid var(--color-white-off-20);
+.music_card .music_card_current:hover img {
     opacity: 1;
+    border: 1px solid var(--color-white-off);
 }
 
 .playing_song_info .song_writer {
@@ -198,10 +199,6 @@ button {
 .music_card .music_card_prev {
     transform-style: preserve-3d;
     transform: perspective(10px) rotateY(-0.5deg);
-}
-
-.music_card .music_card_prev .music_play_btn {
-    /* display: none; */
 }
 
 .music_card .music_card_next {
@@ -440,8 +437,14 @@ input:focus-visible {
 .trending_songs_cards .song_card .song-img {
     height: 60%;
     border-radius: 5px;
+    transform: scale(1);
 }
 
+.trending_songs_cards .song_card:hover .song-img {
+    opacity: 0.5;
+    transition: .2s ease-in-out;
+    transform: scale(0.99);
+}
 
 .slide_btn {
     padding: 10px;
@@ -460,7 +463,7 @@ img {
 .song-writer {
     color: var(--color-white-off);
     font-family: Roboto;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0em;
@@ -474,9 +477,6 @@ img {
     border-radius: 5px;
 }
 
-
-/*  */
-
 .song_play_container {
     position: fixed;
     bottom: 0;
@@ -484,9 +484,8 @@ img {
     background: black;
     width: 100%;
     z-index: 63;
-    opacity: 1;
+    opacity: 0.9;
 }
-
 
 .music_info_sec,
 .music_info {
@@ -585,26 +584,66 @@ img {
 }
 
 .lyrics_show {
-    width: 44%;
+    opacity: 1;
+    width: 64%;
     overflow: hidden;
     height: 80%;
     position: absolute;
     z-index: 12;
     top: 20px;
-    text-align: right;
-    right: 7%;
+    text-align: left;
+    right: -24%;
     font-size: 20px;
-    /* color: var(--color-white-off-20); */
-    color: var(--color-white);
 }
 
-.iframe {
+.lyrics_showing_iframe {
     width: 70%;
     overflow: hidden;
     height: 90%;
 }
 
-iframe body pre {
+#seek-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--color-white-off-20);
+    outline: none;
+    /* overflow: hidden; */
+    /* cursor: pointer; */
+}
+
+#seek-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    opacity: 1;
+    border-radius: 50%;
+    border: none;
+    transition: .2s ease-in-out;
+    width: 14px;
+    height: 14px;
+    background: var(--color-white);
+}
+
+#seek-slider::-moz-range-thumb {
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    transition: .2s ease-in-out;
+    width: 14px;
+    height: 14px;
+    background: var(--color-white);
+}
+
+#seek-slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 12px;
+}
+
+#seek-slider::-moz-range-track {
+    height: 12px;
+}
+
+.lyrics_showing_iframe {
     font-size: 20px;
     color: var(--color-white);
 }
@@ -617,7 +656,7 @@ iframe body pre {
     /* height: 100vh; */
     /* width: 100vw; */
     /* opacity: 0.7; */
-    filter: blur(4px);
+    filter: brightness(0.5);
 }
 
 .lyrics_sec_img {
@@ -648,6 +687,11 @@ iframe body pre {
     height: 2px;
 }
 
+/* 
+input[type='range']::-moz-range-track {
+    background: red;
+} */
+
 .audio-player {
     padding-bottom: 16px;
     margin: -12px;
@@ -659,6 +703,7 @@ iframe body pre {
     left: 0;
     height: 50%;
     opacity: 0;
+    transition: all .5s linear;
 }
 
 /* transform: translate3d(-100%, 0, 0);
@@ -706,11 +751,6 @@ iframe body pre {
     height: 276px;
     padding-bottom: 30px;
     overflow: hidden;
-}
-
-.playing_song_card img {
-    border-radius: 5%;
-    -webkit-box-reflect: below 3px linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.4));
 }
 
 .previous_song_btn,

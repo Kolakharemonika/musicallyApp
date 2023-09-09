@@ -1,35 +1,29 @@
 
 'use strict';
 import * as model from './Js/model.js';
-const cardEl = document.querySelectorAll('.card');
 const showLyricsBtn = document.querySelector('.show_Lyrics_btn');
 const navBtns = document.querySelectorAll('.nav_item_click');
 const navList = document.querySelector('.nav_list')
 const displayLibrary = document.querySelector('.library');
 const homeScreen = document.querySelector('.home');
 
-
 const trendingSongCard = document.querySelector('.trending_songs_cards');
-const trendingSongPlayBtn = document.getElementById('trendingSongPlay');
 const trendingSongBtnPrev = document.querySelector('.trending_song_btn_prev');
 const trendingSongBtnNext = document.querySelector('.trending_song_btn_next');
-const expandLibraryBtn = document.querySelector('.btn_expand_library');
 
 const slides = document.querySelectorAll('.slidebox');
+const songPlayContainer = document.querySelector('.song_play_container');
 const slideContainer = document.querySelector('.slide_container');
 
-const songPlayContainer = document.querySelector('.song_play_container');
-
 const previousSongPlayBtn = document.querySelector('.previous_song_btn');
+const expandLibraryBtn = document.querySelector('.btn_expand_library');
 const nextSongPlayBtn = document.querySelector('.next_song_btn');
-
 const newmusicplaybtn = document.querySelector('.newmusicplaybtn');
 
 // variable declarations
 var selectedCard;
 var songState = { state: 'ready' };
 var currentSlide = 0;
-var myinterval;
 var trendingSongIndex = 5;
 
 //function declarations
@@ -335,7 +329,6 @@ newmusicplaybtn.addEventListener('click', (e) => {
 })
 
 
-// trendingSongPlay
 async function playPrevSong() {
     currentSlide--;
     slides.forEach(slide => {
@@ -406,28 +399,35 @@ async function playNextSong() {
 
 nextSongPlayBtn.addEventListener('click', playNextSong);
 
-//hide Show library
-function showHidwLyrics() {
+async function showHidwLyrics() {
+    const lyricsIframe = document.querySelector('.lyrics_showing_iframe')
+    // console.log(lyricsIframe, lyricsIframe.body);
+    // lyricsIframe.onload = function (e) {
+    //     console.log(lyricsIframe, 'frame');
+    //     var body = lyricsIframe.contentWindow.document.querySelector('body');
+    //     body.style.color = 'red';
+    // }
     const lyricsSec = document.querySelector('.lyrics_sec');
     const trendingSong = document.querySelector('.trending_songs_container');
     const header = document.querySelector('.header');
     const container = document.querySelector('.container');
     var hide = showLyricsBtn.textContent == 'Hide Lyrics';
-    if (!hide) {
-        lyricsSec.style.transform = 'translateY(-7px)';
-        lyricsSec.style.transition = 'width 2s, height 2s, transform 2s';
 
-        songPlayContainer.style.background = 'transparent';
+    if (!hide) {
+        trendingSong.classList.toggle('d-none');
         trendingSongCard.style.marginBottom = '-14px';
+
+        lyricsSec.style.transform = 'translateY(-7px)';
+        lyricsSec.style.transition = 'all .5s linear';
+        songPlayContainer.style.background = 'transparent';
         showLyricsBtn.textContent = 'Hide Lyrics';
         lyricsSec.classList.toggle('hidden');
         setTimeout(() => {
-            trendingSong.classList.toggle('d-none');
             container.classList.toggle('d-none');
             header.classList.toggle('d-none');
-            document.querySelector('.lyrics_sec_bg_img').style.opacity = '0.7';
-        }, 1000);
-        // console.log('selectedCard lyrics selectedCard', selectedCard);
+        }, 500);
+
+
         const html = `<img class="lyrics_sec_bg_img" src="./assests/images/${selectedCard?.songImgUrlHd}" alt="${selectedCard?.songTitle}">
                 <div class="lyrics_sec_img">
                     <img src="./assests/images/${selectedCard?.songImgUrl}" alt="${selectedCard?.songTitle}">
@@ -437,22 +437,22 @@ function showHidwLyrics() {
         document.querySelector('.show_Lyrics_btn').classList.toggle('hide_Lyrics_btn');
         // document.querySelector('.lyrics_sec_bg_img').style.opacity = '0.7';
     } else {
-        document.querySelector('.lyrics_sec_bg_img').style.opacity = '1';
-        lyricsSec.style.transition = 'width 2s, height 2s, transform 2s';
+
+        trendingSongCard.style.marginBottom = '80px';
+        lyricsSec.style.transition = 'all .5s linear';
         lyricsSec.style.transform = 'translateY(500px)';
 
         songPlayContainer.style.background = 'black';
-        trendingSongCard.style.marginBottom = '80px';
         showLyricsBtn.textContent = 'Show Lyrics';
 
         trendingSong.classList.toggle('d-none');
         container.classList.toggle('d-none');
         header.classList.toggle('d-none');
-
+        // document.querySelector('.lyrics_sec_bg_img').style.opacity = '1';
         setTimeout(() => {
             lyricsSec.classList.toggle('hidden');
             document.querySelector('.lyrics_bg').innerHTML = '';
-        }, 2000);
+        }, 500);
     }
 
 }
@@ -468,23 +468,37 @@ document.querySelector('.expand_btn').addEventListener('click', showHidwLyrics);
 function trendingSongMoveNext() {
     trendingSongIndex++;
     const allSongCard = document.querySelectorAll('.song_card');
-
-
+    // transform: translate3d(-16%, 0, 0);
+    // transition: width 2s, height 2s, transform 2s;
+    // transform: translateX(0px);
+    // trendingSongCard.style.transform = `translateX(200px)`;
+    // trendingSongCard.style.transition = ' width 2s, height 2s, transform 2s';
+    // trendingSongCard.style.transitionProprty = 'all';
+    // trendingSongCard.style.transitionProprty = 'transform';
+    // trendingSongCard.style.transitionDelay = '5s';
+    // transition-duration: 5s;
     // console.log(trendingSongsList.length, trendingSongIndex, 'trendingSongIndex');
+    // trendingSongCard.style.transform = `translateX(0px)`;
+    // trendingSongCard.style.transition = 'all 55s linear';
+    // transition : 'all 2.5s linear';
     if (trendingSongsList.length
         > trendingSongIndex) {
 
         allSongCard.forEach((card, i) => {
+            // trendingSongCard.style.transform = `translateX(0px)`;
             if (i == 0) {
                 card.remove()
             }
-            card.style.transition = 'width 2s, height 2s, transform 2s';
+            // card.style.transform = `translateX(0px)`;
+            card.style.transition = 'all 55s linear';
+            // card.style.transitionProprty = 'transform';
+            // card.style.transitionDelay = '100s';
+            // card.style.transition = 'width 2s, height 2s, transform 2s';
         })
         const html = `<div class="song_card" id="${trendingSongsList[trendingSongIndex].songId}">
         <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
     <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
-             <audio class="audio_song" src="./assests/music/${trendingSongsList[trendingSongIndex].audioFile}" type="audio/mpeg">
-                    </audio>                <button class="btn_play_icon_small">
+                           <button class="btn_play_icon_small">
                                <svg class="play_icon" id="play">
                             <use href="./assests/icons.svg#play-icon"></use>
                         </svg>
@@ -495,6 +509,16 @@ function trendingSongMoveNext() {
         <span class="song-writer">${trendingSongsList[trendingSongIndex].songWriter}</span>
         </div>`
 
+        setTimeout(() => {
+            trendingSongCard.style.transform = `translateX(0px)`;
+            trendingSongCard.style.transition = 'all 2.5s linear';
+            // allSongCard.forEach((card, i) => {
+            //     if (i == 0) {
+            //         card.remove()
+            //     }
+            //     // card.style.transition = 'width 2s, height 2s, transform 2s';
+            // })
+        }, 500)
         trendingSongCard.insertAdjacentHTML('beforeend', html)
     }
 
@@ -526,8 +550,7 @@ function trendingSongMovePrev() {
         const html = `  <div class="song_card" id="${trendingSongsList[trendingSongIndex - 5].songId}">
         <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex - 5].songImgUrl}" alt="${trendingSongsList[trendingSongIndex - 5].songTitle}">
           <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
-                        <audio class="audio_song" src="./assests/music/${trendingSongsList[trendingSongIndex - 5].audioFile}" type="audio/mpeg">
-                    </audio>                     <button class="btn_play_icon_small">
+                                      <button class="btn_play_icon_small">
                                <svg class="play_icon" id="play">
                             <use href="./assests/icons.svg#play-icon"></use>
                         </svg>
@@ -585,9 +608,9 @@ function selectedSongDisplay(displaySongId) {
                     </audio>`;
         document.querySelector('.audio_song_container').innerHTML = audioHtml;
 
-        const lyricsMarkup = `<iframe id="lyrics_showing_iframe" class="iframe" style="border: none;" src="assests/heeriye_lyrics.txt">
+        const lyricsMarkup = `<iframe class="lyrics_showing_iframe" style="border: none;" src="assests/heeriye_lyrics.txt">
         </iframe>`
-        document.querySelector('.lyrics_show').innerHTML = lyricsMarkup;
+        // document.querySelector('.lyrics_show').innerHTML = lyricsMarkup;
 
         const musicInfoHtml = `<div>
                         <img width="50" height="50" src="./assests/images/${selectedSong.songImgUrl}" alt="${selectedSong.songTitle}">
