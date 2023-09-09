@@ -10,6 +10,7 @@ export const musicList = [{
     songImgUrl: 'hukum-170px.jpg',
     songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
@@ -17,6 +18,7 @@ export const musicList = [{
     songImgUrl: 'heeriye-170px.jpg',
     songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Jasleen Royal, Arijit singh',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
@@ -24,6 +26,7 @@ export const musicList = [{
     songImgUrl: 'uddjaa-170px.jpg',
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Udit Narayan',
     audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
 },
@@ -32,6 +35,7 @@ export const musicList = [{
     songImgUrl: 'hukum-170px.jpg',
     songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
@@ -39,6 +43,7 @@ export const musicList = [{
     songImgUrl: 'heeriye-170px.jpg',
     songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Jasleen Royal, Arijit singh',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
@@ -46,6 +51,7 @@ export const musicList = [{
     songImgUrl: 'uddjaa-170px.jpg',
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Udit Narayan',
     audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
 },
@@ -54,6 +60,7 @@ export const musicList = [{
     songImgUrl: 'hukum-170px.jpg',
     songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
@@ -61,6 +68,7 @@ export const musicList = [{
     songImgUrl: 'heeriye-170px.jpg',
     songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Jasleen Royal, Arijit singh',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
@@ -68,6 +76,7 @@ export const musicList = [{
     songImgUrl: 'uddjaa-170px.jpg',
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Udit Narayan',
     audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
 }]
@@ -77,6 +86,25 @@ export const getMusicList = async function () {
     return musicList.slice();
 }
 
+export const displaySingleTrendingCardMarkup = async function (trendingSongIndex) {
+    const trendingSongsList = musicList.slice();
+    let html = `<div class="song_card" id="${trendingSongsList[trendingSongIndex].songId}">
+        <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
+    <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
+                           <button class="btn_play_icon_small">
+                               <svg class="play_icon" id="play">
+                            <use href="./assests/icons.svg#play-icon"></use>
+                        </svg>
+                        <svg class="play_icon d-none" id="pause">
+                            <use href="./assests/icons.svg#pause-icon"></use>
+                        </svg>
+                            </button> 
+                             <div class="music_info_trending">    <h5 class="song-title">${trendingSongsList[trendingSongIndex].songTitle}</h5>
+        <span class="song-writer">${trendingSongsList[trendingSongIndex].songWriter}</span>
+     </div>    </div>`;
+
+    return html;
+}
 
 export const trendingSongMarkup = async function () {
     const list = musicList.slice();
@@ -93,10 +121,10 @@ export const trendingSongMarkup = async function () {
                         <svg class="play_icon d-none" id="pause">
                             <use href="./assests/icons.svg#pause-icon"></use>
                         </svg>
-            </button> 
+            </button> <div class="music_info_trending"> 
             <h5 class="song-title">${((music.songTitle).length >= 14) ? (music.songTitle).slice(0, 14) + '...' : music.songTitle}</h5>
                     <span class="song-writer"> ${music.songWriter}</span>
-            </div > `
+         </div >   </div > `
         }).join('')} `;
 
         return html;
@@ -120,8 +148,10 @@ export const loadGallary = async function () {
                         <svg class="play_icon d-none" id="pause">
                             <use href="./assests/icons.svg#pause-icon"></use>
                         </svg>
-                            </button>   <h5 class="song-title">${((music.songTitle).length >= 14) ? (music.songTitle).slice(0, 14) + '...' : music.songTitle}</h5>
-                <span class="song-writer">${music.songWriter}</span>
+                            </button>  
+                           <div class="music_info_trending"> 
+                             <h5 class="song-title">${((music.songTitle).length >= 14) ? (music.songTitle).slice(0, 14) + '...' : music.songTitle}</h5>
+                <span class="song-writer">${music.songWriter}</span> </div>
         </div>`
         }).join('')} `;
 
