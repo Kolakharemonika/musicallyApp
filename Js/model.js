@@ -1,10 +1,4 @@
 
-export const music = {
-    songImgUrl: '',
-    songTitle: '',
-    songWriter: ''
-}
-
 export const musicList = [{
     songId: 1,
     songImgUrl: 'hukum-170px.jpg',
@@ -205,7 +199,11 @@ export const generateMarkup = async function () {
 
 export const dispalyNextSingleCardMarkup = async function (currentSlide) {
     const trendingSongsList = musicList.slice();
-    const markup = `<div class="playing_song_card music_card_next" id="${trendingSongsList[currentSlide].songId}">
+    if (currentSlide >= trendingSongsList.length || currentSlide < 0) {
+        console.log('No songs Available');
+        // return 'No songs Available';
+    } else {
+        const markup = `<div class="playing_song_card music_card_next" id="${trendingSongsList[currentSlide].songId}">
                             <img src="./assests/images/${trendingSongsList[currentSlide].songImgUrlHd}" alt="${trendingSongsList[currentSlide].songTitle}">
                      <div class="playing_song_info">
                                 <span class="song_title">${trendingSongsList[currentSlide].songTitle}</span>
@@ -222,5 +220,7 @@ export const dispalyNextSingleCardMarkup = async function (currentSlide) {
                                     </svg>
                                 </button> </div> 
                                        </div>`;
-    return markup;
+        return markup;
+    }
+
 }
