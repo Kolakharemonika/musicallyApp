@@ -83,14 +83,14 @@ export const getMusicList = async function () {
 export const displaySingleTrendingCardMarkup = async function (trendingSongIndex) {
     const trendingSongsList = musicList.slice();
     let html = `<div class="song_card" id="${trendingSongsList[trendingSongIndex].songId}">
-        <img class="song-img" src="./assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
-    <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
+        <img class="song-img" src="assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
+    <img class="music_gif" src="assests/gif/music_playing.gif" alt="music playing gif">
                            <button class="btn_play_icon_small">
                                <svg class="play_icon" id="play">
-                            <use href="./assests/icons.svg#play-icon"></use>
+                            <use href="assests/icons.svg#play-icon"></use>
                         </svg>
                         <svg class="play_icon d-none" id="pause">
-                            <use href="./assests/icons.svg#pause-icon"></use>
+                            <use href="assests/icons.svg#pause-icon"></use>
                         </svg>
                             </button> 
                              <div class="music_info_trending">    <h5 class="song-title">${trendingSongsList[trendingSongIndex].songTitle}</h5>
@@ -106,14 +106,14 @@ export const trendingSongMarkup = async function () {
         let html = `${list.map((music, id) => {
             if (id >= 6) return;
             return `<div class="song_card" id="${music.songId}">
-            <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
-            <img class="music_gif" src="./assests/gif/music_playing.gif" alt="music playing gif">
+            <img class="song-img" src="assests/images/${music.songImgUrl}" alt="${music.songTitle}">
+            <img class="music_gif" src="assests/gif/music_playing.gif" alt="music playing gif">
              <button class="btn_play_icon_small">
                                <svg class="play_icon" id="play">
-                            <use href="./assests/icons.svg#play-icon"></use>
+                            <use href="assests/icons.svg#play-icon"></use>
                         </svg>
                         <svg class="play_icon d-none" id="pause">
-                            <use href="./assests/icons.svg#pause-icon"></use>
+                            <use href="assests/icons.svg#pause-icon"></use>
                         </svg>
             </button> <div class="music_info_trending"> 
             <h5 class="song-title">${((music.songTitle).length >= 14) ? (music.songTitle).slice(0, 14) + '...' : music.songTitle}</h5>
@@ -132,14 +132,14 @@ export const loadGallary = async function (loadingList) {
     if (loadingList && loadingList.length > 0) {
         let html = `${loadingList.map(music => {
             return `<div class="song_card w-14" id="${music.songId}">
-            <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
-             <img class="music_gif " src="./assests/gif/music_playing.gif" alt="music playing gif">
+            <img class="song-img" src="assests/images/${music.songImgUrl}" alt="${music.songTitle}">
+             <img class="music_gif " src="assests/gif/music_playing.gif" alt="music playing gif">
                           <button class="btn_play_icon_small">
                                <svg class="play_icon" id="play">
-                            <use href="./assests/icons.svg#play-icon"></use>
+                            <use href="assests/icons.svg#play-icon"></use>
                         </svg>
                         <svg class="play_icon d-none" id="pause">
-                            <use href="./assests/icons.svg#pause-icon"></use>
+                            <use href="assests/icons.svg#pause-icon"></use>
                         </svg>
                             </button>  
                            <div class="music_info_trending"> 
@@ -149,8 +149,6 @@ export const loadGallary = async function (loadingList) {
         }).join('')} `;
 
         return html;
-    } else {
-        return 'No songs available...'
     }
 }
 
@@ -169,7 +167,7 @@ export const generateMarkup = async function () {
             }
             if (id >= 3) return;
             return `<div class="playing_song_card ${classtemp}" id="${trendingSong.songId}">
-                            <img src="./assests/images/${trendingSong.songImgUrlHd}" alt="${trendingSong.songTitle}">
+                            <img src="assests/images/${trendingSong.songImgUrlHd}" alt="${trendingSong.songTitle}">
                      <div class="playing_song_info">
                                 <span class="song_title">${trendingSong.songTitle}</span>
                                 <span class="song_writer">${trendingSong.songWriter}</span>
@@ -177,11 +175,11 @@ export const generateMarkup = async function () {
                    
                      <div class="overlay">
                        <button class="music_btn music_play_btn btn_play_icon">
-                                    <svg class="music_btn_svg btn_play_pause" id="play">
-                                        <use href="./assests/icons.svg#play-icon"></use>
+                                    <svg class="music_btn_svg playing_btn btn_play_pause" id="play">
+                                        <use href="assests/icons.svg#play-icon"></use>
                                     </svg>
-                                    <svg class="music_btn_svg btn_play_pause d-none" id="pause">
-                                        <use href="./assests/icons.svg#pause-icon"></use>
+                                    <svg class="music_btn_svg playing_btn btn_play_pause d-none" id="pause">
+                                        <use href="assests/icons.svg#pause-icon"></use>
                                     </svg>
                        </button>
                        </div>
@@ -203,19 +201,19 @@ export const dispalyNextSingleCardMarkup = async function (currentSlide) {
         // return 'No songs Available';
     } else {
         const markup = `<div class="playing_song_card music_card_next" id="${trendingSongsList[currentSlide].songId}">
-                            <img src="./assests/images/${trendingSongsList[currentSlide].songImgUrlHd}" alt="${trendingSongsList[currentSlide].songTitle}">
+                            <img src="assests/images/${trendingSongsList[currentSlide].songImgUrlHd}" alt="${trendingSongsList[currentSlide].songTitle}">
                      <div class="playing_song_info">
                                 <span class="song_title">${trendingSongsList[currentSlide].songTitle}</span>
                                 <span class="song_writer">${trendingSongsList[currentSlide].songWriter}</span>
                             </div>
-                            <audio class="audio_song" src="./assests/music/${trendingSongsList[currentSlide].audioFile}" type="audio/mpeg">
+                            <audio class="audio_song" src="assests/music/${trendingSongsList[currentSlide].audioFile}" type="audio/mpeg">
                     </audio>
                          <div class="overlay"> <button class="music_btn music_play_btn btn_play_icon" id=musicPlay>
-                                    <svg class="music_btn_svg btn_play_pause" id="play">
-                                        <use href="./assests/icons.svg#play-icon"></use>
+                                    <svg class="music_btn_svg playing_btn btn_play_pause" id="play">
+                                        <use href="assests/icons.svg#play-icon"></use>
                                     </svg>
-                                    <svg class="music_btn_svg btn_play_pause d-none" id="pause">
-                                        <use href="./assests/icons.svg#pause-icon"></use>
+                                    <svg class="music_btn_svg playing_btn btn_play_pause d-none" id="pause">
+                                        <use href="assests/icons.svg#pause-icon"></use>
                                     </svg>
                                 </button> </div> 
                                        </div>`;

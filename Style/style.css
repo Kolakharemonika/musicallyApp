@@ -386,7 +386,6 @@ input:focus-visible {
     width: 95%;
     margin: auto;
     overflow: hidden;
-    /* overflow-y: scroll; */
 }
 
 .music_cards_container .music_card {
