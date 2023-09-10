@@ -646,7 +646,7 @@ img {
 }
 
 .music_info_trending {
-    text-wrap: nowrap;
+    white-space: nowrap;
     overflow: hidden;
 }
 
@@ -685,6 +685,15 @@ img {
     width: 241vw;
     /* width: 100vw; */
 }
+
+/* .playing_song_card:first-child {
+    border: 4px solid green;
+}
+
+.playing_song_card:last-child {
+    border: 4px solid red;
+
+} */
 
 .playing_song_card {
     width: 230px;
