@@ -128,10 +128,9 @@ export const trendingSongMarkup = async function () {
 
 }
 
-export const loadGallary = async function () {
-    const list = musicList.slice();
-    if (list.length && list.length > 0) {
-        let html = `${list.map(music => {
+export const loadGallary = async function (loadingList) {
+    if (loadingList && loadingList.length > 0) {
+        let html = `${loadingList.map(music => {
             return `<div class="song_card w-14" id="${music.songId}">
             <img class="song-img" src="./assests/images/${music.songImgUrl}" alt="${music.songTitle}">
              <img class="music_gif " src="./assests/gif/music_playing.gif" alt="music playing gif">

@@ -7,6 +7,8 @@ const navList = document.querySelector('.nav_list')
 const displayLibrary = document.querySelector('.library');
 const homeScreen = document.querySelector('.home');
 
+const trendingSongsContainer = document.querySelector('.trending_songs_container');
+const trendingSubContainer = document.querySelector('.sub_container')
 const trendingSongCard = document.querySelector('.trending_songs_cards');
 const trendingSongBtnPrev = document.querySelector('.trending_song_btn_prev');
 const trendingSongBtnNext = document.querySelector('.trending_song_btn_next');
@@ -234,6 +236,17 @@ function playPauseMusic(curPlaying, idd) {
                 btn.classList.add('d-none');
             }
         });
+
+        // document.querySelectorAll('.playing_song_card').forEach(song => {
+        //     if (song.getAttribute('id') == selectedCard.songId) {
+        //         if (btn.getAttribute('id') == 'play') {
+        //             btn.classList.remove('d-none');
+        //         }
+        //         if (btn.getAttribute('id') == 'pause') {
+        //             btn.classList.add('d-none');
+        //         }
+        //     }
+        // });
     }
 
     // state change
@@ -451,13 +464,12 @@ async function showHidwLyrics() {
     //     body.style.color = 'red';
     // }
     const lyricsSec = document.querySelector('.lyrics_sec');
-    const trendingSong = document.querySelector('.trending_songs_container');
     const header = document.querySelector('.header');
     const container = document.querySelector('.container');
     var hide = showLyricsBtn.textContent == 'Hide Lyrics';
 
     if (!hide) {
-        trendingSong.classList.toggle('d-none');
+        trendingSongsContainer.classList.toggle('d-none');
         trendingSongCard.style.marginBottom = '-14px';
 
         lyricsSec.style.transform = 'translateY(-7px)';
@@ -488,7 +500,7 @@ async function showHidwLyrics() {
         songPlayContainer.style.background = 'black';
         showLyricsBtn.textContent = 'Show Lyrics';
 
-        trendingSong.classList.toggle('d-none');
+        trendingSongsContainer.classList.toggle('d-none');
         container.classList.toggle('d-none');
         header.classList.toggle('d-none');
         // document.querySelector('.lyrics_sec_bg_img').style.opacity = '1';
@@ -599,20 +611,28 @@ trendingSongBtnPrev.addEventListener('click', trendingSongMovePrev);
 
 // library section
 async function fetchMusicLibrary() {
-    document.querySelector('.trending_songs_container').style.top = '11%';
+    trendingSongsContainer.style.top = '11%';
     trendingSongCard.style.flexFlow = 'wrap';
-    trendingSongCard.innerHTML = await model.loadGallary();
+    document.querySelector('.trending_song_btns').classList.add('d-none');
+    trendingSongCard.innerHTML = await model.loadGallary(await model.getMusicList());
 }
 expandLibraryBtn.addEventListener('click', fetchMusicLibrary);
 displayLibrary.addEventListener('click', fetchMusicLibrary);
 
 
-//home screen / getTrendingSongsList
-homeScreen.addEventListener('click', () => {
-    document.querySelector('.trending_songs_container').style.top = '67%';
+function homeScreemLoad() {
+    const heading = document.querySelector('.heading');
+    trendingSongsContainer.style.top = '67%';
+    trendingSubContainer.style.height = 'auto';
+    trendingSubContainer.style.overflowY = 'hidden';
+    heading.textContent = 'Trending Songs';
     trendingSongCard.style.flexFlow = 'row';
+    document.querySelector('.trending_song_btns').classList.remove('d-none');
     getTrendingSongsList();
-});
+}
+
+//home screen / getTrendingSongsList
+homeScreen.addEventListener('click', homeScreemLoad);
 
 function selectedSongDisplay(displaySongId) {
     trendingSongCard.style.marginBottom = '80px';
@@ -654,26 +674,46 @@ function selectedSongDisplay(displaySongId) {
 //     var body = lyricsIframe.contentWindow.document.querySelector('body');
 //     body.style.color = 'red';
 // }
-function showSerachResult(searchValue) {
+
+//search results
+async function showSerachResult(searchValue) {
     console.log(searchValue);
-    const ff = trendingSongsList.find(trendingSong => {
+    const heading = document.querySelector('.heading');
+    trendingSubContainer.style.height = '91vh';
+    // trendingSubContainer.style.overflowY = 'scroll';
+    document.querySelector('.trending_song_btns').classList.add('d-none');
+
+    trendingSongsContainer.style.top = '11%';
+    trendingSongCard.style.flexFlow = 'wrap';
+    heading.textContent = 'Search Results';
+
+    var searchResultsList = trendingSongsList.filter(trendingSong => {
         return (trendingSong.songTitle).toLowerCase() == (searchValue).toLowerCase();
     })
-    console.log(ff);
+    console.log(searchResultsList);
+
+    if (searchResultsList && searchResultsList.length > 0) {
+        trendingSongCard.innerHTML = await model.loadGallary(searchResultsList);
+    } else {
+        trendingSongCard.innerHTML = 'OOPs No search found!';
+        setTimeout(() => {
+            // homeScreemLoad();
+        }, 2000);
+    }
 }
 
 searchInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && searchInput.value) {
         e.preventDefault();
         showSerachResult(searchInput.value);
+        searchInput.value = '';
     }
 });
 
 searchBtn.addEventListener('click', function (e) {
-    console.log('hjghjgjg', e);
     e.preventDefault();
     if (searchInput.value) {
         showSerachResult(searchInput.value);
+        searchInput.value = '';
     }
-
-})
+});
