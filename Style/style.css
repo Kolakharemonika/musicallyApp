@@ -534,14 +534,22 @@ img {
 .lyrics_show {
     opacity: 1;
     width: 64%;
-    overflow: hidden;
+    overflow-y: scroll;
     height: 80%;
     position: absolute;
     z-index: 12;
     top: 20px;
     text-align: left;
-    right: -24%;
+    right: -14%;
+    /* right: -24%; */
     font-size: 20px;
+    /* font-size: 2rem;
+    font-weight: bolder;
+    line-height: 1.5;
+    text-align: center;
+    text-transform: uppercase;
+    max-width: 300px;
+    margin-top: 40px; */
 }
 
 .lyrics_showing_iframe {

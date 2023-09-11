@@ -137,13 +137,14 @@ slideContainer.addEventListener('click', (e) => {
 });
 
 function audioValueUpdate() {
-    const audio = document.querySelector('.playing_audio');
-    const audioSlider = document.querySelector('#seek-slider');
+    // const audio = document.querySelector('.playing_audio');
+    // const audioSlider = document.querySelector('#seek-slider');
 
-    audio.addEventListener('timeupdate', () => {
-        audioSlider.max = Math.floor(audio.duration);
-        audioSlider.value = Math.floor(audio.currentTime);
-    });
+    // audio.addEventListener('timeupdate', () => {
+    //     audioSlider.max = (audio.duration).toFixed(2);
+    //     audioSlider.value = (audio.currentTime).toFixed(2);
+    // });
+    main();
 
 }
 
@@ -458,14 +459,124 @@ async function playNextSong() {
 
 nextSongPlayBtn.addEventListener('click', playNextSong);
 
+function lyricsShow() {
+
+}
+
+function syncLyric(lyrics, time) {
+    const scores = [];
+    lyrics.forEach(lyric => {
+        // get the gap or distance or we call it score
+        var score = time - (lyric.time.toFixed(2));
+        score = score.toFixed(2)
+        // score = Number(0.5) + Number(score);
+        console.log(lyric.time.toFixed(2), 'lyric.time');
+        console.log(score, 'score', Number(0.5) + Number(score), 'Number(0.5) + Number(score);');
+        console.log(time, 'time');
+        // only accept score with positive values
+        if (score >= 0) scores.push(score);
+    });
+    console.log(scores);
+    if (scores.length == 0) return null;
+
+    // get the smallest value from scores
+    const closest = Math.min(...scores);
+    console.log(closest, 'closssee', scores[0]);
+    // return the index of closest lyric
+    console.log(scores.indexOf(`${closest}`), 'scores.indexOf(closest)');
+    return scores.indexOf(`${closest}`);
+}
+// lrc (String) - lrc file text
+function parseLyric(lrc) {
+    // will match "[00:00.00] ooooh yeah!"
+    // note: i use named capturing group
+    // console.log(time, 'time', text);
+    const regex = /^\[(?<time>\d{2}:\d{2}(.\d{2})?)\](?<text>.*)/;
+    console.log(regex, 'regess');
+    // split lrc string to individual lines
+    const lines = lrc.split("\n");
+    // console.log(lines, 'lines');
+    const output = [];
+    // console.log(lines);
+    lines.forEach(line => {
+        // console.log(line.split("\r")[0]);
+        if (line.split("\r")[0].split(']')[0] != '') {
+
+            const [time, text] = [line.split("\r")[0].split(']')[0].replace('[', ''), line.split("\r")[0].split(']')[1]];
+            console.log(time, text, 'time, text');
+
+            output.push({
+                time: parseTime(time),
+                text: text.trim()
+            });
+        }
+
+        // const match = line.match(' ');
+        // console.log(match, 'match');
+        // if doesn't match, return.
+        // if (match == null) return;
+        // output.push({
+        //     time: parseTime(time),
+        //     text: text.trim()
+        // });
+        // console.log(output, 'output');
+    });
+    // console.log(output.time, 'output');
+    // parse formated time
+    // "03:24.73" => 204.73 (total time in seconds)
+    function parseTime(time) {
+        const minsec = time.split(":");
+
+        const min = parseInt(minsec[0]) * 60;
+        const sec = parseFloat(minsec[1]);
+
+        return min + sec;
+    }
+
+    return output;
+}
+
+
+async function main() {
+    const frame = document.querySelector(".lyrics_show");
+    const audio = document.querySelector('.playing_audio')
+
+    const res = await fetch("./assests/heeriye_lyrics.txt");
+    const lrc = await res.text();
+    frame.style.color = 'white';
+
+    const lyrics = parseLyric(lrc);
+    audio.addEventListener('timeupdate', () => {
+        const audioSlider = document.querySelector('#seek-slider');
+
+        audioSlider.max = Math.floor(audio.duration)
+        audioSlider.value = Math.floor(audio.currentTime)
+
+        const time = (audio.currentTime).toFixed(2);
+
+        console.log('dvdvdfv', time, 'audio.currentTime');
+        const index = syncLyric(lyrics, time);
+
+        if (index == null || index < 0) return;
+        console.log(index, 'index');
+
+        frame.innerHTML = lyrics[index].text;
+        console.log(frame.innerHTML, 'lyrics[index].text', lyrics[index].text);
+    });
+    // audio.ontimeupdate = () => {
+    //     const time = (audio.currentTime).toFixed(2);
+    //     console.log('dvdvdfv', time, 'audio.currentTime');
+    //     const index = syncLyric(lyrics, time);
+
+    //     console.log(index, 'index');
+    //     if (index == null || index < 0) return;
+    //     frameContent.innerHTML = lyrics[index].text;
+    //     console.log(frameContent.innerHTML, 'lyrics[index].text', lyrics[index].text);
+    // };
+
+}
 async function showHidwLyrics() {
-    const lyricsIframe = document.querySelector('.lyrics_showing_iframe')
-    // console.log(lyricsIframe, lyricsIframe.body);
-    // lyricsIframe.onload = function (e) {
-    //     console.log(lyricsIframe, 'frame');
-    //     var body = lyricsIframe.contentWindow.document.querySelector('body');
-    //     body.style.color = 'red';
-    // }
+
     const lyricsSec = document.querySelector('.lyrics_sec');
     const header = document.querySelector('.header');
     const container = document.querySelector('.container');
@@ -493,6 +604,7 @@ async function showHidwLyrics() {
         document.querySelector('.lyrics_bg').innerHTML = html;
         document.querySelector('.show_Lyrics_btn').classList.toggle('hide_Lyrics_btn');
         // document.querySelector('.lyrics_sec_bg_img').style.opacity = '0.7';
+        // main();
     } else {
 
         trendingSongCard.style.marginBottom = '80px';
@@ -627,7 +739,7 @@ function selectedSongDisplay(displaySongId) {
 
         const lyricsMarkup = `<iframe class="lyrics_showing_iframe" style="border: none;" src="assests/${selectedSong.songLyrics}">
         </iframe>`
-        document.querySelector('.lyrics_show').innerHTML = lyricsMarkup;
+        // document.querySelector('.lyrics_show').innerHTML = lyricsMarkup;
 
         const musicInfoHtml = `<div>
                         <img width="50" height="50" src="./assests/images/${selectedSong.songImgUrl}" alt="${selectedSong.songTitle}">
@@ -639,7 +751,18 @@ function selectedSongDisplay(displaySongId) {
         document.querySelector('.music_info_sec').innerHTML = musicInfoHtml;
 
         // audio updated
+        const lyricsIframe = document.querySelector('.lyrics_show')
+        // console.log(lyricsIframe, lyricsIframe.body);
+        // lyricsIframe.onload = function (e) {
+        //     console.log(lyricsIframe, 'frame');
+        //     var body = lyricsIframe.contentWindow.document.querySelector('body');
+        //     body.style.color = 'white';
+        // }
         audioValueUpdate();
+        // setTimeout(() => {
+
+        //     main();
+        // })
     }
 
 }
