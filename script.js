@@ -71,7 +71,7 @@ document.querySelector(".dropbtn").addEventListener('click', () => {
 });
 
 trendingSongCard.addEventListener('click', (e) => {
-    console.log(selectedCard, 'selectedCard');
+    // console.log(selectedCard, 'selectedCard');
     if (e.target.closest('.song_card')) {
         const displaySongId = e.target.closest('.song_card').getAttribute('id')
 
@@ -118,12 +118,6 @@ slideContainer.addEventListener('click', (e) => {
     }
 });
 
-
-
-document.querySelector('#seek-slider').onchange = function () {
-    document.querySelector('.playing_audio').play();
-    document.querySelector('.playing_audio').currentTime = document.querySelector('#seek-slider').value;
-}
 
 function playPauseMusic(curPlaying, idd) {
     const audio = document.querySelector('.playing_audio');
@@ -322,7 +316,7 @@ newmusicplaybtn.addEventListener('click', (e) => {
 })
 
 async function findNextSelectedSong(songId, where) {
-    console.log(songId, 'songId hh');
+
     var songIndex = trendingSongsList.findIndex(trendingSong => {
         return trendingSong.songId == (songId || selectedCard.songId);
     });
@@ -476,6 +470,10 @@ function parseLyric(lrc) {
     return output;
 }
 
+//update range value to audio player
+document.querySelector('#seek-slider').onchange = function (e) {
+    document.querySelector('.playing_audio').currentTime = e.target.value;
+}
 
 async function lyricsShow() {
     const frame = document.querySelector(".lyrics_show");
@@ -494,12 +492,10 @@ async function lyricsShow() {
     });
     frame.innerHTML = `<pre>${output.join('\n')}</pre>`;
 
-    console.log(output, 'output');
+    // console.log(output, 'output');
     const mk = frame.innerHTML.split('\n');
-    console.log(mk);
+
     audio.addEventListener('timeupdate', () => {
-        // window.scrollTo(0, Math.floor(audio.duration));
-        // console.log(window.scrollTo(0, Math.floor(audio.duration)), 'sscccolll');
 
         audioSlider.max = Math.floor(audio.duration)
         audioSlider.value = Math.floor(audio.currentTime)
@@ -511,17 +507,12 @@ async function lyricsShow() {
         frame.innerHTML = `<pre>${output.join('\n')}</pre>`;
 
         if (index == null || index < 0) return;
-        console.log(index, 'index');
-        console.log(frame.innerHTML.split('\n')[index], 'hh');
 
         frame.innerHTML = `<pre>${frame.innerHTML.replace(mk[index],
             `<span style="color:white;"><em>${mk[index]}</em></span>`)}</pre>`;
-        console.log(lyrics[index].text, 'lyrics[index].text');
     });
-    let date = new Date('2022-06-17T11:06:50.369Z').toLocaleDateString();
-    console.log(date); // 2022-06-17T11:06:50.369Z
-
 }
+
 async function showHidwLyrics() {
 
     const lyricsSec = document.querySelector('.lyrics_sec');
