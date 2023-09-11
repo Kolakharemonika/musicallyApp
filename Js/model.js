@@ -22,7 +22,7 @@ export const musicList = [{
     songTitle: 'Udd jaa kaale kaava',
     songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Udit Narayan',
-    audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
+    audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
     songId: 4,
@@ -47,7 +47,7 @@ export const musicList = [{
     songTitle: 'Udd jaa kaale kaava',
     songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Udit Narayan',
-    audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
+    audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
     songId: 7,
@@ -72,7 +72,7 @@ export const musicList = [{
     songTitle: 'Udd jaa kaale kaava',
     songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Udit Narayan',
-    audioFile: 'Udja-Kale-Kawan-song-mp3.mp3'
+    audioFile: 'Heeriye-song-mp3.mp3'
 }]
 
 
@@ -82,6 +82,8 @@ export const getMusicList = async function () {
 
 export const displaySingleTrendingCardMarkup = async function (trendingSongIndex) {
     const trendingSongsList = musicList.slice();
+    console.log(trendingSongIndex, 'trendingSongIndex');
+    if (trendingSongIndex < 0 || trendingSongIndex >= trendingSongsList.length) return;
     let html = `<div class="song_card" id="${trendingSongsList[trendingSongIndex].songId}">
         <img class="song-img" src="assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
     <img class="music_gif" src="assests/gif/music_playing.gif" alt="music playing gif">
@@ -196,6 +198,7 @@ export const generateMarkup = async function () {
 
 export const dispalyNextSingleCardMarkup = async function (currentSlide) {
     const trendingSongsList = musicList.slice();
+    console.log(currentSlide, 'currentSlide');
     if (currentSlide >= trendingSongsList.length || currentSlide < 0) {
         console.log('No songs Available');
         // return 'No songs Available';

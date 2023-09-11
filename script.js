@@ -26,7 +26,7 @@ const playPrevSongBtn = document.querySelector('.play_prev_song_btn');
 
 const searchInput = document.querySelector('.search_field');
 const searchBtn = document.querySelector('.search_btn');
-// 
+
 // variable declarations
 var selectedCard;
 var songState = { state: 'ready' };
@@ -74,7 +74,6 @@ trendingSongCard.addEventListener('click', (e) => {
     console.log(selectedCard, 'selectedCard');
     if (e.target.closest('.song_card')) {
         const displaySongId = e.target.closest('.song_card').getAttribute('id')
-        // console.log(displaySongId, 'displaySongId trendingSongCard');
 
         if (displaySongId) {
             const selectedSong = trendingSongsList.find(trendingSong => {
@@ -88,9 +87,6 @@ trendingSongCard.addEventListener('click', (e) => {
                 selectedSongDisplay(displaySongId);
             }
         }
-
-        console.log('just clicked trendingSongCard');
-
         newmusicplaybtn.click();
 
     }
@@ -112,41 +108,17 @@ slideContainer.addEventListener('click', (e) => {
             }
         }
         newmusicplaybtn.click()
-        // if (e.target.closest('.music_card_current')) {
-        //     console.log('just clicked slideContainer');
 
-        //     if (e.target.closest('.music_card_current').querySelector('#play')) {
-        //         const id = e.target.closest('.music_card_current').querySelector('#play')
-        //         if (!id.classList.contains('d-none')) {
-        //             console.log('pllllllllayinggg playactive');
-        //             // newmusicplaybtn.click('playing')
-        //         } else {
-        //             console.log('paussseeeeee pauseactive');
-        //             // newmusicplaybtn.click('pause')
-        //         }
-        //     }
-        // }
-
-        // const musicCardNext = document.querySelector('.music_card_next');
-        // const musicCardPrev = document.querySelector('.music_card_prev');
-        // musicCardNext.addEventListener('click', playNextSong);
-        // musicCardPrev.addEventListener('click', playPrevSong)
+        const musicCardNext = document.querySelector('.music_card_next');
+        const musicCardPrev = document.querySelector('.music_card_prev');
+        musicCardNext.addEventListener('click', playNextSong);
+        musicCardPrev.addEventListener('click', playPrevSong)
 
 
     }
 });
 
-function audioValueUpdate() {
-    // const audio = document.querySelector('.playing_audio');
-    // const audioSlider = document.querySelector('#seek-slider');
 
-    // audio.addEventListener('timeupdate', () => {
-    //     audioSlider.max = (audio.duration).toFixed(2);
-    //     audioSlider.value = (audio.currentTime).toFixed(2);
-    // });
-    main();
-
-}
 
 document.querySelector('#seek-slider').onchange = function () {
     document.querySelector('.playing_audio').play();
@@ -158,7 +130,6 @@ function playPauseMusic(curPlaying, idd) {
 
     if (songState.state == 'ready' || songState.state == 'pause') {
         audio.play();
-        console.log('songState.state readyyy ---- playing');
         songState.state = 'play';
         newmusicplaybtn.querySelectorAll('.btn_play_pause').forEach(btn => {
             if (btn.getAttribute('id') == 'play') {
@@ -336,7 +307,6 @@ function playPauseMusic(curPlaying, idd) {
 }
 
 newmusicplaybtn.addEventListener('click', (e) => {
-    console.log('just clicked newmusicplaybtn', e);
 
     if (e.target.querySelector('#play')) {
         const id = e.target.querySelector('#play').classList;
@@ -351,13 +321,11 @@ newmusicplaybtn.addEventListener('click', (e) => {
 
 })
 
-function findNextSelectedSong(songId, where) {
-
-    console.log(songId, where, 'songId, where');
+async function findNextSelectedSong(songId, where) {
+    console.log(songId, 'songId hh');
     var songIndex = trendingSongsList.findIndex(trendingSong => {
         return trendingSong.songId == (songId || selectedCard.songId);
     });
-    console.log(songIndex, 'songIndex');
 
     (where == 'prev') ? songIndex-- : songIndex++;
 
@@ -367,19 +335,21 @@ function findNextSelectedSong(songId, where) {
         })
         selectedCard = selectedSong;
         selectedSongDisplay(selectedSong.songId);
+        newmusicplaybtn.click();
 
-        if (where == 'next') {
-            currentSlide = songId - 2;
-            trendingSongIndex = songId - 3;
-            playNextSong();
-            trendingSongMoveNext();
-        } else {
-            currentSlide = songId + 2;
-            trendingSongIndex = songId + 3;
-            playPrevSong();
-            trendingSongMovePrev();
-        }
-
+        // if (where == 'next' && songId >= 5) {
+        //     currentSlide = songId - 2;
+        //     trendingSongIndex = songId - 3;
+        //     playNextSong();
+        //     trendingSongMoveNext();
+        // }
+        // if (where == 'prev' && songId >= 6) {
+        //     currentSlide = songId + 2;
+        //     trendingSongIndex = songId + 3;
+        //     playPrevSong();
+        //     trendingSongMovePrev();
+        // }
+        // newmusicplaybtn.click();
     } else {
         alert('No songs Availables!')
     }
@@ -401,11 +371,11 @@ playNextSongBtn.addEventListener('click', () => {
 
 async function playPrevSong() {
     currentSlide--;
+
     slides.forEach(slide => {
-        slide.style.transform = `translate3d(-${(currentSlide * 8) + (2 * currentSlide)}%, 0, 0)`;
+        slide.style.transform = `translate3d(-${(currentSlide * 8.5)}%, 0, 0)`;
         slide.style.transition = 'width 2s, height 2s, transform 2s';
     });
-    // console.log(currentSlide, 'currentSlide');
     if (currentSlide == 0) {
         previousSongPlayBtn.classList.add('disabled');
     } else {
@@ -418,7 +388,7 @@ async function playPrevSong() {
     playingSongCardList1[currentSlide + 2].classList?.replace('music_card_current', 'music_card_next')
 
     setTimeout(() => {
-        // playingSongCardList1.length >= 3 && slideContainer.removeChild(slideContainer.lastChild)
+        playingSongCardList1.length >= 3 && slideContainer.removeChild(slideContainer.lastChild)
     }, 1500);
 }
 
@@ -427,13 +397,12 @@ previousSongPlayBtn.addEventListener('click', playPrevSong);
 async function playNextSong() {
     currentSlide++;
 
-    // console.log(currentSlide, 'currentSlide playNextSong');
     if (currentSlide >= trendingSongsList.length - 3) {
         nextSongPlayBtn.classList.add('disabled');
     } else {
         previousSongPlayBtn.classList.remove('disabled');
         slides.forEach(slide => {
-            slide.style.transform = `translate3d(-${(currentSlide * 8) + (2 * currentSlide)}%, 0, 0)`; //-34%
+            slide.style.transform = `translate3d(-${(currentSlide * 8.5)}%, 0, 0)`; //-34%
             slide.style.transition = 'width 2s, height 2s, transform 2s';
         });
 
@@ -459,51 +428,33 @@ async function playNextSong() {
 
 nextSongPlayBtn.addEventListener('click', playNextSong);
 
-function lyricsShow() {
 
-}
 
 function syncLyric(lyrics, time) {
     const scores = [];
     lyrics.forEach(lyric => {
-        // get the gap or distance or we call it score
+
         var score = time - (lyric.time.toFixed(2));
         score = score.toFixed(2)
-        // score = Number(0.5) + Number(score);
-        console.log(lyric.time.toFixed(2), 'lyric.time');
-        console.log(score, 'score', Number(0.5) + Number(score), 'Number(0.5) + Number(score);');
-        console.log(time, 'time');
-        // only accept score with positive values
+
         if (score >= 0) scores.push(score);
     });
-    console.log(scores);
+
     if (scores.length == 0) return null;
 
-    // get the smallest value from scores
+
     const closest = Math.min(...scores);
-    console.log(closest, 'closssee', scores[0]);
-    // return the index of closest lyric
-    console.log(scores.indexOf(`${closest}`), 'scores.indexOf(closest)');
+
     return scores.indexOf(`${closest}`);
 }
-// lrc (String) - lrc file text
+
 function parseLyric(lrc) {
-    // will match "[00:00.00] ooooh yeah!"
-    // note: i use named capturing group
-    // console.log(time, 'time', text);
-    const regex = /^\[(?<time>\d{2}:\d{2}(.\d{2})?)\](?<text>.*)/;
-    console.log(regex, 'regess');
-    // split lrc string to individual lines
     const lines = lrc.split("\n");
-    // console.log(lines, 'lines');
     const output = [];
-    // console.log(lines);
     lines.forEach(line => {
-        // console.log(line.split("\r")[0]);
         if (line.split("\r")[0].split(']')[0] != '') {
 
             const [time, text] = [line.split("\r")[0].split(']')[0].replace('[', ''), line.split("\r")[0].split(']')[1]];
-            console.log(time, text, 'time, text');
 
             output.push({
                 time: parseTime(time),
@@ -511,19 +462,8 @@ function parseLyric(lrc) {
             });
         }
 
-        // const match = line.match(' ');
-        // console.log(match, 'match');
-        // if doesn't match, return.
-        // if (match == null) return;
-        // output.push({
-        //     time: parseTime(time),
-        //     text: text.trim()
-        // });
-        // console.log(output, 'output');
     });
-    // console.log(output.time, 'output');
-    // parse formated time
-    // "03:24.73" => 204.73 (total time in seconds)
+
     function parseTime(time) {
         const minsec = time.split(":");
 
@@ -537,42 +477,49 @@ function parseLyric(lrc) {
 }
 
 
-async function main() {
+async function lyricsShow() {
     const frame = document.querySelector(".lyrics_show");
-    const audio = document.querySelector('.playing_audio')
+    const audio = document.querySelector('.playing_audio');
+    const audioSlider = document.querySelector('#seek-slider');
 
     const res = await fetch("./assests/heeriye_lyrics.txt");
     const lrc = await res.text();
-    frame.style.color = 'white';
 
     const lyrics = parseLyric(lrc);
+    const lines = lrc.split("\n");
+
+    const output = [];
+    lines.forEach(line => {
+        output.push(line.split("\r")[0].split(']')[1]);
+    });
+    frame.innerHTML = `<pre>${output.join('\n')}</pre>`;
+
+    console.log(output, 'output');
+    const mk = frame.innerHTML.split('\n');
+    console.log(mk);
     audio.addEventListener('timeupdate', () => {
-        const audioSlider = document.querySelector('#seek-slider');
+        // window.scrollTo(0, Math.floor(audio.duration));
+        // console.log(window.scrollTo(0, Math.floor(audio.duration)), 'sscccolll');
 
         audioSlider.max = Math.floor(audio.duration)
         audioSlider.value = Math.floor(audio.currentTime)
 
         const time = (audio.currentTime).toFixed(2);
 
-        console.log('dvdvdfv', time, 'audio.currentTime');
         const index = syncLyric(lyrics, time);
+
+        frame.innerHTML = `<pre>${output.join('\n')}</pre>`;
 
         if (index == null || index < 0) return;
         console.log(index, 'index');
+        console.log(frame.innerHTML.split('\n')[index], 'hh');
 
-        frame.innerHTML = lyrics[index].text;
-        console.log(frame.innerHTML, 'lyrics[index].text', lyrics[index].text);
+        frame.innerHTML = `<pre>${frame.innerHTML.replace(mk[index],
+            `<span style="color:white;"><em>${mk[index]}</em></span>`)}</pre>`;
+        console.log(lyrics[index].text, 'lyrics[index].text');
     });
-    // audio.ontimeupdate = () => {
-    //     const time = (audio.currentTime).toFixed(2);
-    //     console.log('dvdvdfv', time, 'audio.currentTime');
-    //     const index = syncLyric(lyrics, time);
-
-    //     console.log(index, 'index');
-    //     if (index == null || index < 0) return;
-    //     frameContent.innerHTML = lyrics[index].text;
-    //     console.log(frameContent.innerHTML, 'lyrics[index].text', lyrics[index].text);
-    // };
+    let date = new Date('2022-06-17T11:06:50.369Z').toLocaleDateString();
+    console.log(date); // 2022-06-17T11:06:50.369Z
 
 }
 async function showHidwLyrics() {
@@ -603,8 +550,6 @@ async function showHidwLyrics() {
 
         document.querySelector('.lyrics_bg').innerHTML = html;
         document.querySelector('.show_Lyrics_btn').classList.toggle('hide_Lyrics_btn');
-        // document.querySelector('.lyrics_sec_bg_img').style.opacity = '0.7';
-        // main();
     } else {
 
         trendingSongCard.style.marginBottom = '80px';
@@ -617,7 +562,7 @@ async function showHidwLyrics() {
         trendingSongsContainer.classList.toggle('d-none');
         container.classList.toggle('d-none');
         header.classList.toggle('d-none');
-        // document.querySelector('.lyrics_sec_bg_img').style.opacity = '1';
+
         setTimeout(() => {
             lyricsSec.classList.toggle('hidden');
             document.querySelector('.lyrics_bg').innerHTML = '';
@@ -630,10 +575,7 @@ showLyricsBtn.addEventListener('click', showHidwLyrics);
 document.querySelector('.expand_btn').addEventListener('click', showHidwLyrics);
 
 
-
-
 //trending song btns prevList nextList
-
 async function trendingSongMoveNext() {
     trendingSongIndex++;
     const allSongCard = document.querySelectorAll('.song_card');
@@ -648,7 +590,6 @@ async function trendingSongMoveNext() {
             card.style.transition = 'all 55s linear';
         })
 
-        // 
         const html = await model.displaySingleTrendingCardMarkup(trendingSongIndex)
 
         setTimeout(() => {
@@ -680,7 +621,7 @@ async function trendingSongMovePrev() {
             card.style.transition = 'width 2s, height 2s, transform 2s';
             card.style.transitionDelay = '1s';
         })
-
+        // trendingSongIndex = trendingSongIndex - 5
         const html = await model.displaySingleTrendingCardMarkup(trendingSongIndex - 5)
         trendingSongCard.insertAdjacentHTML('afterbegin', html);
     }
@@ -737,8 +678,8 @@ function selectedSongDisplay(displaySongId) {
                     </audio>`;
         document.querySelector('.audio_song_container').innerHTML = audioHtml;
 
-        const lyricsMarkup = `<iframe class="lyrics_showing_iframe" style="border: none;" src="assests/${selectedSong.songLyrics}">
-        </iframe>`
+        // const lyricsMarkup = `<iframe class="lyrics_showing_iframe" style="border: none;" src="assests/${selectedSong.songLyrics}">
+        // </iframe>`
         // document.querySelector('.lyrics_show').innerHTML = lyricsMarkup;
 
         const musicInfoHtml = `<div>
@@ -750,36 +691,18 @@ function selectedSongDisplay(displaySongId) {
                     </div>`;
         document.querySelector('.music_info_sec').innerHTML = musicInfoHtml;
 
-        // audio updated
-        const lyricsIframe = document.querySelector('.lyrics_show')
-        // console.log(lyricsIframe, lyricsIframe.body);
-        // lyricsIframe.onload = function (e) {
-        //     console.log(lyricsIframe, 'frame');
-        //     var body = lyricsIframe.contentWindow.document.querySelector('body');
-        //     body.style.color = 'white';
-        // }
-        audioValueUpdate();
-        // setTimeout(() => {
+        lyricsShow();
 
-        //     main();
-        // })
     }
 
 }
 
-// var lyricsIframe = document.getElementById('lyrics_showing_iframe');
-// lyricsIframe.onload = function (e) {
-//     // console.log(lyricsIframe, 'frame');
-//     var body = lyricsIframe.contentWindow.document.querySelector('body');
-//     body.style.color = 'red';
-// }
 
 //search results
 async function showSerachResult(searchValue) {
-    console.log(searchValue);
+
     const heading = document.querySelector('.heading');
     trendingSubContainer.style.height = '91vh';
-    // trendingSubContainer.style.overflowY = 'scroll';
     document.querySelector('.trending_song_btns').classList.add('d-none');
 
     trendingSongsContainer.style.top = '11%';
@@ -789,7 +712,6 @@ async function showSerachResult(searchValue) {
     var searchResultsList = trendingSongsList.filter(trendingSong => {
         return (trendingSong.songTitle).toLowerCase() == (searchValue).toLowerCase();
     })
-    console.log(searchResultsList);
 
     if (searchResultsList && searchResultsList.length > 0) {
         trendingSongCard.innerHTML = await model.loadGallary(searchResultsList);

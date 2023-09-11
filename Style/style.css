@@ -15,6 +15,12 @@
 
 }
 
+pre {
+    color: var(--color-white-off);
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
 body {
     padding: 0;
     margin: 0;
