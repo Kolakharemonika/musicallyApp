@@ -82,7 +82,7 @@ export const getMusicList = async function () {
 
 export const displaySingleTrendingCardMarkup = async function (trendingSongIndex) {
     const trendingSongsList = musicList.slice();
-    console.log(trendingSongIndex, 'trendingSongIndex');
+
     if (trendingSongIndex < 0 || trendingSongIndex >= trendingSongsList.length) return;
     let html = `<div class="song_card" id="${trendingSongsList[trendingSongIndex].songId}">
         <img class="song-img" src="assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
@@ -102,11 +102,14 @@ export const displaySingleTrendingCardMarkup = async function (trendingSongIndex
     return html;
 }
 
-export const trendingSongMarkup = async function () {
+export const trendingSongMarkup = async function (numOfShowingCard) {
     const list = musicList.slice();
-    if (list.length !== 0 && list.length >= 6) {
-        let html = `${list.map((music, id) => {
-            if (id >= 6) return;
+
+    if (list.length !== 0 && list.length >= numOfShowingCard) {
+        let html = `${list.map((music, index) => {
+
+            if (index >= numOfShowingCard) return;
+
             return `<div class="song_card" id="${music.songId}">
             <img class="song-img" src="assests/images/${music.songImgUrl}" alt="${music.songTitle}">
             <img class="music_gif" src="assests/gif/music_playing.gif" alt="music playing gif">
@@ -124,10 +127,7 @@ export const trendingSongMarkup = async function () {
         }).join('')} `;
 
         return html;
-    } else {
-        return 'No songs available...'
     }
-
 }
 
 export const loadGallary = async function (loadingList) {
@@ -154,21 +154,13 @@ export const loadGallary = async function (loadingList) {
     }
 }
 
-export const generateMarkup = async function () {
-    if (musicList.length !== 0 && musicList.length >= 3) {
-        let html = `${musicList.map((trendingSong, id) => {
-            let classtemp;
-            if (id == 0) {
-                classtemp = 'music_card_prev';
-            }
-            if (id == 1) {
-                classtemp = 'music_card_current';
-            }
-            if (id == 2) {
-                classtemp = 'music_card_next';
-            }
-            if (id >= 3) return;
-            return `<div class="playing_song_card ${classtemp}" id="${trendingSong.songId}">
+export const generateMarkup = async function (slidedisplay) {
+    const list = musicList.slice();
+    if (list.length !== 0 && list.length >= slidedisplay) {
+
+        let html = `${list.map((trendingSong, index) => {
+            if (index >= slidedisplay) return;
+            return `<div class="playing_song_card " id="${trendingSong.songId}">
                             <img src="assests/images/${trendingSong.songImgUrlHd}" alt="${trendingSong.songTitle}">
                      <div class="playing_song_info">
                                 <span class="song_title">${trendingSong.songTitle}</span>
@@ -188,22 +180,16 @@ export const generateMarkup = async function () {
                     </div>`
         }).join('')} `;
         return html;
-    } else {
-        return 'No Songs Available';
+
     }
-
-
 
 }
 
 export const dispalyNextSingleCardMarkup = async function (currentSlide) {
     const trendingSongsList = musicList.slice();
-    console.log(currentSlide, 'currentSlide');
-    if (currentSlide >= trendingSongsList.length || currentSlide < 0) {
-        console.log('No songs Available');
-        // return 'No songs Available';
-    } else {
-        const markup = `<div class="playing_song_card music_card_next" id="${trendingSongsList[currentSlide].songId}">
+    // console.log(currentSlide, 'currentSlide');
+
+    const markup = `<div class="playing_song_card" id="${trendingSongsList[currentSlide].songId}">
                             <img src="assests/images/${trendingSongsList[currentSlide].songImgUrlHd}" alt="${trendingSongsList[currentSlide].songTitle}">
                      <div class="playing_song_info">
                                 <span class="song_title">${trendingSongsList[currentSlide].songTitle}</span>
@@ -220,7 +206,7 @@ export const dispalyNextSingleCardMarkup = async function (currentSlide) {
                                     </svg>
                                 </button> </div> 
                                        </div>`;
-        return markup;
-    }
+    return markup;
+
 
 }
