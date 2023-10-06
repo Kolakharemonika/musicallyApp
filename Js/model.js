@@ -75,9 +75,50 @@ export const musicList = [{
     audioFile: 'Heeriye-song-mp3.mp3'
 }]
 
+export const playList = [{
+    songId: 'song1',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 'song2',
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
+},
+{
+    songId: 'song3',
+    songImgUrl: 'hukum-170px.jpg',
+    songImgUrlHd: 'hukum.jpg',
+    songTitle: 'hukum',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Anirudh Ravichander',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 'song4',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}]
 
 export const getMusicList = async function () {
     return musicList.slice();
+}
+export const getPlayList = async function () {
+    return playList.slice();
+}
+export const getLibraryList = async function () {
+    //library list
+    return playList.slice();
 }
 
 export const displaySingleTrendingCardMarkup = async function (trendingSongIndex) {
@@ -155,7 +196,7 @@ export const loadGallary = async function (loadingList) {
 }
 
 export const generateMarkup = async function (slidedisplay) {
-    const list = musicList.slice();
+    const list = await getPlayList();
     if (list.length !== 0 && list.length >= slidedisplay) {
 
         let html = `${list.map((trendingSong, index) => {
@@ -186,16 +227,15 @@ export const generateMarkup = async function (slidedisplay) {
 }
 
 export const dispalyNextSingleCardMarkup = async function (currentSlide) {
-    const trendingSongsList = musicList.slice();
-    // console.log(currentSlide, 'currentSlide');
+    const songsList = await getPlayList();
 
-    const markup = `<div class="playing_song_card" id="${trendingSongsList[currentSlide].songId}">
-                            <img src="assests/images/${trendingSongsList[currentSlide].songImgUrlHd}" alt="${trendingSongsList[currentSlide].songTitle}">
+    const markup = `<div class="playing_song_card" id="${songsList[currentSlide].songId}">
+                            <img src="assests/images/${songsList[currentSlide].songImgUrlHd}" alt="${songsList[currentSlide].songTitle}">
                      <div class="playing_song_info">
-                                <span class="song_title">${trendingSongsList[currentSlide].songTitle}</span>
-                                <span class="song_writer">${trendingSongsList[currentSlide].songWriter}</span>
+                                <span class="song_title">${songsList[currentSlide].songTitle}</span>
+                                <span class="song_writer">${songsList[currentSlide].songWriter}</span>
                             </div>
-                            <audio class="audio_song" src="assests/music/${trendingSongsList[currentSlide].audioFile}" type="audio/mpeg">
+                            <audio class="audio_song" src="assests/music/${songsList[currentSlide].audioFile}" type="audio/mpeg">
                     </audio>
                          <div class="overlay"> <button class="music_btn music_play_btn btn_play_icon" id=musicPlay>
                                     <svg class="music_btn_svg playing_btn btn_play_pause" id="play">
@@ -207,6 +247,5 @@ export const dispalyNextSingleCardMarkup = async function (currentSlide) {
                                 </button> </div> 
                                        </div>`;
     return markup;
-
 
 }
