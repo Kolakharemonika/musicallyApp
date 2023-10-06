@@ -1,5 +1,6 @@
 
-const numOfShowingCard = 6;
+export const numOfShowingCard = 6;
+export const numOfSlideDisplay = 3;
 export const musicList = [{
     songId: 1,
     songImgUrl: 'hukum-170px.jpg',
@@ -115,8 +116,7 @@ export const musicList = [{
     songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Udit Narayan',
     audioFile: 'Heeriye-song-mp3.mp3'
-},
-    , {
+}, {
     songId: 15,
     songImgUrl: 'heeriye-170px.jpg',
     songImgUrlHd: 'heeriye.jpg',
@@ -185,7 +185,7 @@ export const playList = [{
     audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
-    songId: 'song2',
+    songId: 'song5',
     songImgUrl: 'uddjaa-170px.jpg',
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
@@ -194,7 +194,7 @@ export const playList = [{
     audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
-    songId: 'song3',
+    songId: 'song6',
     songImgUrl: 'hukum-170px.jpg',
     songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
@@ -202,7 +202,7 @@ export const playList = [{
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
-    songId: 'song4',
+    songId: 'song7',
     songImgUrl: 'heeriye-170px.jpg',
     songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
@@ -212,7 +212,7 @@ export const playList = [{
 }]
 
 export const libraryList = [{
-    songId: 'song1',
+    songId: 'm1',
     songImgUrl: 'heeriye-170px.jpg',
     songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
@@ -220,7 +220,7 @@ export const libraryList = [{
     songWriter: 'Jasleen Royal, Arijit singh',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
-    songId: 'song2',
+    songId: 'm2',
     songImgUrl: 'uddjaa-170px.jpg',
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
@@ -229,7 +229,7 @@ export const libraryList = [{
     audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
-    songId: 'song3',
+    songId: 'm3',
     songImgUrl: 'hukum-170px.jpg',
     songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
@@ -237,7 +237,7 @@ export const libraryList = [{
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
-    songId: 'song4',
+    songId: 'm4',
     songImgUrl: 'heeriye-170px.jpg',
     songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
@@ -246,7 +246,7 @@ export const libraryList = [{
     audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
-    songId: 'song2',
+    songId: 'm5',
     songImgUrl: 'uddjaa-170px.jpg',
     songImgUrlHd: 'uddjaa.jpg',
     songTitle: 'Udd jaa kaale kaava',
@@ -255,7 +255,7 @@ export const libraryList = [{
     audioFile: 'Heeriye-song-mp3.mp3'
 },
 {
-    songId: 'song3',
+    songId: 'm6',
     songImgUrl: 'hukum-170px.jpg',
     songImgUrlHd: 'hukum.jpg',
     songTitle: 'hukum',
@@ -263,7 +263,7 @@ export const libraryList = [{
     songWriter: 'Anirudh Ravichander',
     audioFile: 'Heeriye-song-mp3.mp3'
 }, {
-    songId: 'song4',
+    songId: 'm7',
     songImgUrl: 'heeriye-170px.jpg',
     songImgUrlHd: 'heeriye.jpg',
     songTitle: 'Heeriye(feet. Arijit singh)',
@@ -278,7 +278,6 @@ export const getPlayList = async function () {
     return playList.slice();
 }
 export const getLibraryList = async function () {
-    //library list
     return libraryList.slice();
 }
 

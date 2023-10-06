@@ -29,16 +29,11 @@ const searchBtn = document.querySelector('.search_btn');
 
 // variable declarations
 var selectedCard;
-const slidedisplay = 3;
-const trendingSongDisplay = 6;
-var currentSlide = 0;
-var songState = { state: 'ready' };
-var trendingSongIndex = trendingSongDisplay - 1;
-var activeList = 'playList';
-
-// pagination
 var currentPage = 1;
-const numOfShowingCard = 6; // Number of items to display per page
+var currentSlide = 0;
+const slidedisplay = model.numOfSlideDisplay;
+var songState = { state: 'ready' };
+var activeList = 'playList';
 
 //function declarations
 (async function load() {
@@ -47,13 +42,13 @@ const numOfShowingCard = 6; // Number of items to display per page
 
 const trendingSongsList = await model.getMusicList();
 const playSongsList = await model.getPlayList();
-
+const librarySongsList = await model.getLibraryList();
 
 function enableDisableBtn() {
     if (currentPage == 1) {
         trendingSongBtnPrev.classList.add('disabled');
         trendingSongBtnNext.classList.remove('disabled');
-    } else if ((currentPage * numOfShowingCard) >= trendingSongsList.length) {
+    } else if ((currentPage * model.numOfShowingCard) >= trendingSongsList.length) {
         trendingSongBtnNext.classList.add('disabled');
         trendingSongBtnPrev.classList.remove('disabled');
     } else {
@@ -68,8 +63,6 @@ async function getTrendingSongsList(currentPage) {
     trendingSongCard.innerHTML = await model.trendingSongMarkup(currentPage);
 }
 getTrendingSongsList(currentPage);
-
-
 
 //activate navbar btns
 navList.addEventListener('click', (e) => {
@@ -86,17 +79,24 @@ document.querySelector(".dropbtn").addEventListener('click', () => {
 });
 
 trendingSongCard.addEventListener('click', (e) => {
-    console.log(selectedCard, 'selectedCard');
+    // console.log(selectedCard, 'selectedCard');
     if (e.target.closest('.song_card')) {
         const displaySongId = e.target.closest('.song_card').getAttribute('id');
 
         console.log(displaySongId, 'displaySongId');
         if (displaySongId) {
-            const selectedSong = trendingSongsList.find(trendingSong => {
-                return trendingSong.songId == displaySongId;
-            });
-
-            activeList = 'trendingSongs';
+            var selectedSong;
+            if (activeList == 'libraryList') {
+                selectedSong = librarySongsList.find(trendingSong => {
+                    return trendingSong.songId == displaySongId;
+                });
+            } else {
+                activeList = 'trendingSongs'
+                selectedSong = trendingSongsList.find(trendingSong => {
+                    return trendingSong.songId == displaySongId;
+                });
+            }
+            console.log(selectedCard, 'selectedCard');
             if (songState.state == 'ready') {
                 selectedCard = selectedSong;
                 selectedSongDisplay(displaySongId);
@@ -127,7 +127,7 @@ trendingSongCard.addEventListener('click', (e) => {
 
 slideContainer.addEventListener('click', (e) => {
     if (e.target.closest('.playing_song_card')) {
-        console.log(selectedCard, 'selectedCard');
+        // console.log(selectedCard, 'selectedCard');
         const displaySongId = e.target.closest('.playing_song_card').getAttribute('id');
         if (displaySongId) {
             const selectedSong = playSongsList.find(song => {
@@ -167,7 +167,7 @@ function playPauseMusic() {
     const audio = document.querySelector('.playing_audio');
 
     if (songState.state == 'ready' || songState.state == 'pause') {
-        audio.play();
+        // audio.play();
         songState.state = 'play';
 
         newmusicplaybtn.querySelectorAll('.btn_play_pause').forEach(btn => {
@@ -338,7 +338,7 @@ async function findNextSelectedSong(songId, where) {
             alert('No songs Availables!')
         }
 
-    } else {
+    } else if (activeList == 'trendingSongs') {
         songIndex = trendingSongsList.findIndex(trendingSong => {
             return trendingSong.songId == (songId || selectedCard.songId);
         });
@@ -348,19 +348,42 @@ async function findNextSelectedSong(songId, where) {
             const selectedSong = trendingSongsList.find((trendingSong, i) => {
                 return (i == songIndex);
             })
+            console.log(trendingSongsList.length, selectedCard, selectedSong);
 
             selectedCard = selectedSong;
             selectedSongDisplay(selectedSong.songId);
             // newmusicplaybtn.click();
 
             if (where == 'next') {
-                console.log(trendingSongIndex, 'trendingSongIndex');
                 // trendingSongMoveNext();
             }
             // && songId >= 6
             if (where == 'prev') {
-                // trendingSongIndex = songId + 3;
-                // trendingSongMovePrev();
+            }
+            newmusicplaybtn.click();
+        } else {
+            alert('No songs Availables!')
+        }
+    } else {
+        songIndex = librarySongsList.findIndex(trendingSong => {
+            return trendingSong.songId == (songId || selectedCard.songId);
+        });
+
+        (where == 'prev') ? songIndex-- : songIndex++;
+        if (songIndex < librarySongsList.length && songIndex >= 0) {
+            const selectedSong = librarySongsList.find((trendingSong, i) => {
+                return (i == songIndex);
+            })
+
+            selectedCard = selectedSong;
+            selectedSongDisplay(selectedSong.songId);
+            // newmusicplaybtn.click();
+
+            if (where == 'next') {
+                // trendingSongMoveNext();
+            }
+            // && songId >= 6
+            if (where == 'prev') {
             }
             newmusicplaybtn.click();
         } else {
@@ -609,13 +632,16 @@ trendingSongBtnPrev.addEventListener('click', trendingSongMovePrev);
 
 // library section
 async function fetchMusicLibrary() {
+    activeList = 'libraryList';
     trendingSongsContainer.style.top = '11%';
     trendingSongCard.style.flexFlow = 'wrap';
     document.querySelector('.trending_song_btns').classList.add('d-none');
     trendingSongCard.innerHTML = await model.loadGallary(await model.getLibraryList());
 }
+displayLibrary.addEventListener('click', fetchMusicLibrary);
 
 async function fetchTrendingLibrary() {
+    activeList = 'trendingSongs';
     trendingSongsContainer.style.top = '11%';
     trendingSongCard.style.flexFlow = 'wrap';
     document.querySelector('.trending_song_btns').classList.add('d-none');
@@ -623,10 +649,10 @@ async function fetchTrendingLibrary() {
 }
 
 expandTrendingListBtn.addEventListener('click', fetchTrendingLibrary);
-displayLibrary.addEventListener('click', fetchMusicLibrary);
 
 
 function homeScreenLoad() {
+    activeList = 'trendingSongs';
     const heading = document.querySelector('.heading');
     trendingSongsContainer.style.top = '67%';
     trendingSubContainer.style.height = 'auto';
@@ -649,6 +675,10 @@ function selectedSongDisplay(displaySongId) {
         })
     } else if (activeList == 'playList') {
         selectedSong = playSongsList.find(playsong => {
+            return playsong.songId == displaySongId;
+        })
+    } else if (activeList == 'libraryList') {
+        selectedSong = librarySongsList.find(playsong => {
             return playsong.songId == displaySongId;
         })
     }
