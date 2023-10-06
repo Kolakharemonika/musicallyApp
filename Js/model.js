@@ -1,4 +1,5 @@
 
+const numOfShowingCard = 6;
 export const musicList = [{
     songId: 1,
     songImgUrl: 'hukum-170px.jpg',
@@ -73,6 +74,80 @@ export const musicList = [{
     songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Udit Narayan',
     audioFile: 'Heeriye-song-mp3.mp3'
+},
+{
+    songId: 10,
+    songImgUrl: 'hukum-170px.jpg',
+    songImgUrlHd: 'hukum.jpg',
+    songTitle: 'hukum',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Anirudh Ravichander',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 11,
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 12,
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 13,
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 14,
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
+},
+    , {
+    songId: 15,
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 16,
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 17,
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 18,
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }]
 
 export const playList = [{
@@ -108,8 +183,94 @@ export const playList = [{
     songLyrics: 'heeriye_lyrics.txt',
     songWriter: 'Jasleen Royal, Arijit singh',
     audioFile: 'Heeriye-song-mp3.mp3'
+},
+{
+    songId: 'song2',
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
+},
+{
+    songId: 'song3',
+    songImgUrl: 'hukum-170px.jpg',
+    songImgUrlHd: 'hukum.jpg',
+    songTitle: 'hukum',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Anirudh Ravichander',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 'song4',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
 }]
 
+export const libraryList = [{
+    songId: 'song1',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 'song2',
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
+},
+{
+    songId: 'song3',
+    songImgUrl: 'hukum-170px.jpg',
+    songImgUrlHd: 'hukum.jpg',
+    songTitle: 'hukum',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Anirudh Ravichander',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 'song4',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+},
+{
+    songId: 'song2',
+    songImgUrl: 'uddjaa-170px.jpg',
+    songImgUrlHd: 'uddjaa.jpg',
+    songTitle: 'Udd jaa kaale kaava',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Udit Narayan',
+    audioFile: 'Heeriye-song-mp3.mp3'
+},
+{
+    songId: 'song3',
+    songImgUrl: 'hukum-170px.jpg',
+    songImgUrlHd: 'hukum.jpg',
+    songTitle: 'hukum',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Anirudh Ravichander',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}, {
+    songId: 'song4',
+    songImgUrl: 'heeriye-170px.jpg',
+    songImgUrlHd: 'heeriye.jpg',
+    songTitle: 'Heeriye(feet. Arijit singh)',
+    songLyrics: 'heeriye_lyrics.txt',
+    songWriter: 'Jasleen Royal, Arijit singh',
+    audioFile: 'Heeriye-song-mp3.mp3'
+}]
 export const getMusicList = async function () {
     return musicList.slice();
 }
@@ -118,39 +279,18 @@ export const getPlayList = async function () {
 }
 export const getLibraryList = async function () {
     //library list
-    return playList.slice();
+    return libraryList.slice();
 }
 
-export const displaySingleTrendingCardMarkup = async function (trendingSongIndex) {
-    const trendingSongsList = musicList.slice();
+export const trendingSongMarkup = async function (currentPage) {
+    const musicList = await getMusicList();
+    //pagination
+    const startIndex = (currentPage - 1) * numOfShowingCard;
+    const endIndex = startIndex + numOfShowingCard;
+    const list = musicList.slice(startIndex, endIndex);
 
-    if (trendingSongIndex < 0 || trendingSongIndex >= trendingSongsList.length) return;
-    let html = `<div class="song_card" id="${trendingSongsList[trendingSongIndex].songId}">
-        <img class="song-img" src="assests/images/${trendingSongsList[trendingSongIndex].songImgUrl}" alt="${trendingSongsList[trendingSongIndex].songTitle}">
-    <img class="music_gif" src="assests/gif/music_playing.gif" alt="music playing gif">
-                           <button class="btn_play_icon_small">
-                               <svg class="play_icon" id="play">
-                            <use href="assests/icons.svg#play-icon"></use>
-                        </svg>
-                        <svg class="play_icon d-none" id="pause">
-                            <use href="assests/icons.svg#pause-icon"></use>
-                        </svg>
-                            </button> 
-                             <div class="music_info_trending">    <h5 class="song-title">${trendingSongsList[trendingSongIndex].songTitle}</h5>
-        <span class="song-writer">${trendingSongsList[trendingSongIndex].songWriter}</span>
-     </div>    </div>`;
-
-    return html;
-}
-
-export const trendingSongMarkup = async function (numOfShowingCard) {
-    const list = musicList.slice();
-
-    if (list.length !== 0 && list.length >= numOfShowingCard) {
-        let html = `${list.map((music, index) => {
-
-            if (index >= numOfShowingCard) return;
-
+    if (list.length != 0) {
+        let html = `${list.map(music => {
             return `<div class="song_card" id="${music.songId}">
             <img class="song-img" src="assests/images/${music.songImgUrl}" alt="${music.songTitle}">
             <img class="music_gif" src="assests/gif/music_playing.gif" alt="music playing gif">
@@ -171,6 +311,7 @@ export const trendingSongMarkup = async function (numOfShowingCard) {
     }
 }
 
+//display seeAllTrendingList, searchResult, loadGallary
 export const loadGallary = async function (loadingList) {
     if (loadingList && loadingList.length > 0) {
         let html = `${loadingList.map(music => {

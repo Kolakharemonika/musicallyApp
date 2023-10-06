@@ -19,7 +19,7 @@ const slideContainer = document.querySelector('.slide_container');
 
 const previousSongPlayBtn = document.querySelector('.previous_song_btn');
 const nextSongPlayBtn = document.querySelector('.next_song_btn');
-const expandLibraryBtn = document.querySelector('.btn_expand_library');
+const expandTrendingListBtn = document.querySelector('.btn_expand_library');
 const newmusicplaybtn = document.querySelector('.newmusicplaybtn');
 const playNextSongBtn = document.querySelector('.play_next_song_btn');
 const playPrevSongBtn = document.querySelector('.play_prev_song_btn');
@@ -31,23 +31,45 @@ const searchBtn = document.querySelector('.search_btn');
 var selectedCard;
 const slidedisplay = 3;
 const trendingSongDisplay = 6;
-var songState = { state: 'ready' };
 var currentSlide = 0;
+var songState = { state: 'ready' };
 var trendingSongIndex = trendingSongDisplay - 1;
 var activeList = 'playList';
+
+// pagination
+var currentPage = 1;
+const numOfShowingCard = 6; // Number of items to display per page
+
 //function declarations
 (async function load() {
     slideContainer.innerHTML = await model.generateMarkup(slidedisplay)
 })();
 
-// getTrendingSongsList
-async function getTrendingSongsList() {
-    trendingSongCard.innerHTML = await model.trendingSongMarkup(trendingSongDisplay);
-}
-getTrendingSongsList();
-
 const trendingSongsList = await model.getMusicList();
 const playSongsList = await model.getPlayList();
+
+
+function enableDisableBtn() {
+    if (currentPage == 1) {
+        trendingSongBtnPrev.classList.add('disabled');
+        trendingSongBtnNext.classList.remove('disabled');
+    } else if ((currentPage * numOfShowingCard) >= trendingSongsList.length) {
+        trendingSongBtnNext.classList.add('disabled');
+        trendingSongBtnPrev.classList.remove('disabled');
+    } else {
+        trendingSongBtnNext.classList.remove('disabled');
+        trendingSongBtnPrev.classList.remove('disabled');
+    }
+}
+
+// getTrendingSongsList
+async function getTrendingSongsList(currentPage) {
+    enableDisableBtn();
+    trendingSongCard.innerHTML = await model.trendingSongMarkup(currentPage);
+}
+getTrendingSongsList(currentPage);
+
+
 
 //activate navbar btns
 navList.addEventListener('click', (e) => {
@@ -567,51 +589,19 @@ document.querySelector('.expand_btn').addEventListener('click', showHidwLyrics);
 
 //trending song btns prevList nextList
 async function trendingSongMoveNext() {
-    trendingSongIndex++;
-    console.log(trendingSongIndex);
-
-    if (trendingSongIndex == (trendingSongsList.length - 1)) {
-        trendingSongBtnNext.classList.add('disabled')
-    } else {
-        trendingSongBtnPrev.classList.remove('disabled')
-        trendingSongBtnNext.classList.remove('disabled')
-    }
-
-    if (trendingSongsList.length > trendingSongIndex) {
-
-        trendingSongCard.removeChild(trendingSongCard.firstElementChild)
-
-        const html = await model.displaySingleTrendingCardMarkup(trendingSongIndex)
-
-        setTimeout(() => {
-            trendingSongCard.style.transform = `translateX(0px)`;
-            trendingSongCard.style.transition = 'all 2.5s linear';
-        }, 500)
-        trendingSongCard.insertAdjacentHTML('beforeend', html)
-    }
-
-
+    currentPage++;
+    getTrendingSongsList(currentPage);
+    // setTimeout(() => {
+    //     trendingSongCard.style.transform = `translateX(0px)`;
+    //     trendingSongCard.style.transition = 'all 2.5s linear';
+    // }, 500);
 }
 
 async function trendingSongMovePrev() {
-    trendingSongIndex--;
-    if (trendingSongIndex == (trendingSongDisplay - 1)) {
-        trendingSongBtnPrev.classList.add('disabled');
-    } else {
-        trendingSongBtnNext.classList.remove('disabled');
-        trendingSongBtnPrev.classList.remove('disabled');
-    }
-
-    if (trendingSongsList.length > trendingSongIndex) {
-
-        trendingSongCard.removeChild(trendingSongCard.lastElementChild)
-
-        const html = await model.displaySingleTrendingCardMarkup(trendingSongIndex - (trendingSongDisplay - 1))
-        trendingSongCard.insertAdjacentHTML('afterbegin', html);
-    }
-
-
+    currentPage--;
+    getTrendingSongsList(currentPage);
 }
+
 trendingSongBtnNext.addEventListener('click', trendingSongMoveNext);
 trendingSongBtnPrev.addEventListener('click', trendingSongMovePrev);
 
@@ -625,7 +615,14 @@ async function fetchMusicLibrary() {
     trendingSongCard.innerHTML = await model.loadGallary(await model.getLibraryList());
 }
 
-expandLibraryBtn.addEventListener('click', fetchMusicLibrary);
+async function fetchTrendingLibrary() {
+    trendingSongsContainer.style.top = '11%';
+    trendingSongCard.style.flexFlow = 'wrap';
+    document.querySelector('.trending_song_btns').classList.add('d-none');
+    trendingSongCard.innerHTML = await model.loadGallary(await model.getMusicList());
+}
+
+expandTrendingListBtn.addEventListener('click', fetchTrendingLibrary);
 displayLibrary.addEventListener('click', fetchMusicLibrary);
 
 
@@ -637,7 +634,8 @@ function homeScreenLoad() {
     heading.textContent = 'Trending Songs';
     trendingSongCard.style.flexFlow = 'row';
     document.querySelector('.trending_song_btns').classList.remove('d-none');
-    getTrendingSongsList();
+    currentPage = 1
+    getTrendingSongsList(currentPage);
 }
 
 //home screen / getTrendingSongsList
@@ -659,7 +657,6 @@ function selectedSongDisplay(displaySongId) {
     songPlayContainer.classList.remove("hidden");
 
     console.log(displaySongId, 'SongId');
-    console.log();
     if (selectedSong) {
         const audioHtml = `<audio class="audio_song playing_audio" src="./assests/music/${selectedSong.audioFile}" type="audio/mpeg">
                     </audio>`;
