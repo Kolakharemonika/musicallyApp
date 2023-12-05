@@ -179,7 +179,9 @@ function playPauseMusic() {
             });
         }
     });
-
+    // newmusicplaybtn.querySelectorAll('.btn_play_pause').forEach(btn => {
+    //     btn.classList.toggle('d-none');
+    // });
     if (songState.state == 'ready' || songState.state == 'pause') {
         audio.play();
         songState.state = 'play';
@@ -237,6 +239,7 @@ function playPauseMusic() {
                     audio.play();
                     songState.state = 'play';
                     song.querySelector('.music_gif').style.opacity = '1';
+
                 }
                 song.querySelectorAll('.play_icon').forEach(btn => {
                     btn.classList.toggle('d-none');
@@ -245,7 +248,21 @@ function playPauseMusic() {
         });
 
     }
-
+    if (songState.state == 'new') {
+        if (newmusicplaybtn.querySelector('#play').classList.contains('d-none')) {
+            audio.play()
+            console.log('playy');
+        } else {
+            console.log('pause');
+            audio.pause()
+            newmusicplaybtn.querySelectorAll('.btn_play_pause').forEach(btn => {
+                btn.classList.toggle('d-none');
+            });
+        }
+        // newmusicplaybtn.querySelectorAll('.btn_play_pause').forEach(btn => {
+        //     btn.classList.toggle('d-none');
+        // });
+    }
 
 }
 
@@ -268,7 +285,9 @@ async function findNextSelectedSong(songId, where) {
             selectedCard = selectedSong;
             selectedSongDisplay(selectedSong.songId);
 
+
             newmusicplaybtn.click();
+
         } else {
             alert('No songs Availables!')
         }
@@ -295,7 +314,13 @@ async function findNextSelectedSong(songId, where) {
             // && songId >= 6
             if (where == 'prev') {
             }
+            const audio = document.querySelector('.playing_audio');
+            // audio.play()
+            songState.state = 'new';
             newmusicplaybtn.click();
+            // newmusicplaybtn.querySelectorAll('.btn_play_pause').forEach(btn => {
+            //     btn.classList.toggle('d-none');
+            // });
         } else {
             alert('No songs Availables!')
         }
@@ -635,7 +660,6 @@ function selectedSongDisplay(displaySongId) {
                         <span>${selectedSong.songWriter}</span>
                     </div>`;
         document.querySelector('.music_info_sec').innerHTML = musicInfoHtml;
-        // document.querySelector('.music_info_sec').insertAdjacentHTML('afterend', musicInfoHtml);
 
         lyricsShow();
 
